@@ -31,17 +31,11 @@
             android:screenOrientation="landscape" />
         
         <activity android:name=".SettingsActivity" />
-<<<<<<< HEAD
         <activity 
             android:name=".ScoresActivity" 
             android:configChanges="keyboardHidden|orientation" 
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
             android:screenOrientation="landscape" />
-=======
-        
-        <activity android:name=".ScoresActivity" />
-        
->>>>>>> 49db16fdaf4099d31476ff96896debf9ff4b152e
         <activity
             android:name=".HowtoActivity"
             android:configChanges="keyboardHidden|orientation" 
