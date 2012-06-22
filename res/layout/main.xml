@@ -25,18 +25,21 @@
         android:id="@+id/settings"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="@string/settings" />
+        android:text="@string/settings"
+        android:onClick="settingsActivity" />
 
     <Button
         android:id="@+id/highscores"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="@string/highscores" />
+        android:text="@string/highscores"
+        android:onClick="scoresActivity" />
 
     <Button
         android:id="@+id/howtoplay"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="@string/howtoplay" />
+        android:text="@string/howtoplay"
+        android:onClick="howtoActivity" />
 
 </LinearLayout>
