@@ -166,7 +166,7 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
     }
     
     
-	public void setActivity(gameActivity gameActivity) {
+	public void setActivity(GameActivity gameActivity) {
 
 		// TODO Auto-generated method stub
 		activity = gameActivity;

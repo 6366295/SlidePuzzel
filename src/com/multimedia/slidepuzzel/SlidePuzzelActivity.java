@@ -14,7 +14,7 @@ public class SlidePuzzelActivity extends Activity {
     }
     
     public void gameActivity(View view) {
-    	Intent intent = new Intent(this, gameActivity.class);
+    	Intent intent = new Intent(this, GameActivity.class);
     	startActivity(intent);
     }
 }
