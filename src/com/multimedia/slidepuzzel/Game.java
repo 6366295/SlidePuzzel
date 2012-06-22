@@ -8,6 +8,7 @@ public class Game{
 	private int size;				// Field size (size x size)
 	private Tile[] tiles;			// Tiles containing rgb data
 	private Field curField; 		// Current field as seen by the player 
+	private Field defField;			// Default field
 	private Difficulty difficulty;	// Difficulty for this game
 	//TODO: add shuffle history
 	
@@ -15,6 +16,7 @@ public class Game{
 		size = s;
 		difficulty = d;
 		curField = new Field(size);
+		defField = new Field(size);
 		tiles = new Tile[size * size];
 		
 		for(int i = 0; i < 9; i++){
@@ -32,5 +34,9 @@ public class Game{
 	
 	public Field getField(){
 		return curField;
+	}
+	
+	public Field getDefaultField(){
+		return defField;
 	}
 }

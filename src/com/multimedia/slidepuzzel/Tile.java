@@ -7,13 +7,10 @@ public class Tile{
 	
 	public Tile(int s){
 		size = s;
-		
-		//TODO: Initialise rgb
+		rgb = new int[size * size];
 	}
 	
 	public int rgbIdx(int x, int y){
-		//TODO: Implement
-		// x,y -> idx in rgb array
-		return -1;
+		return y * size + x;
 	}
 }
