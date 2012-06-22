@@ -22,7 +22,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import com.multimedia.slidepuzzel.GameActivity;
+import com.multimedia.slidepuzzel.DrawGame;
 
 
 /**
@@ -48,7 +48,7 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
     
     private LinearLayout buttonBar;
     
-	private GameActivity drawControl;
+	private DrawGame drawControl;
     
     /*
      * Camera get
@@ -99,7 +99,7 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
     private void finalInitialize() {
     	
 		// Create our DrawCamera object
-    	drawControl = new GameActivity();
+    	drawControl = new DrawGame();
     	
     	try {
 
