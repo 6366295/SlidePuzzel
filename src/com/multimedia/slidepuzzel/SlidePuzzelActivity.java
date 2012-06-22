@@ -14,7 +14,7 @@ public class SlidePuzzelActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.GameActivity);
+        setContentView(R.layout.game);
         
         // get handles to the CameraView from XML
         mCameraView = (CameraView) findViewById(R.id.cameraView1);
