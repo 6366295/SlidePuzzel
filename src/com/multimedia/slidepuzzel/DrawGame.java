@@ -29,7 +29,7 @@ public class DrawGame{
 	}
 
 	public void draw(Canvas c) {
-		
+		c.drawBitmap(rgb, 0, imageSize.width, 0f, 0f, imageSize.width, imageSize.height, true, null);
 	}
 
 

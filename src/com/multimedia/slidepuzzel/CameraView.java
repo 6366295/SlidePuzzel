@@ -24,10 +24,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import com.multimedia.slidepuzzel.DrawGame;
 
-
-/**
- * Your face. Or something. Whatever...
- */
 public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
 
     /** Handle to the application context, used to e.g. fetch Drawables. */
@@ -91,13 +87,14 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
      * used.
      */
     public void surfaceCreated(SurfaceHolder holder) {
+    	Log.d("DEBUG", "CameraView loaded");
     	setKeepScreenOn(true);
 		if (++creationPhase == 2) finalInitialize();
     }
     	
 
     private void finalInitialize() {
-    	
+    	Log.d("DEBUG", "START FINALIZE");
 		// Create our DrawCamera object
     	drawControl = new DrawGame();
     	
@@ -171,7 +168,7 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
 		// TODO Auto-generated method stub
 		activity = gameActivity;
 
-        cameraShow = (SurfaceView) activity.findViewById(R.id.cameraView1);
+        cameraShow = (SurfaceView) activity.findViewById(R.id.surfaceView1);
         cameraShow.getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
         cameraShow.getHolder().addCallback(new CameraSurfaceCallBack());
         
@@ -185,6 +182,7 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
 		}
 
 		public void surfaceCreated(SurfaceHolder holder) {
+			Log.d("DEBUG", "SurfaceView loaded");
 			if (++creationPhase == 2) finalInitialize();
 		}
 
@@ -202,8 +200,6 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
 	class PreviewFramer implements Camera.PreviewCallback {
 
 		public void onPreviewFrame(byte[] data, Camera camera) {
-	        //Log.d("Camera", "Got a camera frame");
-
 	        Canvas c = null;
 
 	        if(mHolder == null) {//mHolder == null){
