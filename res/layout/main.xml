@@ -18,7 +18,8 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="@string/play" />
+        android:text="@string/play"
+        android:onClick="gameActivity" />
 
     <Button
         android:id="@+id/settings"

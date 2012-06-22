@@ -1,24 +1,20 @@
 package com.multimedia.slidepuzzel;
 
-import com.multimedia.slidepuzzel.R;
 import android.app.Activity;
-import android.hardware.Camera;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
-public class SlidePuzzelActivity extends Activity {
-
-    private CameraView mCameraView;
-    
-    
+public class SlidePuzzelActivity extends Activity {    
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.game);
-        
-        // get handles to the CameraView from XML
-        mCameraView = (CameraView) findViewById(R.id.cameraView1);
-        
-        mCameraView.setActivity(this);
+        setContentView(R.layout.main);
+    }
+    
+    public void gameActivity(View view) {
+    	Intent intent = new Intent(this, gameActivity.class);
+    	startActivity(intent);
     }
 }

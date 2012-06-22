@@ -166,10 +166,10 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
     }
     
     
-	public void setActivity(SlidePuzzelActivity cameraTest) {
+	public void setActivity(gameActivity gameActivity) {
 
 		// TODO Auto-generated method stub
-		activity = cameraTest;
+		activity = gameActivity;
 
         cameraShow = (SurfaceView) activity.findViewById(R.id.cameraView1);
         cameraShow.getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
