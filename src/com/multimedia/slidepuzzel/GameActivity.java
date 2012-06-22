@@ -1,7 +1,6 @@
 package com.multimedia.slidepuzzel;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 
 public class GameActivity extends Activity {
@@ -16,7 +15,5 @@ public class GameActivity extends Activity {
         mCameraView = (CameraView) findViewById(R.id.cameraView1);
         
         mCameraView.setActivity(this);
-        
-        Intent intent = getIntent();
     }
 }
