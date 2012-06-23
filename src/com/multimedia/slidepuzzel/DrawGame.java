@@ -10,20 +10,35 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.hardware.Camera.Size;
 import android.util.Log;
+import android.view.MotionEvent;
 
 public class DrawGame{
 	public Size imageSize;
 
 	private Game game;
-	private int tileSize;
-	private int[] rgb;			// the array of integers
-	private Bitmap bitmap;
 	private Paint p;
+	
+	private int[] rgb;
+	private Bitmap bitmap;
+	
+	private int tileSize;
 	private Rect[][] defaultRect;
+	
+	private int swapX;
+	private int swapY;
+	private int animX;
+	private int animY;
+	private int anim;
+	private Rect animRect;
 
 	public DrawGame(Activity activity){
 		game = ((GameActivity) activity).getGame();
-		game.getField().swapTile(2, 1);
+	
+		// Inactive animation state
+		anim = -1;
+		swapX = -1;
+		swapY = -1;
+		
 		p = new Paint();
 	}
 
@@ -58,11 +73,29 @@ public class DrawGame{
 		bitmap = Bitmap.createBitmap(rgb, imageSize.width, imageSize.height, Bitmap.Config.ARGB_8888);
 	}
 
-	public void draw(Canvas c) {
+	public void draw(Canvas c){
+		if(anim > 0){
+			anim--;
+			// Move animating rectangle
+			animRect.offset(animX, animY);
+		}else if(anim == 0){	
+			// Swap the actual tile
+			game.getField().swapTile(swapX, swapY);
+			
+			// Reset
+			anim = -1;
+			swapX = -1;
+			swapY = -1;
+			animRect = null;
+		}
 		p.setColor(combine(0, 0, 0));
 		
-		//float scalefactor = (float) c.getHeight() / (float) (game.getSize() * tileSize);
-		//c.scale(scalefactor, scalefactor, 0, 0);
+		// Scale
+		float scalefactor = (float) c.getHeight() / (float) (game.getSize() * tileSize);
+		c.scale(scalefactor, scalefactor, 0, 0);
+		
+		// Draw the empty square black
+		c.drawRect(defaultRect[game.getField().getNullX()][game.getField().getNullY()], p);
 		
 		Rect t;
 		int tIdx;
@@ -70,13 +103,22 @@ public class DrawGame{
 			for(int y = 0; y < game.getSize(); y++){
 				tIdx = game.getField().getTileIdx(x, y);
 				
+				// Skip empty square
 				if(tIdx == 0){
-					c.drawRect(defaultRect[x][y], p);
 					continue;
 				}
+				
 				t = game.getTile(tIdx);
-				// Draw rectangle t of the bitmap into rectangle defaultRectangle[x][y]
-				c.drawBitmap(bitmap, t, defaultRect[x][y], null);		
+				
+				if(x != swapX || y != swapY){
+					// Draw rectangle t of the bitmap into rectangle defaultRectangle[x][y]
+					c.drawBitmap(bitmap, t, defaultRect[x][y], null);		
+				}else if(animRect != null){
+					// Draw place from where swapped black
+					c.drawRect(defaultRect[x][y], p);
+					// Draw in animate rectangle, paint over black (sliding animation)
+					c.drawBitmap(bitmap, t, animRect, null);
+				}
 				
 				// Draw surrounding lines
 				c.drawLine((x * tileSize), (y * tileSize), ((x + 1) * tileSize), (y * tileSize), p);
@@ -88,26 +130,28 @@ public class DrawGame{
 			}
 		}
 	}
-
-	/*
-	 * Below are some convenience methods,
-	 * like grabbing colors and decoding.
-	 */
-    
-	/*// Extract the red element from the given color
-    private int r(int rgb) {
-    	return (rgb & 0xff0000) >> 16;
-    }
-
-	// Extract the green element from the given color
-    private int g(int rgb) {
-    	return (rgb & 0x00ff00) >> 8;
-    }
-
-	// Extract the blue element from the given color
-    private int b(int rgb) {
-    	return (rgb & 0x0000ff);
-    }*/
+	
+	public void onTouchEvent(MotionEvent event){
+		if(anim == -1){
+			swapX = (int) event.getX();
+			swapY = (int) event.getY();
+			swapX /= tileSize;
+			swapY /= tileSize;
+			
+			if(game.getField().validSwap(swapX, swapY)){
+				// Animation timer
+				anim = tileSize / 20;
+				
+				animRect = new Rect(game.getTile(game.getDefaultField().getTileIdx(swapX, swapY)));
+				
+				// Shift of rectangle each draw
+				animX = game.getField().getNullX() - swapX;
+				animY = game.getField().getNullY() - swapY;
+				animX *= 20;
+				animY *= 20;
+			}
+		}
+	}
     
     // Combine red, green and blue into a single color int
     private int combine(int r, int g, int b) {

@@ -43,7 +43,7 @@ public class Field{
 	 * be swapped with the blank tile in a valid move.
 	 */
 	public boolean validSwap(int x, int y){
-		if(x == nullX || y == nullY){
+		if(x == nullX && y == nullY){
 			// Swap blank tile with blank tile
 			return false;
 		}
@@ -64,5 +64,13 @@ public class Field{
 	
 	public int getTileIdx(int x, int y){
 		return tileIdx[x][y];
+	}
+	
+	public int getNullX(){
+		return nullX;
+	}
+
+	public int getNullY(){
+		return nullY;
 	}
 }

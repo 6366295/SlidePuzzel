@@ -12,6 +12,7 @@ import android.hardware.Camera.Parameters;
 import android.hardware.Camera.Size;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -104,6 +105,11 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 		cameraShow =(SurfaceView) activity.findViewById(R.id.surfaceView1);
 		cameraShow.getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 		cameraShow.getHolder().addCallback(this);
+	}
+	
+	public boolean onTouchEvent(MotionEvent event){
+		drawControl.onTouchEvent(event);
+		return super.onTouchEvent(event);
 	}
 
 	class PreviewFramer implements Camera.PreviewCallback{
