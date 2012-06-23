@@ -1,34 +1,11 @@
-Main menu:
-- Play -> speel spel in gekozen difficulty
-- Settings 
-   - difficulty kiezen
-   - scherpte beeld
-   - Made by
-- Highscores
-   - Per difficulty en tijd
-- How to play
+Schoolproject for the course Multimedia at the University of Amsterdam (UvA)
 
-Settings:
-- Difficulty
-   - Easy (wel hints, geen rotaties)
-   - Normal (geen hints, geen rotatie)
-   - Hard (geen hints, wel rotaties)
-- reset
+[Work in progress]
+Live camera SlidePuzzle for Android
 
-Spel:
-- Beeld is width x width
-- Husselen door programma de blokjes te laten schuiven van goed beeld naar
-  gehussels, zodat de puzzel oplosbaar is.
-- Ieder blokje 4 booleans: N(orth), E(ast), S(outh), W(est). True als die kant
-  op geschoven kan worden.
-- Hints oplossing kunnen geven door oneindig te hinten, beste zet tonen
-   - Bij shufflen bijhouden in boom, stappen die door de gebruiker worden gedaan
-   toevoegen en loops eruit vissen en verwijderen.
-- Tijd in beeld
-- Difficulty in beeld
 
-Spel afgelopen:
-- Tijd laten zien
-- Nieuwe highscore, geef naam op
-- Nieuw spel beginnen?
-
+Participants:
+Tom Peerdeman
+Mike Trieu
+Freddy de Greef
+René Aparicio Saez
