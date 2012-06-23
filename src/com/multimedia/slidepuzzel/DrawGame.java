@@ -23,7 +23,7 @@ public class DrawGame{
 
 	public DrawGame(Activity activity){
 		game = ((GameActivity) activity).getGame();
-		game.getField().swapTile(0, 0);
+		game.getField().swapTile(2, 1);
 		p = new Paint();
 	}
 
@@ -65,11 +65,20 @@ public class DrawGame{
 		//c.scale(scalefactor, scalefactor, 0, 0);
 		
 		Rect t;
+		int tIdx;
 		for(int x = 0; x < game.getSize(); x++){
-			for(int y = 0; y < game.getSize(); y++){				
-				t = game.getTile(game.getField().getTileIdx(x, y));
+			for(int y = 0; y < game.getSize(); y++){
+				tIdx = game.getField().getTileIdx(x, y);
+				
+				if(tIdx == 0){
+					c.drawRect(defaultRect[x][y], p);
+					continue;
+				}
+				t = game.getTile(tIdx);
+				// Draw rectangle t of the bitmap into rectangle defaultRectangle[x][y]
 				c.drawBitmap(bitmap, t, defaultRect[x][y], null);		
 				
+				// Draw surrounding lines
 				c.drawLine((x * tileSize), (y * tileSize), ((x + 1) * tileSize), (y * tileSize), p);
 				c.drawLine((x * tileSize), ((y + 1) * tileSize), ((x + 1) * tileSize), ((y + 1) * tileSize), p);
 				
