@@ -99,21 +99,4 @@
         android:text="@string/size"
         android:textSize="20sp" />
 
-    <SurfaceView
-        android:id="@+id/surfaceView1"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:gravity="center" />
-
-    <com.multimedia.slidepuzzel.CameraView
-        android:id="@+id/cameraView1"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_alignBaseline="@+id/surfaceView1"
-        android:layout_alignBottom="@+id/surfaceView1"
-        android:layout_alignLeft="@+id/surfaceView1"
-        android:gravity="center" />
-
 </RelativeLayout>
