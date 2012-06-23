@@ -30,7 +30,7 @@ public class DrawGame{
 
 	public void draw(Canvas c) {
 		c.save();
-		c.scale(1.875f, 1.875f, 0, 0); // c.getHeight() / imageSize.height = scalefactor
+		c.scale(c.getHeight() / imageSize.height, c.getHeight() / imageSize.height, 0, 0); // c.getHeight() / imageSize.height = scalefactor
 		c.drawBitmap(rgb, 0, imageSize.width, 0f, 0f, imageSize.height, imageSize.height, true, null);
 		c.restore();
 		p.setColor(combine(255, 0, 0));
