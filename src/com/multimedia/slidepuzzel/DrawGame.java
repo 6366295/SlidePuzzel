@@ -66,9 +66,8 @@ public class DrawGame{
 	public void draw(Canvas c) {
 		p.setColor(combine(0, 0, 0));
 		
-		float scalefactor = (float) c.getHeight() / (float) imageSize.height;
+		float scalefactor = (float) c.getHeight() / (float) (game.getSize() * tileSize);
 		c.scale(scalefactor, scalefactor, 0, 0);
-		c.drawBitmap(rgb, 0, imageSize.width, 0f, 0f, imageSize.height, imageSize.height, true, null);
 		
 		Tile t;
 		for(int x = 0; x < game.getSize(); x++){
