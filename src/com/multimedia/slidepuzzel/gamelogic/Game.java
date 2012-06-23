@@ -1,14 +1,16 @@
 package com.multimedia.slidepuzzel.gamelogic;
 
+import android.graphics.Rect;
+
 public class Game{
 	public enum Difficulty{
 		EASY, NORMAL, HARD;
 	}
 	
 	private int size;				// Field size (size x size)
-	private Tile[] tiles;			// Tiles containing rgb data
+	private Rect[] tiles;			// Tiles containing rgb data
 	private Field curField; 		// Current field as seen by the player 
-	private Field defField;			// Default field
+	private Field defField;
 	private Difficulty difficulty;	// Difficulty for this game
 	//TODO: add shuffle history
 	
@@ -17,11 +19,7 @@ public class Game{
 		difficulty = d;
 		curField = new Field(size);
 		defField = new Field(size);
-		tiles = new Tile[size * size];
-		
-		for(int i = 0; i < 9; i++){
-			tiles[i] = new Tile(totalWidth / size);
-		}
+		tiles = new Rect[size * size];
 	}
 	
 	public boolean useHints(){
@@ -40,8 +38,12 @@ public class Game{
 		return defField;
 	}
 	
-	public Tile getTile(int i){
+	public Rect getTile(int i){
 		return tiles[i];
+	}
+	
+	public void setTile(Rect t, int i){
+		tiles[i] = t;
 	}
 	
 	public int getSize(){
