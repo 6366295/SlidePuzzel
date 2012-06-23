@@ -14,7 +14,7 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game);
         
-        game = new Game(Game.Difficulty.EASY, 3, 300);
+        game = new Game(Game.Difficulty.EASY, 4);
         
         // get handles to the CameraView from XML
         mCameraView = (CameraView) findViewById(R.id.cameraView1);
