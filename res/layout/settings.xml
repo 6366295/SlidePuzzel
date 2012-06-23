@@ -20,27 +20,27 @@
         android:id="@+id/easy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Easy"
+        android:text="@string/easy"
         android:checked="true" />
 
     <RadioButton
         android:id="@+id/normal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Normal" />
+        android:text="@string/normal" />
 
     <RadioButton
         android:id="@+id/hard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hard" />
+        android:text="@string/hard" />
 </RadioGroup>
     <Button
         android:id="@+id/reset"
         android:layout_width="174dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal|center"
-        android:text="Reset" />
+        android:text="@string/reset" />
 
     <Button
         android:id="@+id/back3"
