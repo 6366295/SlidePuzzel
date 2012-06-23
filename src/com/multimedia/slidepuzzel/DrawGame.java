@@ -29,8 +29,11 @@ public class DrawGame{
 	}
 
 	public void draw(Canvas c) {
-		c.drawBitmap(rgb, 0, imageSize.width, 0f, 0f, imageSize.width, imageSize.height, true, null);
-		p.setColor(combine(255, 255, 255));
+		c.save();
+		c.scale(1.875f, 1.875f, 0, 0); // c.getHeight() / imageSize.height = scalefactor
+		c.drawBitmap(rgb, 0, imageSize.width, 0f, 0f, imageSize.height, imageSize.height, true, null);
+		c.restore();
+		p.setColor(combine(255, 0, 0));
 		c.drawLine(0, 0, 100, 100, p);
 	}
 
