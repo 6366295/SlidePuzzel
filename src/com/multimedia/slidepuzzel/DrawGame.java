@@ -45,7 +45,6 @@ public class DrawGame{
 	public void imageReceived(byte[] data) {
 		// Allocate the image as an array of integers if needed.
 		// Then, decode the raw image data in YUV420SP format into a red-green-blue array (rgb array)
-		// Note that per pixel the RGB values are packed into an integer. See the methods r(), g() and b().
 		
 		if(rgb == null){
 			int arraySize = imageSize.width*imageSize.height;
@@ -149,6 +148,9 @@ public class DrawGame{
 				animY = game.getField().getNullY() - swapY;
 				animX *= 20;
 				animY *= 20;
+				
+				//TODO Play sound
+				game.getSound().playSound(game.getSound().swap);
 			}
 		}
 	}

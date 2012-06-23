@@ -1,6 +1,7 @@
 package com.multimedia.slidepuzzel;
 
 import com.multimedia.slidepuzzel.gamelogic.Game;
+import com.multimedia.slidepuzzel.sound.SoundManager;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -14,7 +15,7 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game);
         
-        game = new Game(Game.Difficulty.EASY, 4);
+        game = new Game(Game.Difficulty.EASY, 4, new SoundManager(getBaseContext()));
         
         // get handles to the CameraView from XML
         mCameraView = (CameraView) findViewById(R.id.cameraView1);

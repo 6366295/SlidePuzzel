@@ -17,8 +17,8 @@ public class SoundManager{
 	public SoundManager(Context c){
 		pool = new SoundPool(3, AudioManager.STREAM_MUSIC, 0);
 		swap = pool.load(c, R.raw.swap, 1);
-		rotate = pool.load(c, R.raw.rotate, 1);
-		win = pool.load(c, R.raw.win, 1);
+		rotate = pool.load(c, R.raw.rotate, 2);
+		win = pool.load(c, R.raw.win, 3);
 	}
 	
 	public int playSound(int soundId){

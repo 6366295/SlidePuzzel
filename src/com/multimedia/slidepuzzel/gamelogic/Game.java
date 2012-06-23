@@ -1,5 +1,7 @@
 package com.multimedia.slidepuzzel.gamelogic;
 
+import com.multimedia.slidepuzzel.sound.SoundManager;
+
 import android.graphics.Rect;
 
 public class Game{
@@ -12,9 +14,11 @@ public class Game{
 	private Field curField; 		// Current field as seen by the player 
 	private Field defField;			// Default field (solved)
 	private Difficulty difficulty;	// Difficulty for this game
+	private SoundManager sound;
 	//TODO: add shuffle history
 	
-	public Game(Difficulty d, int s){
+	public Game(Difficulty d, int s, SoundManager sound){
+		this.sound = sound;
 		size = s;
 		difficulty = d;
 		curField = new Field(size);
@@ -48,5 +52,9 @@ public class Game{
 	
 	public int getSize(){
 		return size;
+	}
+	
+	public SoundManager getSound(){
+		return sound;
 	}
 }
