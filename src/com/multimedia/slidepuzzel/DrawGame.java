@@ -1,21 +1,28 @@
 package com.multimedia.slidepuzzel;
 
-import com.multimedia.slidepuzzel.R;
+
+import com.multimedia.slidepuzzel.gamelogic.Game;
+import com.multimedia.slidepuzzel.gamelogic.Tile;
+
+import android.app.Activity;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.hardware.Camera.Size;
-import com.multimedia.slidepuzzel.CameraView;
-import android.widget.SeekBar;
 
 public class DrawGame{
 	public Size imageSize;
 
+	private Game game;
+	private int tileSize;
 	private int[] rgb;			// the array of integers
-	private Paint p, black;
+	private Paint p;
 
-
-
+	public DrawGame(Activity activity){
+		game = ((GameActivity) activity).getGame();
+		game.getField().swapTile(0, 0);
+		tileSize = game.getTile(0).getSize();
+		p = new Paint();
+	}
 
 	public void imageReceived(byte[] data) {
 		// Allocate the image as an array of integers if needed.
@@ -24,17 +31,59 @@ public class DrawGame{
 		int arraySize = imageSize.width*imageSize.height;
 		if(rgb == null)rgb = new int[arraySize];
 		decodeYUV420SP(rgb, data);
-
-
+		
+		
+		int x, y, tIdx, dx, dy;
+		Tile t;
+		for(int i = 0; i < rgb.length; i++){
+			// x,y in total image
+			x = i - (imageSize.width * (i / imageSize.width));
+			y = i / imageSize.width;
+			
+			// x,y of tile
+			dx = x / tileSize;
+			dy = y / tileSize;
+			
+			if(dx >= game.getSize() || dy >= game.getSize()){
+				continue;
+			}
+			tIdx = game.getField().getTileIdx(dx, dy);
+			
+			// x,y in tile
+			x -= tileSize * dx;
+			y -= tileSize * dy;
+			
+			t = game.getTile(tIdx);
+			// Set tile rgb
+			if(tIdx == 0){
+				t.rgb[t.rgbIdx(x, y)] = combine(0, 255, 0);
+			}else{
+				t.rgb[t.rgbIdx(x, y)] = rgb[i];	
+			}
+		}
 	}
 
 	public void draw(Canvas c) {
-		c.drawBitmap(rgb, 0, imageSize.width, 0f, 0f, imageSize.width, imageSize.height, true, null);
-		p.setColor(combine(255, 255, 255));
-		c.drawLine(0, 0, 100, 100, p);
+		p.setColor(combine(255, 0, 0));
+		c.drawLine(10, 10, 110, 10, p);
+		p.setColor(combine(0, 255, 0));
+		c.drawLine(10, 10, 10, 110, p);
+		p.setColor(combine(0, 0, 0));
+		
+		Tile t;
+		for(int x = 0; x < game.getSize(); x++){
+			for(int y = 0; y < game.getSize(); y++){
+				t = game.getTile(game.getDefaultField().getTileIdx(x, y));
+				c.drawBitmap(t.rgb, 0, tileSize, (x * tileSize), (y * tileSize), tileSize, tileSize, true, null);		
+				
+				c.drawLine((x * tileSize), (y * tileSize), ((x + 1) * tileSize), (y * tileSize), p);
+				c.drawLine((x * tileSize), ((y + 1) * tileSize), ((x + 1) * tileSize), ((y + 1) * tileSize), p);
+				
+				c.drawLine((x * tileSize), (y * tileSize), (x * tileSize), ((y + 1) * tileSize), p);
+				c.drawLine(((x + 1) * tileSize), (y * tileSize), ((x + 1) * tileSize), ((y + 1) * tileSize), p);
+			}
+		}
 	}
-
-
 
 	/*
 	 * Below are some convenience methods,
@@ -92,9 +141,4 @@ public class DrawGame{
     		}
     	}
     }
-
-	public DrawGame() {
-		p = new Paint();
-		black = new Paint();
-	}
 }
