@@ -66,17 +66,17 @@
         android:orientation="vertical" >
 
         <RadioButton
-            android:id="@+id/3x3"
+            android:id="@+id/three"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="@string/3x3" />
+            android:text="@string/three" />
 
         <RadioButton
-            android:id="@+id/4x4"
+            android:id="@+id/four"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="@string/4x4" />
+            android:text="@string/four" />
     </RadioGroup>
 
     <TextView
