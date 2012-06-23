@@ -64,11 +64,11 @@ public class DrawGame{
 	}
 
 	public void draw(Canvas c) {
-		p.setColor(combine(255, 0, 0));
-		c.drawLine(10, 10, 110, 10, p);
-		p.setColor(combine(0, 255, 0));
-		c.drawLine(10, 10, 10, 110, p);
 		p.setColor(combine(0, 0, 0));
+		
+		float scalefactor = (float) c.getHeight() / (float) imageSize.height;
+		c.scale(scalefactor, scalefactor, 0, 0);
+		c.drawBitmap(rgb, 0, imageSize.width, 0f, 0f, imageSize.height, imageSize.height, true, null);
 		
 		Tile t;
 		for(int x = 0; x < game.getSize(); x++){

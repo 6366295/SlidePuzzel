@@ -30,12 +30,17 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
             android:screenOrientation="landscape" />
         
-        <activity android:name=".SettingsActivity" />
+        <activity android:name=".SettingsActivity"
+            android:configChanges="keyboardHidden|orientation" 
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+            android:screenOrientation="landscape" />
+        
         <activity 
             android:name=".ScoresActivity" 
             android:configChanges="keyboardHidden|orientation" 
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
             android:screenOrientation="landscape" />
+        
         <activity
             android:name=".HowtoActivity"
             android:configChanges="keyboardHidden|orientation" 
