@@ -14,7 +14,8 @@ public class SlidePuzzelActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         SharedApplication app = (SharedApplication) getApplication();
-        app.settings = "HelloWorld";
+        app.size = 3;
+        app.diff = 1;
     }
     
     public void gameActivity(View view) {

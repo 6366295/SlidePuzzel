@@ -3,5 +3,6 @@ package com.multimedia.slidepuzzel.application;
 import android.app.Application;
 
 public class SharedApplication extends Application{
-	public String settings;
+	public int size;
+	public int diff;
 }
