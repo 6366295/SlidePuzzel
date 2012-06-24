@@ -20,5 +20,7 @@
     <string name="three">3 x 3</string>
     <string name="four">4 x 4</string>
     <string name="reset">Reset</string>
+        
+    <string name="hint">Hint</string>
     
 </resources>

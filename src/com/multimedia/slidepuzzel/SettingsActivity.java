@@ -12,7 +12,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 public class SettingsActivity extends Activity {
-	int s, diff;
 	   @Override
 	    public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
@@ -35,27 +34,22 @@ public class SettingsActivity extends Activity {
 	            	
 			    	RadioButton easy=(RadioButton)findViewById(R.id.easy);
 		        	easy.setChecked(true);
-		        	diff = 1;
-		        	app.diff = 1;
+		        	app.diff = "EASY";
 		        	
 			    	RadioButton three=(RadioButton)findViewById(R.id.three);
 		        	three.setChecked(true);
-		        	s = 3;
 		        	app.size = 3;
 	            }
 	        });
 	        
 	        RadioGroup rg1=(RadioGroup)findViewById(R.id.radioGroup1);
-	        if(app.diff == 1){
-	        	diff = 1;
+	        if(app.diff.equals("EASY")){
 	        	rg1.check(R.id.easy);
 	        }
-	        else if(app.diff == 2){
-	        	diff = 2;
+	        else if(app.diff.equals("NORMAL")){
 	        	rg1.check(R.id.normal);
 	        }
-	        else if(app.diff == 3){
-	        	diff = 3;
+	        else if(app.diff.equals("HARD")){
 	        	rg1.check(R.id.hard);
 	        }
 	        
@@ -68,20 +62,17 @@ public class SettingsActivity extends Activity {
 			    RadioButton rb=(RadioButton)findViewById(arg1);
 			    
 				if(rb.getText().equals("Easy")){
-			    	diff = 1;
-			    	app.diff = 1;
+			    	app.diff = "EASY";
 			    	RadioButton easy=(RadioButton)findViewById(R.id.easy);
 		        	easy.setChecked(true);
 				}
 			    else if(rb.getText().equals("Normal")){
-			    	diff = 2;
-			    	app.diff = 2;
+			    	app.diff = "NORMAL";
 			    	RadioButton normal=(RadioButton)findViewById(R.id.normal);
 			    	normal.setChecked(true);
 			    }
 			    else if(rb.getText().equals("Hard")){
-			    	diff = 3;
-			    	app.diff = 3;
+			    	app.diff = "HARD";
 			    	RadioButton hard=(RadioButton)findViewById(R.id.hard);
 			    	hard.setChecked(true);
 			    }
@@ -96,11 +87,9 @@ public class SettingsActivity extends Activity {
 	        
 	        RadioGroup rg2=(RadioGroup)findViewById(R.id.radioGroup2);
 	        if(app.size == 3){
-	        	s = 3;
 	        	rg2.check(R.id.three);
 	        }
 	        else if(app.size == 4){
-	        	s = 4;
 	        	rg2.check(R.id.four);
 	        }
 	        
@@ -113,13 +102,11 @@ public class SettingsActivity extends Activity {
 			    RadioButton rb=(RadioButton)findViewById(arg1);
 			    
 				if(rb.getText().equals("4 x 4")){
-			    	s = 4;
 			    	app.size = 4;
 			    	RadioButton four=(RadioButton)findViewById(R.id.four);
 		        	four.setChecked(true);
 				}
 			    else{
-			    	s = 3;
 			    	app.size = 3;
 			    	RadioButton three=(RadioButton)findViewById(R.id.three);
 			    	three.setChecked(true);

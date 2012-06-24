@@ -25,7 +25,18 @@ public class GameActivity extends Activity {
                 finish();
             }
         });
-        game = new Game(Game.Difficulty.EASY, app.size, new SoundManager(getBaseContext()));
+        if(app.diff.equals("EASY"))
+        	game = new Game(Game.Difficulty.EASY, app.size, new SoundManager(getBaseContext()));
+        else if(app.diff.equals("NORMAL")){
+        	game = new Game(Game.Difficulty.NORMAL, app.size, new SoundManager(getBaseContext()));
+        	View b = findViewById(R.id.hint);
+        	b.setVisibility(View.GONE);
+        }
+        else if(app.diff.equals("HARD")){
+        	game = new Game(Game.Difficulty.HARD, app.size, new SoundManager(getBaseContext()));
+        	View b = findViewById(R.id.hint);
+        	b.setVisibility(View.GONE);
+        }
         
         // get handles to the CameraView from XML
         mCameraView = (CameraView) findViewById(R.id.cameraView1);
