@@ -11,12 +11,16 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:textSize="30sp"
+        android:padding="5dp"
+        android:textColor="#ffffff"
         android:text="@string/howtoplay" />
 
     <TextView
         android:id="@+id/howtoplaytext"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="230dp"
+        android:padding="10dp"
+        android:textColor="#ffffff"
         android:text="@string/howtoplaytext" />
 
     <Button

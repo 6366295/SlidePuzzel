@@ -10,8 +10,21 @@
     <string name="highscores">Highscores</string>
     <string name="howtoplay">How To Play</string>
     
-    <string name="howtoplaytext">Press, Slide, Win.</string>
-
+    <string name="howtoplaytext">
+		Change difficulty in the Settings menu\n
+		<li>Choose Easy if you like hints</li>\n
+		<li>Choose Normal if you don\'t like hints</li>\n
+		<li>Choose Hard if you like rotations</li>\n
+		\n
+		Change gridsize in the Settings menu\n
+		<li>Choose 3x3 if you like 3x3</li>\n
+		<li>Choose 4x4 if you like 4x4</li>\n
+		\n
+		Choose play to play the game\n
+		<li>Press the tile you want to slide to the empty tile</li>\n
+		<li>Keep pressing tiles to the empty tile and eventualy you will win</li>
+	</string>
+    
     <string name="difficulty">Difficulty</string>
     <string name="easy">Easy</string>
     <string name="normal">Normal</string>
@@ -23,4 +36,4 @@
         
     <string name="hint">Hint</string>
     
-</resources>
+</resources>    
