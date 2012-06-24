@@ -1,16 +1,17 @@
 package com.multimedia.slidepuzzel;
 
 
-import com.multimedia.slidepuzzel.gamelogic.Game;
-import com.multimedia.slidepuzzel.gamelogic.GameRotation;
-
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.hardware.Camera.Size;
 import android.view.MotionEvent;
+
+import com.multimedia.slidepuzzel.gamelogic.Game;
 
 public class DrawGame{
 	public Size imageSize;
@@ -30,6 +31,8 @@ public class DrawGame{
 	private int animY;
 	private int anim;
 	private Rect animRect;
+	
+	public Context mContext;
 
 	public DrawGame(Activity activity){
 		game = ((GameActivity) activity).getGame();
@@ -40,6 +43,8 @@ public class DrawGame{
 		swapY = -1;
 		
 		p = new Paint();
+		
+		mContext = ((GameActivity) activity).gContext();
 	}
 
 	public void imageReceived(byte[] data) {
@@ -136,11 +141,14 @@ public class DrawGame{
 				
 			}
 		}
-		
 		if(game.isSolved()){
 			p.setColor(combine(255, 0, 0));
 			c.drawText("You have solved the puzzle", 50, 50, p);
 			c.drawText("Time: " + (game.getGameTime().getTimeElapsed() / 1000) + " sec", 50, 70, p);
+			
+			Intent intent = new Intent().setClass(mContext, WinActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivity(intent);
 		}
 	}
 	

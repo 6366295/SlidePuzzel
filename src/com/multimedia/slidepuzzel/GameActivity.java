@@ -1,13 +1,14 @@
 package com.multimedia.slidepuzzel;
 
-import com.multimedia.slidepuzzel.gamelogic.Game;
-import com.multimedia.slidepuzzel.sound.SoundManager;
-import com.multimedia.slidepuzzel.application.SharedApplication;
-
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.multimedia.slidepuzzel.application.SharedApplication;
+import com.multimedia.slidepuzzel.gamelogic.Game;
+import com.multimedia.slidepuzzel.sound.SoundManager;
 
 public class GameActivity extends Activity {
     private CameraView mCameraView;
@@ -42,6 +43,10 @@ public class GameActivity extends Activity {
         // get handles to the CameraView from XML
         mCameraView = (CameraView) findViewById(R.id.cameraView1);
         mCameraView.setActivity(this);
+    }
+    
+    public Context gContext() {
+    	return getApplicationContext();
     }
     
     @Override
