@@ -1,8 +1,11 @@
 package com.multimedia.slidepuzzel;
 
+import com.multimedia.slidepuzzel.application.SharedApplication;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -15,6 +18,9 @@ public class SettingsActivity extends Activity {
 	        super.onCreate(savedInstanceState);
 	        
 	        setContentView(R.layout.settings);
+	        
+	        SharedApplication app = (SharedApplication) getApplication();
+	        Log.d("SharedApp", app.settings);
 	        
 	        Button back = (Button) findViewById(R.id.back3);
 	        back.setOnClickListener(new View.OnClickListener() {

@@ -1,5 +1,7 @@
 package com.multimedia.slidepuzzel;
 
+import com.multimedia.slidepuzzel.application.SharedApplication;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +13,8 @@ public class SlidePuzzelActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        SharedApplication app = (SharedApplication) getApplication();
+        app.settings = "HelloWorld";
     }
     
     public void gameActivity(View view) {
