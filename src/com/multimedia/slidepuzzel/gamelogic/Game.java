@@ -5,6 +5,8 @@ import com.multimedia.slidepuzzel.sound.SoundManager;
 import android.graphics.Rect;
 
 public class Game{
+	public static final long ROTATE_DELAY = 10000;
+	
 	public enum Difficulty{
 		EASY, NORMAL, HARD;
 	}
@@ -17,6 +19,7 @@ public class Game{
 	private SoundManager sound;
 	private StopWatch gameTimer;
 	private boolean solved;
+	private GameRotation rotation;
 	//TODO: add shuffle history
 	
 	public Game(Difficulty d, int s, SoundManager sound){
@@ -28,6 +31,7 @@ public class Game{
 		tiles = new Rect[size * size];
 		solved = false;
 		gameTimer = new StopWatch();
+		rotation = new GameRotation(this); 
 		gameTimer.start();
 	}
 	
@@ -78,5 +82,9 @@ public class Game{
 	
 	public StopWatch getGameTime(){
 		return gameTimer;
+	}
+	
+	public GameRotation getRotation(){
+		return rotation;
 	}
 }

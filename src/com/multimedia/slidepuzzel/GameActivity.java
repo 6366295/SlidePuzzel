@@ -17,14 +17,15 @@ public class GameActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game);
-        SharedApplication app = (SharedApplication) getApplication();
-        
+       
         Button back = (Button) findViewById(R.id.back4);
         back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 finish();
             }
         });
+        
+        SharedApplication app = (SharedApplication) getApplication();
         if(app.diff.equals("EASY"))
         	game = new Game(Game.Difficulty.EASY, app.size, new SoundManager(getBaseContext()));
         else if(app.diff.equals("NORMAL")){
@@ -41,6 +42,20 @@ public class GameActivity extends Activity {
         // get handles to the CameraView from XML
         mCameraView = (CameraView) findViewById(R.id.cameraView1);
         mCameraView.setActivity(this);
+    }
+    
+    @Override
+    public void onPause(){
+    	// Pause rotation thread
+    	game.getRotation().onPause();
+    	super.onPause();
+    }
+    
+    @Override
+    public void onResume(){
+    	// Resume rotation thread
+    	game.getRotation().onResume();
+    	super.onResume();
     }
     
     public Game getGame(){

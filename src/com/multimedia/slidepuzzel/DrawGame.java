@@ -2,6 +2,7 @@ package com.multimedia.slidepuzzel;
 
 
 import com.multimedia.slidepuzzel.gamelogic.Game;
+import com.multimedia.slidepuzzel.gamelogic.GameRotation;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -48,10 +49,12 @@ public class DrawGame{
 		if(rgb == null){
 			int arraySize = imageSize.width*imageSize.height;
 			rgb = new int[arraySize];
+			
+			// Calculate tile length & height by the height of the camera image
 			tileSize = imageSize.height / game.getSize();
 		
+			// Make default mapping rectangles
 			defaultRect = new Rect[game.getSize()][game.getSize()];
-			
 			for(int x = 0; x < game.getSize(); x++){
 				for(int y = 0; y < game.getSize(); y++){
 					defaultRect[x][y] = new Rect(
@@ -68,6 +71,8 @@ public class DrawGame{
 		// Create bitmap
 		// TODO reuse bitmap
 		bitmap = Bitmap.createBitmap(rgb, imageSize.width, imageSize.height, Bitmap.Config.ARGB_8888);
+		// Apply rotation
+		bitmap = game.getRotation().apply(bitmap);
 	}
 
 	public void draw(Canvas c){
