@@ -48,7 +48,7 @@ public class Field{
 			return false;
 		}
 		
-		if(x > tileIdx.length || x < 0 || y > tileIdx.length || y < 0){
+		if(x >= tileIdx.length || x < 0 || y >= tileIdx.length || y < 0){
 			// Out of bounds
 			return false;
 		}

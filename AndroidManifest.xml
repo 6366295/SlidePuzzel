@@ -42,6 +42,24 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
             android:screenOrientation="landscape" />
         
+		<activity 
+            android:name=".ScoresEasy" 
+            android:configChanges="keyboardHidden|orientation" 
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+            android:screenOrientation="landscape" />
+                
+		<activity 
+            android:name=".ScoresNormal" 
+            android:configChanges="keyboardHidden|orientation" 
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+            android:screenOrientation="landscape" />
+                        
+		<activity 
+            android:name=".ScoresHard" 
+            android:configChanges="keyboardHidden|orientation" 
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+            android:screenOrientation="landscape" />
+        
         <activity
             android:name=".HowtoActivity"
             android:configChanges="keyboardHidden|orientation" 

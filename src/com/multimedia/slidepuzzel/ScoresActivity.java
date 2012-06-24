@@ -1,11 +1,14 @@
 package com.multimedia.slidepuzzel;
 
-import android.app.Activity;
+import android.app.TabActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TabHost;
+import android.widget.TabHost.TabSpec;
 
-public class ScoresActivity extends Activity {
+public class ScoresActivity extends TabActivity {
 	   @Override
 	    public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
@@ -18,5 +21,26 @@ public class ScoresActivity extends Activity {
 	                finish();
 	            }
 	        });
+	        
+	    TabHost tabHost = getTabHost();
+ 
+        TabSpec scoreseasy = tabHost.newTabSpec("Easy");
+        scoreseasy.setIndicator("Easy");
+        Intent easyIntent = new Intent(this, ScoresEasy.class);
+        scoreseasy.setContent(easyIntent);
+ 
+        TabSpec scoresnormal = tabHost.newTabSpec("Normal");
+        scoresnormal.setIndicator("Normal");
+        Intent normalIntent = new Intent(this, ScoresNormal.class);
+        scoresnormal.setContent(normalIntent);
+ 
+        TabSpec scoreshard = tabHost.newTabSpec("Hard");
+        scoreshard.setIndicator("Hard");
+        Intent hardIntent = new Intent(this, ScoresHard.class);
+        scoreshard.setContent(hardIntent);
+ 
+        tabHost.addTab(scoreseasy);
+        tabHost.addTab(scoresnormal);
+        tabHost.addTab(scoreshard);
 	   }
 }
