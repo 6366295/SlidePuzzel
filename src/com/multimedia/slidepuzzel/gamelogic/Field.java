@@ -73,4 +73,19 @@ public class Field{
 	public int getNullY(){
 		return nullY;
 	}
+	
+	public boolean equals(Field d){
+		if(d.getNullX() != nullX || d.getNullY() != nullY){
+			return false;
+		}
+		
+		for(int x = 0; x < tileIdx.length; x++){
+			for(int y = 0; y < tileIdx.length; y++){
+				if(d.getTileIdx(x, y) != tileIdx[x][y]){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 }

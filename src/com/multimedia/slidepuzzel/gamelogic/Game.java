@@ -15,6 +15,8 @@ public class Game{
 	private Field defField;			// Default field (solved)
 	private Difficulty difficulty;	// Difficulty for this game
 	private SoundManager sound;
+	private StopWatch gameTimer;
+	private boolean solved;
 	//TODO: add shuffle history
 	
 	public Game(Difficulty d, int s, SoundManager sound){
@@ -24,6 +26,9 @@ public class Game{
 		curField = new Field(size);
 		defField = new Field(size);
 		tiles = new Rect[size * size];
+		solved = false;
+		gameTimer = new StopWatch();
+		gameTimer.start();
 	}
 	
 	public boolean useHints(){
@@ -56,5 +61,22 @@ public class Game{
 	
 	public SoundManager getSound(){
 		return sound;
+	}
+	
+	public boolean checkPuzzleSolved(){
+		if(!solved && curField.equals(defField)){
+			solved = true;
+			gameTimer.stop();
+		}
+		
+		return solved;
+	}
+	
+	public boolean isSolved(){
+		return solved;
+	}
+	
+	public StopWatch getGameTime(){
+		return gameTimer;
 	}
 }

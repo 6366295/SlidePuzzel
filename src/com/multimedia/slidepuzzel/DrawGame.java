@@ -9,7 +9,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.hardware.Camera.Size;
-import android.util.Log;
 import android.view.MotionEvent;
 
 public class DrawGame{
@@ -33,7 +32,7 @@ public class DrawGame{
 
 	public DrawGame(Activity activity){
 		game = ((GameActivity) activity).getGame();
-	
+		game.getField().swapTile(game.getField().getNullX(), game.getField().getNullY() - 1);
 		// Inactive animation state
 		anim = -1;
 		swapX = -1;
@@ -50,7 +49,6 @@ public class DrawGame{
 			int arraySize = imageSize.width*imageSize.height;
 			rgb = new int[arraySize];
 			tileSize = imageSize.height / game.getSize();
-			Log.d("Tilesize", "" + tileSize + " height: " + imageSize.height + " width: " + imageSize.width);
 		
 			defaultRect = new Rect[game.getSize()][game.getSize()];
 			
@@ -80,6 +78,11 @@ public class DrawGame{
 		}else if(anim == 0){	
 			// Swap the actual tile
 			game.getField().swapTile(swapX, swapY);
+			
+			// Last swap solved the puzzle
+			if(game.checkPuzzleSolved()){
+				game.getSound().playSound(game.getSound().win);
+			}
 			
 			// Reset
 			anim = -1;
@@ -128,10 +131,16 @@ public class DrawGame{
 				
 			}
 		}
+		
+		if(game.isSolved()){
+			p.setColor(combine(255, 0, 0));
+			c.drawText("You have solved the puzzle", 50, 50, p);
+			c.drawText("Time: " + (game.getGameTime().getTimeElapsed() / 1000) + " sec", 50, 70, p);
+		}
 	}
 	
 	public void onTouchEvent(MotionEvent event){
-		if(anim == -1){
+		if(anim == -1 && !game.isSolved()){
 			swapX = (int) event.getX();
 			swapY = (int) event.getY();
 			swapX /= tileSize;
