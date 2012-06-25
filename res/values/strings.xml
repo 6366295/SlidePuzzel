@@ -36,4 +36,7 @@
         
     <string name="hint">Hint</string>
     
+    <string name="congrats">Congratulations, you have solved the puzzle!</string>
+    <string name="newgame">New Game</string>
+    
 </resources>    
