@@ -45,6 +45,9 @@ public class WinActivity extends Activity {
         Button back = (Button) findViewById(R.id.back5);
         back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+            	EditText et = (EditText) findViewById(R.id.entername);
+                String theText = et.getText().toString();
+            	h.setName(theText);
                 app.dataManager.insertHighscore(h);
                 finish();
             }
@@ -53,6 +56,9 @@ public class WinActivity extends Activity {
         Button newgame = (Button) findViewById(R.id.newgame);
         newgame.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+            	EditText et = (EditText) findViewById(R.id.entername);
+                String theText = et.getText().toString();
+            	h.setName(theText);
                 app.dataManager.insertHighscore(h);
                 finish();
                 Intent intent = new Intent(WinActivity.this, GameActivity.class);
@@ -69,9 +75,9 @@ public class WinActivity extends Activity {
         s.setSize(app.size);
 		h.setSettings(s);
         h.setTime(totaltime2);
-        h.setName(theText);
-    	Log.d("Highscore", "Score Added, NAME: " + theText + " TIME: " + totaltime2);
-    	app.dataManager.insertHighscore(h);
+       
+    	//Log.d("Highscore", "Score Added, NAME: " + theText + " TIME: " + totaltime2);
+    	//app.dataManager.insertHighscore(h);
         
     }
 }

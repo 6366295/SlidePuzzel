@@ -5,10 +5,7 @@ import com.multimedia.slidepuzzel.data.HighscoreEntry;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.LinearLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;

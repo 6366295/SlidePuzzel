@@ -1,7 +1,5 @@
 package com.multimedia.slidepuzzel;
 
-import java.util.Random;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -45,7 +43,7 @@ public class DrawGame{
 		swapX = -1;
 		swapY = -1;
 		
-		game = game.shuffler();
+		//game.shuffle();
 		
 		p = new Paint();
 		

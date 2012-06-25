@@ -90,36 +90,33 @@ public class Game{
 		return rotation;
 	}
 	
-	public Game shuffler(){
+	public void shuffle(){
 		boolean loop = true;
 		boolean up, down, left, right;
 		int rand;
-		Game game = this;
 		Random generator = new Random();
 		
 		while(loop){
 			for(int i = 0; i < 10000; i ++){
-				left = game.getField().validSwap(game.getField().getNullX() - 1, game.getField().getNullY());
-				right = game.getField().validSwap(game.getField().getNullX() + 1, game.getField().getNullY());
-				up = game.getField().validSwap(game.getField().getNullX(), game.getField().getNullY() - 1);
-				down = game.getField().validSwap(game.getField().getNullX(), game.getField().getNullY() + 1);
+				left = curField.validSwap(curField.getNullX() - 1, curField.getNullY());
+				right = curField.validSwap(curField.getNullX() + 1, curField.getNullY());
+				up = curField.validSwap(curField.getNullX(), curField.getNullY() - 1);
+				down = curField.validSwap(curField.getNullX(), curField.getNullY() + 1);
 				
 				rand = generator.nextInt();
 				rand = rand % 4;
 				if(rand == 0 && left)
-					game.getField().swapTile(game.getField().getNullX() - 1, game.getField().getNullY());
+					curField.swapTile(curField.getNullX() - 1, curField.getNullY());
 				if(rand == 1 && right)
-					game.getField().swapTile(game.getField().getNullX() + 1, game.getField().getNullY());
+					curField.swapTile(curField.getNullX() + 1, curField.getNullY());
 				if(rand == 2 && up)
-					game.getField().swapTile(game.getField().getNullX(), game.getField().getNullY() - 1);
+					curField.swapTile(curField.getNullX(), curField.getNullY() - 1);
 				if(rand == 3 && down)
-					game.getField().swapTile(game.getField().getNullX(), game.getField().getNullY() + 1);
+					curField.swapTile(curField.getNullX(), curField.getNullY() + 1);
 
 			}
-			if(!game.checkPuzzleSolved())
+			if(!checkPuzzleSolved())
 				loop = false;
 		}
-		
-		return game;
 	}
 }
