@@ -25,7 +25,10 @@ public class ScoresEasy extends Activity {
         HighscoreEntry[] entries = ((SharedApplication) getApplication()).dataManager.getHighscore("EASY", 5);
         for(int i = 0; i < entries.length; i++){
         	if(entries[i] == null)break;
-        	Log.d("Highscore", "Add 1");
+        	int time = entries[i].getTime();
+        	int sec = time % 60;
+        	int min = time / 60;
+        	
         	TableRow row = (TableRow)inflater.inflate(R.layout.tablerow, layout, false);
         	
         	TextView id = (TextView) row.findViewById(R.id.table_id);
@@ -34,8 +37,8 @@ public class ScoresEasy extends Activity {
             TextView name = (TextView) row.findViewById(R.id.table_name);
             name.setText(entries[i].getName());
             
-            TextView time = (TextView) row.findViewById(R.id.table_time);
-            time.setText(entries[i].getTime() + "");
+            TextView timeView = (TextView) row.findViewById(R.id.table_time);
+            timeView.setText(min + ":" + sec);
         	
         	layout.addView(row);
         }
