@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.multimedia.slidepuzzel.application.SharedApplication;
-import com.multimedia.slidepuzzel.data.DataManager;
 import com.multimedia.slidepuzzel.gamelogic.Game;
 import com.multimedia.slidepuzzel.sound.SoundManager;
 
@@ -28,7 +27,6 @@ public class GameActivity extends Activity {
         });
         
         SharedApplication app = (SharedApplication) getApplication();
-        app.dataManager = new DataManager(getBaseContext());
         if(app.diff.equals("EASY"))
         	game = new Game(Game.Difficulty.EASY, app.size, new SoundManager(getBaseContext()));
         else if(app.diff.equals("NORMAL")){
