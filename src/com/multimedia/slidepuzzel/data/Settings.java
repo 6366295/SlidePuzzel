@@ -1,5 +1,6 @@
 package com.multimedia.slidepuzzel.data;
 
+/* Wrapper class for settings */
 public class Settings{
 	private int size;
 	private String difficulty;
