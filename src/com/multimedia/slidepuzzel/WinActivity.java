@@ -63,21 +63,15 @@ public class WinActivity extends Activity {
         EditText et = (EditText) findViewById(R.id.entername);
         String theText = et.getText().toString();
         
-		Settings s = new Settings();
-		if(app.diff.equals("EASY"))
-			s.setDifficulty("EASY");
-		else if(app.diff.equals("NORMAL"))
-			s.setDifficulty("NORMAL");
-		else if(app.diff.equals("HARD"))
-			s.setDifficulty("HARD");
-		if(app.size == 3)
-			s.setSize(3);
-		else if(app.size == 4)
-			s.setSize(4);
+        h = new HighscoreEntry();
+        Settings s = new Settings();
+        s.setDifficulty(app.diff);
+        s.setSize(app.size);
 		h.setSettings(s);
         h.setTime(totaltime2);
         h.setName(theText);
     	Log.d("Highscore", "Score Added, NAME: " + theText + " TIME: " + totaltime2);
+    	app.dataManager.insertHighscore(h);
         
     }
 }
