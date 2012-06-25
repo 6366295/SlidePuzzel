@@ -13,6 +13,12 @@ public class DataManager extends SQLiteOpenHelper{
 	
 	public DataManager(Context context) {
 		super(context, DATABASE_NAME, null, 1);
+		
+		// ONLY FOR FIXING ERROR time COLLUM NOT FOUND
+		getWritableDatabase().execSQL("DROP TABLE " + SETTINGS_TABLE);
+		getWritableDatabase().execSQL("DROP TABLE " + HIGHSCORE_TABLE);
+		onCreate(getWritableDatabase());
+		// EOF QF
 	}
 	
 	@Override
@@ -28,8 +34,8 @@ public class DataManager extends SQLiteOpenHelper{
 		db.execSQL("CREATE TABLE " + HIGHSCORE_TABLE + " ("
 				+ "id INTEGER PRIMARY KEY, "
 				+ "difficulty TEXT, "
-				+ "name TEXT"
-				+ "size INTEGER"
+				+ "name TEXT, "
+				+ "size INTEGER, "
 				+ "time INTEGER"
 			+ ")");
 		
