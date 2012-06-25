@@ -19,6 +19,17 @@ public class DataManager extends SQLiteOpenHelper{
 		getWritableDatabase().execSQL("DROP TABLE " + HIGHSCORE_TABLE);
 		onCreate(getWritableDatabase());
 		// EOF QF
+		
+		// SAMPLE INSERT RUN ONCE
+		HighscoreEntry h = new HighscoreEntry();
+		Settings s = new Settings();
+		s.setDifficulty("EASY");
+		s.setSize(3);
+		h.setSettings(s);
+		h.setName("Me");
+		h.setTime(1234);
+		insertHighscore(h);
+		// EOF SAMPLE
 	}
 	
 	@Override

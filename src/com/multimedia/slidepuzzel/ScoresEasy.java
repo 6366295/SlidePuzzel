@@ -6,6 +6,7 @@ import com.multimedia.slidepuzzel.data.HighscoreEntry;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.LinearLayout;
+import android.util.Log;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -21,6 +22,7 @@ public class ScoresEasy extends Activity {
         HighscoreEntry[] entries = ((SharedApplication) getApplication()).dataManager.getHighscore("EASY", 5);
         for(int i = 0; i < entries.length; i++){
         	if(entries[i] == null)break;
+        	Log.d("Highscore", "Add 1");
         	TableRow row = new TableRow(this);
         	
         	TextView id = new TextView(this);
@@ -29,7 +31,7 @@ public class ScoresEasy extends Activity {
         	
         	id.setText("" + (i + 1));
         	name.setText(entries[i].getName());
-        	time.setText(entries[i].getTime());
+        	time.setText("" + entries[i].getTime());
         	
         	id.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 0.2f));
         	name.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 0.5f));
@@ -39,7 +41,7 @@ public class ScoresEasy extends Activity {
         	row.addView(name);
         	row.addView(time);
         	
-        	layout.addView(row);
+        	layout.addView(row, new TableLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
         }
     }
 }
