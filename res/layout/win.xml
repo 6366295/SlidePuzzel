@@ -13,8 +13,7 @@
         android:textSize="25sp"
         android:padding="5dp"
         android:textColor="#ffffff"
-        android:text="@string/congrats"
- />
+        android:text="@string/congrats"/>
 
     <Button
         android:id="@+id/back5"
@@ -47,10 +46,6 @@
         android:layout_width="150dp"
         android:layout_height="100dp"
         android:layout_alignParentLeft="true"
-<<<<<<< HEAD
-        android:text="@string/newgame"
-        android:onClick="newGame" />
-=======
         android:layout_below="@+id/wintext"
         android:text="@string/enternametext"
         android:textSize="20sp" />
@@ -68,6 +63,5 @@
 
         <requestFocus />
     </EditText>
->>>>>>> 1f973a67b6406d81b0af56cec936945bbdca07b9
 
 </RelativeLayout>
