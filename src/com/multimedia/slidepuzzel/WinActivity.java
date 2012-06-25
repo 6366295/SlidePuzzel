@@ -37,4 +37,20 @@ public class WinActivity extends Activity {
             }
         });
     }
+	
+    public void newGame(View view) {
+    	Intent intent = new Intent(this, GameActivity.class);
+    	startActivity(intent);
+    }
+	
+    @Override
+    protected void onStop() {
+    	super.onStop();
+    	finish();
+    }
+    @Override
+    protected void onDestroy() {
+    	super.onDestroy();
+    	finish();
+    }
 }
