@@ -35,7 +35,10 @@ public class ScoresEasy extends Activity {
             name.setText(entries[i].getName());
             
             TextView timeView = (TextView) row.findViewById(R.id.table_time);
-            timeView.setText(min + ":" + sec);
+            if(sec < 10)
+            	timeView.setText(min + ":0" + sec);
+            else
+            	timeView.setText(min + ":" + sec);
         	
         	layout.addView(row);
         }
