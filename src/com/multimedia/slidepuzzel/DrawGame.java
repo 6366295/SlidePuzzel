@@ -1,6 +1,5 @@
 package com.multimedia.slidepuzzel;
 
-
 import java.util.Random;
 
 import android.app.Activity;
@@ -37,6 +36,10 @@ public class DrawGame{
 	public Context mContext;
 
 	public DrawGame(Activity activity){
+		boolean loop = true;
+		boolean up, down, left, right;
+		int rand;
+		
 		game = ((GameActivity) activity).getGame();
 		
 		/*
@@ -47,19 +50,28 @@ public class DrawGame{
 		swapY = -1;
 		*/
 		Random generator = new Random();
-			for(int i = 0; i < 100; i ++){
-			if(generator.nextInt() % 2 == 0){
-				if(game.getField().validSwap(game.getField().getNullX() - 1, game.getField().getNullY()))
+		
+		while(loop){
+			for(int i = 0; i < 10000; i ++){
+				left = game.getField().validSwap(game.getField().getNullX() - 1, game.getField().getNullY());
+				right = game.getField().validSwap(game.getField().getNullX() + 1, game.getField().getNullY());
+				up = game.getField().validSwap(game.getField().getNullX(), game.getField().getNullY() - 1);
+				down = game.getField().validSwap(game.getField().getNullX(), game.getField().getNullY() + 1);
+				
+				rand = generator.nextInt();
+				rand = rand % 4;
+				if(rand == 0 && left)
 					game.getField().swapTile(game.getField().getNullX() - 1, game.getField().getNullY());
-				else if(game.getField().validSwap(game.getField().getNullX() + 1, game.getField().getNullY()))
+				if(rand == 1 && right)
 					game.getField().swapTile(game.getField().getNullX() + 1, game.getField().getNullY());
-			}
-			else{
-				if(game.getField().validSwap(game.getField().getNullX(), game.getField().getNullY() - 1))
+				if(rand == 2 && up)
 					game.getField().swapTile(game.getField().getNullX(), game.getField().getNullY() - 1);
-				else if(game.getField().validSwap(game.getField().getNullX() + 1, game.getField().getNullY() + 1))
+				if(rand == 3 && down)
 					game.getField().swapTile(game.getField().getNullX(), game.getField().getNullY() + 1);
+
 			}
+			if(!game.checkPuzzleSolved())
+				loop = false;
 		}
 		
 		
