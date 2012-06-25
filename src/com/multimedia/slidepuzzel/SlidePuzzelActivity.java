@@ -16,8 +16,6 @@ public class SlidePuzzelActivity extends Activity {
         setContentView(R.layout.main);
         SharedApplication app = (SharedApplication) getApplication();
         app.dataManager = new DataManager(getBaseContext());
-        //app.size = 3;
-       // app.diff = "EASY";
     }
     
     public void gameActivity(View view) {

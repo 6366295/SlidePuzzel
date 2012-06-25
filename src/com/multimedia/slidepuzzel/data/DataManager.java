@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 public class DataManager extends SQLiteOpenHelper{
 	private static final String DATABASE_NAME = "slidepuzzel_data";
@@ -18,7 +17,6 @@ public class DataManager extends SQLiteOpenHelper{
 	
 	@Override
 	public void onCreate(SQLiteDatabase db){
-		Log.d("Database", "Create");
 		// Create settings table
 		db.execSQL("CREATE TABLE " + SETTINGS_TABLE + " ("
 				+ "id INTEGER PRIMARY KEY, "
@@ -43,7 +41,6 @@ public class DataManager extends SQLiteOpenHelper{
 	}
 	
 	public void updateSettings(Settings s){
-		Log.d("Database", "Update settings (" + s.getDifficulty() + ", " + s.getSize() + ")");
 		ContentValues val = new ContentValues();
 		val.put("difficulty", s.getDifficulty());
 		val.put("size", s.getSize());
@@ -58,7 +55,6 @@ public class DataManager extends SQLiteOpenHelper{
 		c.moveToFirst();
 		s.setDifficulty(c.getString(0));
 		s.setSize(c.getInt(1));
-		Log.d("Database", "Get settings (" + s.getDifficulty() + ", " + s.getSize() + ")");
 		c.close();
 		return s;
 	}
