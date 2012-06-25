@@ -142,12 +142,13 @@ public class DrawGame{
 			}
 		}
 		if(game.isSolved()){
-			p.setColor(combine(255, 0, 0));
-			c.drawText("You have solved the puzzle", 50, 50, p);
-			c.drawText("Time: " + (game.getGameTime().getTimeElapsed() / 1000) + " sec", 50, 70, p);
-			
+			//p.setColor(combine(255, 0, 0));
+			//c.drawText("You have solved the puzzle", 50, 50, p);
+			//c.drawText("Time: " + (game.getGameTime().getTimeElapsed() / 1000) + " sec", 50, 70, p);
+			int time = (int) (game.getGameTime().getTimeElapsed() / 1000);
 			Intent intent = new Intent().setClass(mContext, WinActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			intent.putExtra("time", time);
             mContext.startActivity(intent);
 		}
 	}
