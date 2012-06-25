@@ -1,6 +1,7 @@
 package com.multimedia.slidepuzzel;
 
 import com.multimedia.slidepuzzel.application.SharedApplication;
+import com.multimedia.slidepuzzel.data.Settings;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,13 +11,19 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 public class SettingsActivity extends Activity {
+		private Settings settings;
+		private SharedApplication app;
+	
 	   @Override
 	    public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        
 	        setContentView(R.layout.settings);
 	        
-	        SharedApplication app = (SharedApplication) getApplication();
+	        app = (SharedApplication) getApplication();
+	        settings = app.dataManager.getSettings();
+	        app.diff = settings.getDifficulty();
+	        app.size = settings.getSize();
 	        
 	        Button back = (Button) findViewById(R.id.back3);
 	        back.setOnClickListener(new View.OnClickListener() {
@@ -27,16 +34,18 @@ public class SettingsActivity extends Activity {
 	        
 	        Button reset = (Button) findViewById(R.id.reset);
 	        reset.setOnClickListener(new View.OnClickListener() {
-	            public void onClick(View view) {
-	            	SharedApplication app = (SharedApplication) getApplication();
-	            	
-			    	RadioButton easy=(RadioButton)findViewById(R.id.easy);
+	            public void onClick(View view) {            	
+			    	RadioButton easy = (RadioButton)findViewById(R.id.easy);
 		        	easy.setChecked(true);
 		        	app.diff = "EASY";
 		        	
-			    	RadioButton three=(RadioButton)findViewById(R.id.three);
+			    	RadioButton three = (RadioButton)findViewById(R.id.three);
 		        	three.setChecked(true);
 		        	app.size = 3;
+		        	
+		        	settings.setDifficulty(app.diff);
+		        	settings.setSize(app.size);
+		        	app.dataManager.updateSettings(settings);
 	            }
 	        });
 	        
@@ -55,9 +64,7 @@ public class SettingsActivity extends Activity {
 	        {
 
 			   public void onCheckedChanged(RadioGroup arg0, int arg1) {
-			    // TODO Auto-generated method stub
-				SharedApplication app = (SharedApplication) getApplication();
-			    RadioButton rb=(RadioButton)findViewById(arg1);
+			    RadioButton rb = (RadioButton)findViewById(arg1);
 			    
 				if(rb.getText().equals("Easy")){
 			    	app.diff = "EASY";
@@ -74,6 +81,8 @@ public class SettingsActivity extends Activity {
 			    	RadioButton hard=(RadioButton)findViewById(R.id.hard);
 			    	hard.setChecked(true);
 			    }
+				settings.setDifficulty(app.diff);
+				app.dataManager.updateSettings(settings);
 			   }
 	         
 	        }
@@ -109,6 +118,9 @@ public class SettingsActivity extends Activity {
 			    	RadioButton three=(RadioButton)findViewById(R.id.three);
 			    	three.setChecked(true);
 			    }
+				
+				settings.setSize(app.size);
+				app.dataManager.updateSettings(settings);
 			   }
 	         
 	        }

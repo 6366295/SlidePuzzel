@@ -29,6 +29,7 @@ public class GameActivity extends Activity {
         SharedApplication app = (SharedApplication) getApplication();
         if(app.diff.equals("EASY"))
         	game = new Game(Game.Difficulty.EASY, app.size, new SoundManager(getBaseContext()));
+        	
         else if(app.diff.equals("NORMAL")){
         	game = new Game(Game.Difficulty.NORMAL, app.size, new SoundManager(getBaseContext()));
         	View b = findViewById(R.id.hint);

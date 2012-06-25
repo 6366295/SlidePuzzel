@@ -1,6 +1,5 @@
 package com.multimedia.slidepuzzel;
 
-
 import java.util.Random;
 
 import android.app.Activity;
@@ -39,29 +38,14 @@ public class DrawGame{
 	public DrawGame(Activity activity){
 		game = ((GameActivity) activity).getGame();
 		
-		/*
+		
 		game.getField().swapTile(game.getField().getNullX(), game.getField().getNullY() - 1);
 		// Inactive animation state
 		anim = -1;
 		swapX = -1;
 		swapY = -1;
-		*/
-		Random generator = new Random();
-			for(int i = 0; i < 100; i ++){
-			if(generator.nextInt() % 2 == 0){
-				if(game.getField().validSwap(game.getField().getNullX() - 1, game.getField().getNullY()))
-					game.getField().swapTile(game.getField().getNullX() - 1, game.getField().getNullY());
-				else if(game.getField().validSwap(game.getField().getNullX() + 1, game.getField().getNullY()))
-					game.getField().swapTile(game.getField().getNullX() + 1, game.getField().getNullY());
-			}
-			else{
-				if(game.getField().validSwap(game.getField().getNullX(), game.getField().getNullY() - 1))
-					game.getField().swapTile(game.getField().getNullX(), game.getField().getNullY() - 1);
-				else if(game.getField().validSwap(game.getField().getNullX() + 1, game.getField().getNullY() + 1))
-					game.getField().swapTile(game.getField().getNullX(), game.getField().getNullY() + 1);
-			}
-		}
 		
+		game = game.shuffler();
 		
 		p = new Paint();
 		
