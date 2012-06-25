@@ -1,6 +1,7 @@
 package com.multimedia.slidepuzzel;
 
 import com.multimedia.slidepuzzel.application.SharedApplication;
+import com.multimedia.slidepuzzel.data.DataManager;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,8 +15,9 @@ public class SlidePuzzelActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         SharedApplication app = (SharedApplication) getApplication();
-        app.size = 3;
-        app.diff = "EASY";
+        app.dataManager = new DataManager(getBaseContext());
+        //app.size = 3;
+       // app.diff = "EASY";
     }
     
     public void gameActivity(View view) {
