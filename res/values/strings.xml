@@ -37,6 +37,9 @@
     <string name="hint">Hint</string>
     
     <string name="congrats">Congratulations, you have solved the puzzle!</string>
+    <string name="enternametext">Enter your name here: </string>
+    <string name="NameDefault">Your name here</string>
+    <string name="confirm">Confirm</string>
     <string name="newgame">New Game</string>
     
 </resources>    

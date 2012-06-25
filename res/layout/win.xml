@@ -21,17 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="@string/back" />
-
-    <TextView
-        android:id="@+id/wintext"
-        android:layout_width="match_parent"
-        android:layout_height="230dp"
-        android:layout_above="@+id/back5"
-        android:layout_alignParentLeft="true"
-        android:padding="10dp"
-        android:text=""
-        android:textColor="#ffffff" />
+        android:text="@string/confirm" />
 
     <Button
         android:id="@+id/newgame"
@@ -40,5 +30,38 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:text="@string/newgame" />
+
+    <TextView
+        android:id="@+id/wintext"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/wintitle"
+        android:padding="10dp"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/enternametext"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/wintext"
+        android:text="@string/enternametext"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/entername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/enternametext"
+        android:layout_marginLeft="37dp"
+        android:layout_toRightOf="@+id/enternametext"
+        android:ems="10"
+        android:inputType="textPersonName"
+		android:hint="@string/NameDefault" >
+
+        <requestFocus />
+    </EditText>
 
 </RelativeLayout>
