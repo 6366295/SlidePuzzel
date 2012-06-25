@@ -36,5 +36,14 @@ public class WinActivity extends Activity {
                 finish();
             }
         });
+        
+        Button newgame = (Button) findViewById(R.id.newgame);
+        newgame.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                finish();
+                Intent intent = new Intent(WinActivity.this, GameActivity.class);
+            	startActivity(intent);
+            }
+        });
     }
 }
