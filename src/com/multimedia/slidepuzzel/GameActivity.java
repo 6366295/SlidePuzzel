@@ -44,6 +44,17 @@ public class GameActivity extends Activity {
         mCameraView = (CameraView) findViewById(R.id.cameraView1);
         mCameraView.setActivity(this);
     }
+   
+    @Override
+    protected void onStop() {
+    	super.onStop();
+    	finish();
+    }
+    @Override
+    protected void onDestroy() {
+    	super.onDestroy();
+    	finish();
+    }
     
     public Context gContext() {
     	return getApplicationContext();
