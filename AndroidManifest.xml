@@ -47,8 +47,32 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
             android:screenOrientation="landscape" />
         
+        <activity 
+            android:name=".ScoresActivity2" 
+            android:configChanges="keyboardHidden|orientation" 
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+            android:screenOrientation="landscape" />
+                
+        <activity 
+            android:name=".ScoresActivity3" 
+            android:configChanges="keyboardHidden|orientation" 
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+            android:screenOrientation="landscape" />
+                        
+        <activity 
+            android:name=".ScoresActivity4" 
+            android:configChanges="keyboardHidden|orientation" 
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+            android:screenOrientation="landscape" />
+        
 		<activity 
             android:name=".ScoresEasy" 
+            android:configChanges="keyboardHidden|orientation" 
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+            android:screenOrientation="landscape" />
+		
+		<activity 
+            android:name=".ScoresEasy2" 
             android:configChanges="keyboardHidden|orientation" 
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
             android:screenOrientation="landscape" />
@@ -58,9 +82,21 @@
             android:configChanges="keyboardHidden|orientation" 
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
             android:screenOrientation="landscape" />
+		
+		<activity 
+            android:name=".ScoresNormal2" 
+            android:configChanges="keyboardHidden|orientation" 
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+            android:screenOrientation="landscape" />
                         
 		<activity 
             android:name=".ScoresHard" 
+            android:configChanges="keyboardHidden|orientation" 
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+            android:screenOrientation="landscape" />
+		
+		<activity 
+            android:name=".ScoresHard2" 
             android:configChanges="keyboardHidden|orientation" 
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
             android:screenOrientation="landscape" />

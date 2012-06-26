@@ -19,7 +19,7 @@ public class ScoresNormal extends Activity {
 		
 		LayoutInflater inflater = getLayoutInflater();
 		
-		HighscoreEntry[] entries = ((SharedApplication) getApplication()).dataManager.getHighscore("NORMAL", 5);
+		HighscoreEntry[] entries = ((SharedApplication) getApplication()).dataManager.getHighscore("NORMAL", 5, "size = 3");
 		for(int i = 0; i < entries.length; i++){
 			if(entries[i] == null)break;
 			int time = entries[i].getTime();

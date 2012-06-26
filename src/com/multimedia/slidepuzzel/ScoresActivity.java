@@ -26,17 +26,17 @@ public class ScoresActivity extends TabActivity {
  
 		TabSpec scoreseasy = tabHost.newTabSpec("Easy");
 		scoreseasy.setIndicator("Easy");
-		Intent easyIntent = new Intent(this, ScoresEasy.class);
+		Intent easyIntent = new Intent(this, ScoresActivity2.class);
 		scoreseasy.setContent(easyIntent);
  
 		TabSpec scoresnormal = tabHost.newTabSpec("Normal");
 		scoresnormal.setIndicator("Normal");
-		Intent normalIntent = new Intent(this, ScoresNormal.class);
+		Intent normalIntent = new Intent(this, ScoresActivity3.class);
 		scoresnormal.setContent(normalIntent);
  
 		TabSpec scoreshard = tabHost.newTabSpec("Hard");
 		scoreshard.setIndicator("Hard");
-		Intent hardIntent = new Intent(this, ScoresHard.class);
+		Intent hardIntent = new Intent(this, ScoresActivity4.class);
 		scoreshard.setContent(hardIntent);
  
 		tabHost.addTab(scoreseasy);

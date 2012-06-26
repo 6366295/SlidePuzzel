@@ -69,11 +69,11 @@ public class DataManager extends SQLiteOpenHelper{
 		getWritableDatabase().insert(HIGHSCORE_TABLE, null, val);
 	}
 	
-	public HighscoreEntry[] getHighscore(String difficulty, int max){
+	public HighscoreEntry[] getHighscore(String difficulty, int max, String qsize){
 		HighscoreEntry[] entries = new HighscoreEntry[max];
 		
 		// Select highscore 
-		Cursor c = getReadableDatabase().query(HIGHSCORE_TABLE, new String[] {"difficulty, name", "time", "size"}, "difficulty = ?",
+		Cursor c = getReadableDatabase().query(HIGHSCORE_TABLE, new String[] {"difficulty, name", "time", "size"}, "difficulty = ? AND " + qsize,
 				new String[] {difficulty}, null, null, "time ASC", "" + max);
 		
 		// Parse highscores
