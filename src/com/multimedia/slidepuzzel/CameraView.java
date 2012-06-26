@@ -23,6 +23,7 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 	private Parameters parameters;		// The camera settings
 	private int creationPhase = 0;		// Keep track of number surfaces created
 	private DrawGame drawControl;		// The objects that draws our game
+	
 	private Camera camera;
 	
 	public CameraView(Context context, AttributeSet attrs){
@@ -113,6 +114,10 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 		// Pass on touch event to our drawing control
 		drawControl.onTouchEvent(event);
 		return super.onTouchEvent(event);
+	}
+	
+	public DrawGame getDrawControl() {
+		return drawControl;
 	}
 
 	class PreviewFramer implements Camera.PreviewCallback{

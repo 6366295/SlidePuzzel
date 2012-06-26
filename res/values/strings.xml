@@ -44,5 +44,6 @@
     <string name="highscore_name">Name</string>
     <string name="highscore_num">Num</string>
     <string name="highscore_time">Time</string>
+    <string name="freeze">Freeze</string>
     
 </resources>    
