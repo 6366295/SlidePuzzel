@@ -16,19 +16,19 @@
                 android:id="@+id/textView1"
                 android:layout_weight="0.2"
                 android:layout_width="0px"
-                android:text="Num" />
+                android:text="@string/highscore_num" />
             
 			<TextView
                 android:id="@+id/textView2"
                 android:layout_weight="0.5"
                 android:layout_width="0px"
-                android:text="Name" />
+                android:text="@string/highscore_name" />
             
             <TextView
                 android:id="@+id/textView3"
                 android:layout_weight="0.3"
                 android:layout_width="0px"
-                android:text="Time" />
+                android:text="@string/highscore_time" />
 
         </TableRow>
     </TableLayout>

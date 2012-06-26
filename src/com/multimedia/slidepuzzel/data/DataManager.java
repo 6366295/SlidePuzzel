@@ -13,23 +13,6 @@ public class DataManager extends SQLiteOpenHelper{
 	
 	public DataManager(Context context) {
 		super(context, DATABASE_NAME, null, 1);
-		
-		// ONLY FOR FIXING ERROR time COLLUM NOT FOUND
-		getWritableDatabase().execSQL("DROP TABLE " + SETTINGS_TABLE);
-		getWritableDatabase().execSQL("DROP TABLE " + HIGHSCORE_TABLE);
-		onCreate(getWritableDatabase());
-		// EOF QF
-		
-		// SAMPLE INSERT RUN ONCE
-		HighscoreEntry h = new HighscoreEntry();
-		Settings s = new Settings();
-		s.setDifficulty("EASY");
-		s.setSize(3);
-		h.setSettings(s);
-		h.setName("Me");
-		h.setTime(1234);
-		insertHighscore(h);
-		// EOF SAMPLE
 	}
 	
 	@Override
