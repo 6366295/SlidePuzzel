@@ -8,49 +8,45 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.hardware.Camera.Size;
-import android.util.Log;
 import android.view.MotionEvent;
 
 import com.multimedia.slidepuzzel.gamelogic.Game;
 
 public class DrawGame{
-	public Size imageSize;
+	public Size imageSize;			// Size of the camera image
 
-	private Game game;
-	private Paint p;
+	private Game game;				// The game this object should draw
+	private Paint p;				// Paint for outer square lines
 	
-	private int[] rgb;
-	private Bitmap bitmap;
+	private int[] rgb;				// Camera rgb data
+	private Bitmap bitmap;			// Camera rgb data put into Bitmap
 	
-	private int tileSize;
-	private Rect[][] defaultRect;
+	private int tileSize;			// Size of a tile (tileSize * tileSize)
+	private Rect[][] defaultRect;	// Default square positions for x,y
 	
-	private int swapX;
-	private int swapY;
-	private int animX;
-	private int animY;
-	private int anim;
-	private Rect animRect;
+	private int swapX;				// Position x of tile to be swapped
+	private int swapY;				// Position y of tile to be swapped
+	private int animX;				// Shift in x direction per draw 
+	private int animY;				// Shift in y direction per draw 
+	private int anim;				// Animation counter
+	private Rect animRect;			// Animated rectangle, position will change in animation
 	
-	private float scaleFactor;
+	private float scaleFactor;		// Times the drawed image is scaled to fit the whole canvas
 	
-	public Context mContext;
+	public Context mContext;		// Application context
 
 	public DrawGame(Activity activity){
 		game = ((GameActivity) activity).getGame();
-		
-		
-		game.getField().swapTile(game.getField().getNullX(), game.getField().getNullY() - 1);
 		// Inactive animation state
 		anim = -1;
 		swapX = -1;
 		swapY = -1;
 		
+		game.getField().swapTile(game.getField().getNullX(), game.getField().getNullY() - 1);
 		//game.shuffle();
 		
 		p = new Paint();
-		
-		mContext = ((GameActivity) activity).gContext();
+		mContext = activity.getApplicationContext();
 	}
 
 	public void imageReceived(byte[] data) {
@@ -103,7 +99,7 @@ public class DrawGame{
 				Intent intent = new Intent().setClass(mContext, WinActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				intent.putExtra("time", time);
-	            mContext.startActivity(intent);
+				mContext.startActivity(intent);
 			}
 			
 			// Reset
@@ -112,12 +108,14 @@ public class DrawGame{
 			swapY = -1;
 			animRect = null;
 		}
-		p.setColor(combine(0, 0, 0));
+		
 		
 		// Scale
 		scaleFactor = (float) c.getHeight() / (float) (game.getSize() * tileSize);
 		c.scale(scaleFactor, scaleFactor, 0, 0);
 		
+		// Set color to black
+		p.setColor(0xFF000000);
 		// Draw the empty square black
 		c.drawRect(defaultRect[game.getField().getNullX()][game.getField().getNullY()], p);
 		
@@ -127,7 +125,7 @@ public class DrawGame{
 			for(int y = 0; y < game.getSize(); y++){
 				tIdx = game.getField().getTileIdx(x, y);
 				
-				// Skip empty square
+				// Don't draw empty square
 				if(tIdx == 0){
 					continue;
 				}
@@ -153,37 +151,22 @@ public class DrawGame{
 				
 			}
 		}
-		
-		// Draw solved each time
-		/*if(game.isSolved()){
-			//p.setColor(combine(255, 0, 0));
-			//c.drawText("You have solved the puzzle", 50, 50, p);
-			//c.drawText("Time: " + (game.getGameTime().getTimeElapsed() / 1000) + " sec", 50, 70, p);
-			int time = (int) (game.getGameTime().getTimeElapsed() / 1000);
-			Intent intent = new Intent().setClass(mContext, WinActivity.class);
-			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			intent.putExtra("time", time);
-            mContext.startActivity(intent);
-		}*/
 	}
 	
 	public void onTouchEvent(MotionEvent event){
-		Log.d("TouchEvent", "Raw touch event on " + event.getX() + ", " + event.getY());
 		if(anim == -1 && !game.isSolved()){		
 			float x =  event.getX();
 			float y =  event.getY();
-			Log.d("TouchEvent", "Touch on unscaled " + x + ", " + y);
+			// Apply reverse scale to get the actual x,y in the unscaled plane
 			x /= scaleFactor;
 			y /= scaleFactor;
+			
 			swapX = (int) Math.round(x);
 			swapY = (int) Math.round(y);
-			Log.d("TouchEvent", "Touch on scaled " + swapX + ", " + swapY + " tilesize " + tileSize);
 			swapX /= tileSize;
 			swapY /= tileSize;
-			Log.d("TouchEvent", "Touch gives " + swapX + ", " + swapY);
 			
 			if(game.getField().validSwap(swapX, swapY)){
-				Log.d("TouchEvent", "Starting anim on " + swapX + ", " + swapY);
 				// Animation timer
 				anim = tileSize / 20;
 				
@@ -197,46 +180,42 @@ public class DrawGame{
 				
 				game.getSound().playSound(game.getSound().swap);
 			}else{
+				// Reset swap x & y
 				swapX = -1;
 				swapY = -1;
 			}
 		}
 	}
-    
-    // Combine red, green and blue into a single color int
-    private int combine(int r, int g, int b) {
-    	 return 0xff000000 | (r << 16) | (g << 8) | b;
-    }
-    
-    /*
-     * Decode the incoming data (YUV format) to a red-green-blue format
-     */
+	
+	/*
+	 * Decode the incoming data (YUV format) to a red-green-blue format
+	 */
 	private void decodeYUV420SP(int[] rgb, byte[] yuv420sp) {
 		final int width = imageSize.width;
 		final int height = imageSize.height;
-    	final int frameSize = width * height;
-    	
-    	for (int j = 0, yp = 0; j < height; j++) {
-    		int uvp = frameSize + (j >> 1) * width, u = 0, v = 0;
-    		for (int i = 0; i < width; i++, yp++) {
-    			int y = (0xff & ((int) yuv420sp[yp])) - 16;
-    			if (y < 0) y = 0;
-    			if ((i & 1) == 0) {
-    				v = (0xff & yuv420sp[uvp++]) - 128;
-    				u = (0xff & yuv420sp[uvp++]) - 128;
-    			}
-    			
-    			int y1192 = 1192 * y;
-    			int r = (y1192 + 1634 * v);
-    			int g = (y1192 - 833 * v - 400 * u);
-    			int b = (y1192 + 2066 * u);
-    			
-    			if (r < 0) r = 0; else if (r > 262143) r = 262143;
-    			if (g < 0) g = 0; else if (g > 262143) g = 262143;
-    			if (b < 0) b = 0; else if (b > 262143) b = 262143;
-    			
-    			rgb[yp] = 0xff000000 | ((r << 6) & 0xff0000) | ((g >> 2) & 0xff00) | ((b >> 10) & 0xff);
-    		}
-    	}
-    }
+		final int frameSize = width * height;
+		
+		for (int j = 0, yp = 0; j < height; j++) {
+			int uvp = frameSize + (j >> 1) * width, u = 0, v = 0;
+			for (int i = 0; i < width; i++, yp++) {
+				int y = (0xff & ((int) yuv420sp[yp])) - 16;
+				if (y < 0) y = 0;
+				if ((i & 1) == 0) {
+					v = (0xff & yuv420sp[uvp++]) - 128;
+					u = (0xff & yuv420sp[uvp++]) - 128;
+				}
+				
+				int y1192 = 1192 * y;
+				int r = (y1192 + 1634 * v);
+				int g = (y1192 - 833 * v - 400 * u);
+				int b = (y1192 + 2066 * u);
+				
+				if (r < 0) r = 0; else if (r > 262143) r = 262143;
+				if (g < 0) g = 0; else if (g > 262143) g = 262143;
+				if (b < 0) b = 0; else if (b > 262143) b = 262143;
+				
+				rgb[yp] = 0xff000000 | ((r << 6) & 0xff0000) | ((g >> 2) & 0xff00) | ((b >> 10) & 0xff);
+			}
+		}
+	}
 }

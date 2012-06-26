@@ -28,5 +28,4 @@ public class StopWatch{
 		
 		return end - start;
 	}
-	
 }

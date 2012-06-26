@@ -14,119 +14,107 @@ public class SettingsActivity extends Activity {
 		private Settings settings;
 		private SharedApplication app;
 	
-	   @Override
-	    public void onCreate(Bundle savedInstanceState) {
-	        super.onCreate(savedInstanceState);
-	        
-	        setContentView(R.layout.settings);
-	        
-	        app = (SharedApplication) getApplication();
-	        settings = app.dataManager.getSettings();
-	        app.diff = settings.getDifficulty();
-	        app.size = settings.getSize();
-	        
-	        Button back = (Button) findViewById(R.id.back3);
-	        back.setOnClickListener(new View.OnClickListener() {
-	            public void onClick(View view) {
-	                finish();
-	            }
-	        });
-	        
-	        Button reset = (Button) findViewById(R.id.reset);
-	        reset.setOnClickListener(new View.OnClickListener() {
-	            public void onClick(View view) {            	
-			    	RadioButton easy = (RadioButton)findViewById(R.id.easy);
-		        	easy.setChecked(true);
-		        	app.diff = "EASY";
-		        	
-			    	RadioButton three = (RadioButton)findViewById(R.id.three);
-		        	three.setChecked(true);
-		        	app.size = 3;
-		        	
-		        	settings.setDifficulty(app.diff);
-		        	settings.setSize(app.size);
-		        	app.dataManager.updateSettings(settings);
-	            }
-	        });
-	        
-	        RadioGroup rg1=(RadioGroup)findViewById(R.id.radioGroup1);
-	        if(app.diff.equals("EASY")){
-	        	rg1.check(R.id.easy);
-	        }
-	        else if(app.diff.equals("NORMAL")){
-	        	rg1.check(R.id.normal);
-	        }
-	        else if(app.diff.equals("HARD")){
-	        	rg1.check(R.id.hard);
-	        }
-	        
-	        rg1.setOnCheckedChangeListener(new android.widget.RadioGroup.OnCheckedChangeListener()
-	        {
-
-			   public void onCheckedChanged(RadioGroup arg0, int arg1) {
-			    RadioButton rb = (RadioButton)findViewById(arg1);
-			    
-				if(rb.getText().equals("Easy")){
-			    	app.diff = "EASY";
-			    	RadioButton easy=(RadioButton)findViewById(R.id.easy);
-		        	easy.setChecked(true);
+		@Override
+		public void onCreate(Bundle savedInstanceState) {
+			super.onCreate(savedInstanceState);
+			
+			setContentView(R.layout.settings);
+			
+			app = (SharedApplication) getApplication();
+			settings = app.dataManager.getSettings();
+			app.diff = settings.getDifficulty();
+			app.size = settings.getSize();
+			
+			Button back = (Button) findViewById(R.id.back3);
+			back.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View view) {
+					finish();
 				}
-			    else if(rb.getText().equals("Normal")){
-			    	app.diff = "NORMAL";
-			    	RadioButton normal=(RadioButton)findViewById(R.id.normal);
-			    	normal.setChecked(true);
-			    }
-			    else if(rb.getText().equals("Hard")){
-			    	app.diff = "HARD";
-			    	RadioButton hard=(RadioButton)findViewById(R.id.hard);
-			    	hard.setChecked(true);
-			    }
-				settings.setDifficulty(app.diff);
-				app.dataManager.updateSettings(settings);
-			   }
-	         
-	        }
-	        );
-	        
-	        
-	        
-	        
-	        
-	        RadioGroup rg2=(RadioGroup)findViewById(R.id.radioGroup2);
-	        if(app.size == 3){
-	        	rg2.check(R.id.three);
-	        }
-	        else if(app.size == 4){
-	        	rg2.check(R.id.four);
-	        }
-	        
-	        rg2.setOnCheckedChangeListener(new android.widget.RadioGroup.OnCheckedChangeListener()
-	        {
-
-			   public void onCheckedChanged(RadioGroup arg0, int arg1) {
-			    // TODO Auto-generated method stub
-				SharedApplication app = (SharedApplication) getApplication();
-			    RadioButton rb=(RadioButton)findViewById(arg1);
-			    
-				if(rb.getText().equals("4 x 4")){
-			    	app.size = 4;
-			    	RadioButton four=(RadioButton)findViewById(R.id.four);
-		        	four.setChecked(true);
+			});
+			
+			Button reset = (Button) findViewById(R.id.reset);
+			reset.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View view) {				
+					RadioButton easy = (RadioButton)findViewById(R.id.easy);
+					easy.setChecked(true);
+					app.diff = "EASY";
+					
+					RadioButton three = (RadioButton)findViewById(R.id.three);
+					three.setChecked(true);
+					app.size = 3;
+					
+					settings.setDifficulty(app.diff);
+					settings.setSize(app.size);
+					app.dataManager.updateSettings(settings);
 				}
-			    else{
-			    	app.size = 3;
-			    	RadioButton three=(RadioButton)findViewById(R.id.three);
-			    	three.setChecked(true);
-			    }
-				
-				settings.setSize(app.size);
-				app.dataManager.updateSettings(settings);
-			   }
-	         
-	        }
-	        );
-	        
-	        
+			});
+			
+			RadioGroup rg1=(RadioGroup)findViewById(R.id.radioGroup1);
+			if(app.diff.equals("EASY")){
+				rg1.check(R.id.easy);
+			}
+			else if(app.diff.equals("NORMAL")){
+				rg1.check(R.id.normal);
+			}
+			else if(app.diff.equals("HARD")){
+				rg1.check(R.id.hard);
+			}
+			
+			rg1.setOnCheckedChangeListener(new android.widget.RadioGroup.OnCheckedChangeListener(){
+				public void onCheckedChanged(RadioGroup arg0, int arg1) {
+					RadioButton rb = (RadioButton)findViewById(arg1);
+					
+					if(rb.getText().equals("Easy")){
+						app.diff = "EASY";
+						RadioButton easy=(RadioButton)findViewById(R.id.easy);
+						easy.setChecked(true);
+					}
+					else if(rb.getText().equals("Normal")){
+						app.diff = "NORMAL";
+						RadioButton normal=(RadioButton)findViewById(R.id.normal);
+						normal.setChecked(true);
+					}
+					else if(rb.getText().equals("Hard")){
+						app.diff = "HARD";
+						RadioButton hard=(RadioButton)findViewById(R.id.hard);
+						hard.setChecked(true);
+					}
+					settings.setDifficulty(app.diff);
+					app.dataManager.updateSettings(settings);
+				}
+			
+			});
+			
+
+			RadioGroup rg2=(RadioGroup)findViewById(R.id.radioGroup2);
+			if(app.size == 3){
+				rg2.check(R.id.three);
+			}
+			else if(app.size == 4){
+				rg2.check(R.id.four);
+			}
+			
+			rg2.setOnCheckedChangeListener(new android.widget.RadioGroup.OnCheckedChangeListener(){
+				public void onCheckedChanged(RadioGroup arg0, int arg1) {
+					SharedApplication app = (SharedApplication) getApplication();
+					RadioButton rb=(RadioButton)findViewById(arg1);
+					
+					if(rb.getText().equals("4 x 4")){
+						app.size = 4;
+						RadioButton four=(RadioButton)findViewById(R.id.four);
+						four.setChecked(true);
+					}
+					else{
+						app.size = 3;
+						RadioButton three=(RadioButton)findViewById(R.id.three);
+						three.setChecked(true);
+					}
+					
+					settings.setSize(app.size);
+					app.dataManager.updateSettings(settings);
+				}
+			});
+			
 	   }
 }
 
