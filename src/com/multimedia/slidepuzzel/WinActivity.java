@@ -7,7 +7,6 @@ import com.multimedia.slidepuzzel.data.Settings;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -66,19 +65,13 @@ public class WinActivity extends Activity {
             }
         });
         
-        EditText et = (EditText) findViewById(R.id.entername);
-        String theText = et.getText().toString();
-        
         h = new HighscoreEntry();
         Settings s = new Settings();
         s.setDifficulty(app.diff);
         s.setSize(app.size);
 		h.setSettings(s);
         h.setTime(totaltime2);
-       
-    	//Log.d("Highscore", "Score Added, NAME: " + theText + " TIME: " + totaltime2);
-    	//app.dataManager.insertHighscore(h);
-        
+               
     }
 	
     public void newGame(View view) {
