@@ -32,6 +32,8 @@ public class DrawGame{
 	private int anim;
 	private Rect animRect;
 	
+	private float scaleFactor;
+	
 	public Context mContext;
 
 	public DrawGame(Activity activity){
@@ -113,8 +115,8 @@ public class DrawGame{
 		p.setColor(combine(0, 0, 0));
 		
 		// Scale
-		float scalefactor = (float) c.getHeight() / (float) (game.getSize() * tileSize);
-		c.scale(scalefactor, scalefactor, 0, 0);
+		scaleFactor = (float) c.getHeight() / (float) (game.getSize() * tileSize);
+		c.scale(scaleFactor, scaleFactor, 0, 0);
 		
 		// Draw the empty square black
 		c.drawRect(defaultRect[game.getField().getNullX()][game.getField().getNullY()], p);
@@ -168,9 +170,14 @@ public class DrawGame{
 	public void onTouchEvent(MotionEvent event){
 		Log.d("TouchEvent", "Raw touch event on " + event.getX() + ", " + event.getY());
 		if(anim == -1 && !game.isSolved()){		
-			swapX = (int) event.getX();
-			swapY = (int) event.getY();
-			Log.d("TouchEvent", "Touch on " + swapX + ", " + swapY + " tilesize " + tileSize);
+			float x =  event.getX();
+			float y =  event.getY();
+			Log.d("TouchEvent", "Touch on unscaled " + x + ", " + y);
+			x /= scaleFactor;
+			y /= scaleFactor;
+			swapX = (int) Math.round(x);
+			swapY = (int) Math.round(y);
+			Log.d("TouchEvent", "Touch on scaled " + swapX + ", " + swapY + " tilesize " + tileSize);
 			swapX /= tileSize;
 			swapY /= tileSize;
 			Log.d("TouchEvent", "Touch gives " + swapX + ", " + swapY);
