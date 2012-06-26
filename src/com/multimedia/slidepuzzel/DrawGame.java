@@ -33,7 +33,9 @@ public class DrawGame{
 	
 	private float scaleFactor;		// Times the drawed image is scaled to fit the whole canvas
 	
-	public Context mContext;		// Application context
+	private Context mContext;		// Application context
+	
+	private boolean fixedImage;		// Image is fixed or live camera image is frozen
 
 	public DrawGame(Activity activity){
 		game = ((GameActivity) activity).getGame();
@@ -41,6 +43,7 @@ public class DrawGame{
 		anim = -1;
 		swapX = -1;
 		swapY = -1;
+		fixedImage = false;
 		
 		game.getField().swapTile(game.getField().getNullX(), game.getField().getNullY() - 1);
 		//game.shuffle();
@@ -73,6 +76,11 @@ public class DrawGame{
 				}
 			}
 		}
+		// If fixed image do nothing with the received data
+		if(fixedImage){
+			return;
+		}
+		
 		decodeYUV420SP(rgb, data);
 		
 		// Create bitmap
@@ -80,6 +88,14 @@ public class DrawGame{
 		bitmap = Bitmap.createBitmap(rgb, imageSize.width, imageSize.height, Bitmap.Config.ARGB_8888);
 		// Apply rotation
 		bitmap = game.getRotation().apply(bitmap);
+	}
+	
+	public void freezeCamera(){
+		fixedImage = true;
+	}
+	
+	public void unfreezeCamera(){
+		fixedImage = false;
 	}
 
 	public void draw(Canvas c){

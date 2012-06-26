@@ -12,6 +12,7 @@ import com.multimedia.slidepuzzel.sound.SoundManager;
 public class GameActivity extends Activity {
 	private CameraView mCameraView;
 	private Game game;
+	private Button freeze;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,19 @@ public class GameActivity extends Activity {
 			}
 		});
 		
+		freeze = (Button) findViewById(R.id.buttonFreeze);
+		freeze.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View view) {
+				if(freeze.getText().equals("Freeze")){		
+					freeze.setText("Unfreeze");
+					mCameraView.getDrawControl().freezeCamera();
+				}else{
+					freeze.setText(R.string.freeze);
+					mCameraView.getDrawControl().unfreezeCamera();
+				}
+			}
+		});
+		
 		SharedApplication app = (SharedApplication) getApplication();
 		if(app.diff.equals("EASY")){
 			game = new Game(Game.Difficulty.EASY, app.size, new SoundManager(getBaseContext()));
@@ -32,12 +46,14 @@ public class GameActivity extends Activity {
 		else if(app.diff.equals("NORMAL")){
 			game = new Game(Game.Difficulty.NORMAL, app.size, new SoundManager(getBaseContext()));
 			View b = findViewById(R.id.hint);
-			b.setVisibility(View.GONE);
+			//b.setVisibility(View.GONE);
+			b.setEnabled(false);
 		}
 		else if(app.diff.equals("HARD")){
 			game = new Game(Game.Difficulty.HARD, app.size, new SoundManager(getBaseContext()));
 			View b = findViewById(R.id.hint);
-			b.setVisibility(View.GONE);
+			//b.setVisibility(View.GONE);
+			b.setEnabled(false);
 		}
 		
 		// get handles to the CameraView from XML
