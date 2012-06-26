@@ -166,6 +166,7 @@ public class DrawGame{
 	}
 	
 	public void onTouchEvent(MotionEvent event){
+		Log.d("TouchEvent", "Raw touch event on " + event.getX() + ", " + event.getY());
 		if(anim == -1 && !game.isSolved()){		
 			swapX = (int) event.getX();
 			swapY = (int) event.getY();
@@ -187,7 +188,6 @@ public class DrawGame{
 				animX *= 20;
 				animY *= 20;
 				
-				//TODO Play sound
 				game.getSound().playSound(game.getSound().swap);
 			}else{
 				swapX = -1;
