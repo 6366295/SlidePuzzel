@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.hardware.Camera.Size;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import com.multimedia.slidepuzzel.gamelogic.Game;
@@ -165,13 +166,17 @@ public class DrawGame{
 	}
 	
 	public void onTouchEvent(MotionEvent event){
-		if(anim == -1 && !game.isSolved()){
+		Log.d("TouchEvent", "Raw touch event on " + event.getX() + ", " + event.getY());
+		if(anim == -1 && !game.isSolved()){		
 			swapX = (int) event.getX();
 			swapY = (int) event.getY();
+			Log.d("TouchEvent", "Touch on " + swapX + ", " + swapY + " tilesize " + tileSize);
 			swapX /= tileSize;
 			swapY /= tileSize;
+			Log.d("TouchEvent", "Touch gives " + swapX + ", " + swapY);
 			
 			if(game.getField().validSwap(swapX, swapY)){
+				Log.d("TouchEvent", "Starting anim on " + swapX + ", " + swapY);
 				// Animation timer
 				anim = tileSize / 20;
 				
@@ -183,8 +188,10 @@ public class DrawGame{
 				animX *= 20;
 				animY *= 20;
 				
-				//TODO Play sound
 				game.getSound().playSound(game.getSound().swap);
+			}else{
+				swapX = -1;
+				swapY = -1;
 			}
 		}
 	}
