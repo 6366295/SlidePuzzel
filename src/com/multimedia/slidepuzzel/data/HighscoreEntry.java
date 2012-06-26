@@ -1,6 +1,6 @@
 package com.multimedia.slidepuzzel.data;
 
-public class HighscoreEntry {
+public class HighscoreEntry{
 	private Settings s;
 	private int time;
 	private String name;

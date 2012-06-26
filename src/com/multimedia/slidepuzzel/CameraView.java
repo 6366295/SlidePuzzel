@@ -1,6 +1,5 @@
 package com.multimedia.slidepuzzel;
 
-
 import java.io.IOException;
 import java.util.List;
 
@@ -11,6 +10,7 @@ import android.hardware.Camera;
 import android.hardware.Camera.Parameters;
 import android.hardware.Camera.Size;
 import android.util.AttributeSet;
+import android.util.FloatMath;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -18,11 +18,11 @@ import android.view.SurfaceView;
 
 public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 	private Activity activity;
-	private SurfaceHolder mHolder;
-	private SurfaceView cameraShow; 
-	private Parameters parameters;		//The camera settings
-	private int creationPhase = 0;
-	private DrawGame drawControl;
+	private SurfaceHolder mHolder;		// The holder of this SurfaceView object
+	private SurfaceView cameraShow; 	// The surface android draws on (required to get preview)
+	private Parameters parameters;		// The camera settings
+	private int creationPhase = 0;		// Keep track of number surfaces created
+	private DrawGame drawControl;		// The objects that draws our game
 	private Camera camera;
 	
 	public CameraView(Context context, AttributeSet attrs){
@@ -77,7 +77,10 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 			// Grab the one closest to our preview size
 			Size current = sizes.get(0);
 			for(Size c : sizes){
-				float distance =(float)Math.sqrt((c.width-goalw)*(c.width-goalw)+(c.height-goalh)*(c.height-goalh));
+				float distance = FloatMath.sqrt(
+						(c.width - goalw) * (c.width - goalw)
+						+ (c.height - goalh) * (c.height - goalh)
+					);
 				if(distance < lowestDistance){
 					lowestDistance = distance;
 					current = c;
@@ -88,13 +91,11 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 			
 			camera.setParameters(parameters);
 			drawControl.imageSize = camera.getParameters().getPreviewSize(); 
-			Log.d("preview","preview w = " + drawControl.imageSize.width + " h = " + drawControl.imageSize.height);
-			//camera.setDisplayOrientation(90);
 			camera.setPreviewCallback(new PreviewFramer());
 
 			camera.startPreview();
 		}catch(RuntimeException e){
-			Log.e("CameraView", "Camera not available?", e);
+			Log.e("CameraView", "Camera not available", e);
 		}catch(IOException e){
 			Log.e("CameraView", "Can't start preview", e);
 		}
@@ -103,11 +104,13 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 	public void setActivity(GameActivity activity){
 		this.activity = activity;
 		cameraShow =(SurfaceView) activity.findViewById(R.id.surfaceView1);
+		// Type PUSH_BUFERS required, otherwise android will not draw
 		cameraShow.getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 		cameraShow.getHolder().addCallback(this);
 	}
 	
 	public boolean onTouchEvent(MotionEvent event){
+		// Pass on touch event to our drawing control
 		drawControl.onTouchEvent(event);
 		return super.onTouchEvent(event);
 	}

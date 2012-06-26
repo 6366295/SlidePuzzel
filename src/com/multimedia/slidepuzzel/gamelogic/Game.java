@@ -18,11 +18,10 @@ public class Game{
 	private Field curField; 		// Current field as seen by the player 
 	private Field defField;			// Default field (solved)
 	private Difficulty difficulty;	// Difficulty for this game
-	private SoundManager sound;
-	private StopWatch gameTimer;
-	private boolean solved;
-	private GameRotation rotation;
-	//TODO: add shuffle history
+	private SoundManager sound;		// Manager that loads & plays the sound
+	private StopWatch gameTimer;	// Stopwatch that keeps track of played time
+	private boolean solved;			// Is the puzzle solved?
+	private GameRotation rotation;	// Object that handles the automatic rotation
 	
 	public Game(Difficulty d, int s, SoundManager sound){
 		this.sound = sound;

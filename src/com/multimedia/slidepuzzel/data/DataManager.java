@@ -96,5 +96,4 @@ public class DataManager extends SQLiteOpenHelper{
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldv, int newv){
 	}
-
 }
