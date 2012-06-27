@@ -7,6 +7,6 @@ import android.app.Application;
 public class SharedApplication extends Application{
 	public int size;
 	public String diff;
-	public String mode;
+	public int mode;
 	public DataManager dataManager;
 }

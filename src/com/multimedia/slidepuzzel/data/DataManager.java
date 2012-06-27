@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DataManager extends SQLiteOpenHelper{
+
 	private static final String DATABASE_NAME = "slidepuzzel_data";
 	private static final String SETTINGS_TABLE = "settings";
 	private static final String HIGHSCORE_TABLE = "highscores";
@@ -21,7 +22,8 @@ public class DataManager extends SQLiteOpenHelper{
 		db.execSQL("CREATE TABLE " + SETTINGS_TABLE + " ("
 				+ "id INTEGER PRIMARY KEY, "
 				+ "difficulty TEXT, "
-				+ "size INTEGER"
+				+ "size INTEGER, "
+				+ "mode INTEGER"
 			+ ")");
 		
 		// Create highscores table
@@ -30,13 +32,15 @@ public class DataManager extends SQLiteOpenHelper{
 				+ "difficulty TEXT, "
 				+ "name TEXT, "
 				+ "size INTEGER, "
-				+ "time INTEGER"
+				+ "time INTEGER, "
+				+ "mode INTEGER"
 			+ ")");
 		
 		// Insert default settings
 		ContentValues val = new ContentValues();
 		val.put("difficulty", "EASY");
 		val.put("size", 3);
+		val.put("mode", 1);
 		db.insert(SETTINGS_TABLE, null, val);
 	}
 	
@@ -44,17 +48,19 @@ public class DataManager extends SQLiteOpenHelper{
 		ContentValues val = new ContentValues();
 		val.put("difficulty", s.getDifficulty());
 		val.put("size", s.getSize());
+		val.put("mode", s.getMode());
 		getWritableDatabase().update(SETTINGS_TABLE, val, null, null);
 	}
 	
 	public Settings getSettings(){
 		Settings s = new Settings();
-		Cursor c = getReadableDatabase().query(SETTINGS_TABLE, new String[] {"difficulty, size"}, null,
+		Cursor c = getReadableDatabase().query(SETTINGS_TABLE, new String[] {"difficulty, size, mode"}, null,
 				null, null, null, null, "1");
 		if(c == null)return null;
 		c.moveToFirst();
 		s.setDifficulty(c.getString(0));
 		s.setSize(c.getInt(1));
+		s.setMode(c.getInt(2));
 		c.close();
 		return s;
 	}
@@ -65,6 +71,7 @@ public class DataManager extends SQLiteOpenHelper{
 		val.put("time", h.getTime());
 		val.put("name", h.getName());
 		val.put("size", h.getSettings().getSize());
+		val.put("mode", h.getSettings().getMode());
 		
 		getWritableDatabase().insert(HIGHSCORE_TABLE, null, val);
 	}
@@ -73,7 +80,7 @@ public class DataManager extends SQLiteOpenHelper{
 		HighscoreEntry[] entries = new HighscoreEntry[max];
 		
 		// Select highscore 
-		Cursor c = getReadableDatabase().query(HIGHSCORE_TABLE, new String[] {"difficulty, name", "time", "size"}, "difficulty = ? AND " + qsize,
+		Cursor c = getReadableDatabase().query(HIGHSCORE_TABLE, new String[] {"difficulty", "name", "time", "size", "mode"}, "difficulty = ? AND " + qsize,
 				new String[] {difficulty}, null, null, "time ASC", "" + max);
 		
 		// Parse highscores
@@ -82,6 +89,7 @@ public class DataManager extends SQLiteOpenHelper{
 			Settings s = new Settings();
 			s.setDifficulty(c.getString(0));
 			s.setSize(c.getInt(3));
+			s.setMode(c.getInt(4));
 			HighscoreEntry h = new HighscoreEntry();
 			h.setName(c.getString(1));
 			h.setTime(c.getInt(2));

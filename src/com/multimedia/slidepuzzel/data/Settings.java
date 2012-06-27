@@ -4,7 +4,7 @@ package com.multimedia.slidepuzzel.data;
 public class Settings{
 	private int size;
 	private String difficulty;
-	private String mode;
+	private int mode;
 	
 	public int getSize(){
 		return size;
@@ -18,10 +18,10 @@ public class Settings{
 	public void setDifficulty(String difficulty){
 		this.difficulty = difficulty;
 	}
-	public void setMode(String mode){
+	public void setMode(int mode){
 		this.mode = mode;
 	}
-	public String getMode(){
+	public int getMode(){
 		return mode;
 	}
 }

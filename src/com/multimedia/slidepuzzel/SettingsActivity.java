@@ -117,10 +117,10 @@ public class SettingsActivity extends Activity {
 			});
 
 			RadioGroup rg3=(RadioGroup)findViewById(R.id.radioGroup2);
-			if(app.mode.equals("LIVE")){
+			if(app.mode == 0){
 				rg2.check(R.id.live);
 			}
-			else if(app.mode.equals("IMAGE")){
+			else if(app.mode == 1){
 				rg2.check(R.id.image);
 			}
 			
@@ -129,13 +129,13 @@ public class SettingsActivity extends Activity {
 					SharedApplication app = (SharedApplication) getApplication();
 					RadioButton rb=(RadioButton)findViewById(arg1);
 					
-					if(rb.getText().equals("LIVE")){
-						app.mode = "LIVE";
+					if(rb.getText() == "Live Image"){
+						app.mode = 0;
 						RadioButton live=(RadioButton)findViewById(R.id.live);
 						live.setChecked(true);
 					}
 					else{
-						app.mode = "IMAGE";
+						app.mode = 1;
 						RadioButton image=(RadioButton)findViewById(R.id.image);
 						image.setChecked(true);
 					}
