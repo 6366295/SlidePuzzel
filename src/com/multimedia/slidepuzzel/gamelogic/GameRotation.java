@@ -12,12 +12,14 @@ public class GameRotation extends TimerTask{
 	private Timer timer;
 	private Matrix rotateMatrix[];
 	private boolean paused;
+	private boolean changed;
 	
 	public GameRotation(Game g){
 		game = g;	
 		if(game.useRotations()){
 			angle = 0;
 			paused = false;
+			changed = false;
 			timer = new Timer();
 			timer.scheduleAtFixedRate(this, Game.ROTATE_DELAY, Game.ROTATE_DELAY);
 			rotateMatrix = new Matrix[4];
@@ -32,6 +34,7 @@ public class GameRotation extends TimerTask{
 	}
 	
 	public Bitmap apply(Bitmap map){
+		changed = false;
 		if(!game.useRotations() || angle == 0){
 			return map;
 		}else{
@@ -42,6 +45,7 @@ public class GameRotation extends TimerTask{
 	@Override
 	public void run(){
 		if(!paused){
+			changed = true;
 			game.getSound().playSound(game.getSound().rotate);
 			angle++;
 			angle %= 4;
@@ -61,5 +65,9 @@ public class GameRotation extends TimerTask{
 			timer.scheduleAtFixedRate(this, Game.ROTATE_DELAY, Game.ROTATE_DELAY);
 			paused = false;
 		}
+	}
+	
+	public boolean rotationChanged(){
+		return changed;
 	}
 }

@@ -1,7 +1,5 @@
 package com.multimedia.slidepuzzel;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import android.app.Activity;
@@ -14,7 +12,6 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.hardware.Camera.Size;
 import android.net.Uri;
-import android.util.Log;
 import android.view.MotionEvent;
 
 import com.multimedia.slidepuzzel.gamelogic.Game;
@@ -64,7 +61,6 @@ public class DrawGame{
 	
 	public DrawGame(Activity activity, Game g, Uri uri){
 		this(activity, g);
-		Log.d("Mode", "Uri set");
 		fixedImage = true;
 		this.uri = uri;
 	}
@@ -73,15 +69,12 @@ public class DrawGame{
 		// Allocate the image as an array of integers if needed.
 		// Then, decode the raw image data in YUV420SP format into a red-green-blue array (rgb array)
 		
-		if(rgb == null){
-			//Log.d("Mode", "Initial frame received");
-			
-			// Fixed image already loaded
+		if(rgb == null){		
+			// Fixed image
 			if(uri != null){
 				if(bitmap == null){
 					return;
 				}
-				Log.d("Mode", "Bitmap already loaded " + bitmap.getHeight() + "x" + bitmap.getWidth());
 				imageSize.width = bitmap.getWidth();
 				imageSize.height = bitmap.getHeight();
 				rgb = new int[1];
@@ -90,7 +83,7 @@ public class DrawGame{
 				rgb = new int[arraySize];
 			}
 			
-			// Calculate tile length & height by the height of the camera image
+			// Calculate tile width & height by the least size of the camera image
 			tileSize = Math.min(imageSize.height, imageSize.width) / game.getSize();
 		
 			// Make default mapping rectangles
@@ -110,7 +103,9 @@ public class DrawGame{
 		
 		// If fixed image do nothing with the received data, only apply rotation if needed.
 		if(fixedImage){
-			bitmap = game.getRotation().apply(bitmap);
+			if(game.getRotation().rotationChanged()){
+				bitmap = game.getRotation().apply(bitmap);
+			}
 			return;
 		}
 		
@@ -124,14 +119,12 @@ public class DrawGame{
 	}
 	
 	public void getViewSize(int h, int w){
-		Log.d("Mode", "ViewSize received " + h + "x" + w);
 		try{
 			InputStream image = activity.getContentResolver().openInputStream(uri);
 			
 			BitmapFactory.Options o = new BitmapFactory.Options();
 		    o.inJustDecodeBounds = true;
 		    BitmapFactory.decodeStream(image, null,  o);
-		    Log.d("Mode", "Bounds " + o.outHeight + "x" + o.outWidth);
 	
 		    //Find the correct scale value. It should be the power of 2.
 		    int width_tmp = o.outWidth, height_tmp = o.outHeight;
@@ -144,14 +137,14 @@ public class DrawGame{
 		        height_tmp /= 2;
 		        scale *= 2;
 		    }
-		    Log.d("Mode", "Total bounds " + width_tmp + "x" + height_tmp + " scale: " + scale);
 	
+		    image.close();
+		    
 		    //Decode with inSampleSize
 		    image = activity.getContentResolver().openInputStream(uri);
 		    BitmapFactory.Options o2 = new BitmapFactory.Options();
 		    o2.inSampleSize = scale;
 		    bitmap = BitmapFactory.decodeStream(image, null, o2);
-		    Log.d("Mode", "Bitmap loaded, image decoded " + bitmap);
 		    
 		    image.close();
 		}catch(Exception e){
@@ -169,6 +162,7 @@ public class DrawGame{
 	}
 
 	public void draw(Canvas c){
+		// If bitmap is null the fixed image is not loaded yet
 		if(bitmap == null){
 			return;
 		}
