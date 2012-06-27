@@ -32,6 +32,9 @@
     <string name="size">Size</string>
     <string name="three">3 x 3</string>
     <string name="four">4 x 4</string>
+    <string name="mode">Mode</string>
+    <string name="live">Live Image</string>
+    <string name="image">Galerry Image</string>
     <string name="reset">Reset</string>
         
     <string name="hint">Hint</string>
