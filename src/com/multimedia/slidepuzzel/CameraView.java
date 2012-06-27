@@ -3,7 +3,6 @@ package com.multimedia.slidepuzzel;
 import java.io.IOException;
 import java.util.List;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.hardware.Camera;
@@ -17,7 +16,6 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
-	private Activity activity;
 	private SurfaceHolder mHolder;		// The holder of this SurfaceView object
 	private SurfaceView cameraShow; 	// The surface android draws on (required to get preview)
 	private Parameters parameters;		// The camera settings
@@ -59,9 +57,6 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 		
 
 	private void finalInitialize(){
-		// Create our DrawCamera object
-		drawControl = new DrawGame(activity);
-		
 		try{
 			openCamera();
 
@@ -103,11 +98,14 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 	}
 
 	public void setActivity(GameActivity activity){
-		this.activity = activity;
 		cameraShow =(SurfaceView) activity.findViewById(R.id.surfaceView1);
 		// Type PUSH_BUFERS required, otherwise android will not draw
 		cameraShow.getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 		cameraShow.getHolder().addCallback(this);
+	}
+	
+	public void setDrawControl(DrawGame dg){
+		drawControl = dg;
 	}
 	
 	public boolean onTouchEvent(MotionEvent event){

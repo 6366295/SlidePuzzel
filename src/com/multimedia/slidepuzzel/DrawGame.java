@@ -8,6 +8,9 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.hardware.Camera.Size;
+import android.net.Uri;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import com.multimedia.slidepuzzel.gamelogic.Game;
@@ -37,8 +40,8 @@ public class DrawGame{
 	
 	private boolean fixedImage;		// Image is fixed or live camera image is frozen
 
-	public DrawGame(Activity activity){
-		game = ((GameActivity) activity).getGame();
+	public DrawGame(Activity activity, Game g){
+		game = g;
 		// Inactive animation state
 		anim = -1;
 		swapX = -1;
@@ -51,17 +54,39 @@ public class DrawGame{
 		p = new Paint();
 		mContext = activity.getApplicationContext();
 	}
+	
+	public DrawGame(Activity activity, Game g, Uri uri){
+		this(activity, g);
+		fixedImage = true;
+		try{
+			Log.d("Mode", "Set fixed image uri " + uri.toString());
+			fixedImage = true;
+			bitmap = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), uri);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+	}
 
 	public void imageReceived(byte[] data) {
 		// Allocate the image as an array of integers if needed.
 		// Then, decode the raw image data in YUV420SP format into a red-green-blue array (rgb array)
 		
 		if(rgb == null){
-			int arraySize = imageSize.width*imageSize.height;
-			rgb = new int[arraySize];
+			Log.d("Mode", "Initial frame received");
+			
+			// Fixed image already loaded
+			if(bitmap != null){
+				Log.d("Mode", "Bitmap already loaded " + bitmap.getHeight() + "x" + bitmap.getWidth());
+				imageSize.width = bitmap.getWidth();
+				imageSize.height = bitmap.getHeight();
+				rgb = new int[1];
+			}else{
+				int arraySize = imageSize.width*imageSize.height;
+				rgb = new int[arraySize];
+			}
 			
 			// Calculate tile length & height by the height of the camera image
-			tileSize = imageSize.height / game.getSize();
+			tileSize = Math.min(imageSize.height, imageSize.width) / game.getSize();
 		
 			// Make default mapping rectangles
 			defaultRect = new Rect[game.getSize()][game.getSize()];
@@ -75,7 +100,9 @@ public class DrawGame{
 					game.setTile(defaultRect[x][y], game.getDefaultField().getTileIdx(x, y));
 				}
 			}
+			
 		}
+		
 		// If fixed image do nothing with the received data
 		if(fixedImage){
 			return;
@@ -89,7 +116,7 @@ public class DrawGame{
 		// Apply rotation
 		bitmap = game.getRotation().apply(bitmap);
 	}
-	
+
 	public void freezeCamera(){
 		fixedImage = true;
 	}

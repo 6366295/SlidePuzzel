@@ -1,11 +1,13 @@
 package com.multimedia.slidepuzzel;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import com.multimedia.slidepuzzel.application.SharedApplication;
+import com.multimedia.slidepuzzel.data.Settings;
 import com.multimedia.slidepuzzel.gamelogic.Game;
 import com.multimedia.slidepuzzel.sound.SoundManager;
 
@@ -13,6 +15,7 @@ public class GameActivity extends Activity {
 	private CameraView mCameraView;
 	private Game game;
 	private Button freeze;
+	private DrawGame drawControl;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -55,10 +58,17 @@ public class GameActivity extends Activity {
 			//b.setVisibility(View.GONE);
 			b.setEnabled(false);
 		}
+		if(app.mode == Settings.MODE_IMAGE){
+			drawControl = new DrawGame(this, game, (Uri) getIntent().getParcelableExtra("uri"));
+		}else{
+			drawControl = new DrawGame(this, game);
+		}
 		
 		// get handles to the CameraView from XML
 		mCameraView = (CameraView) findViewById(R.id.cameraView1);
+		mCameraView.setDrawControl(drawControl);
 		mCameraView.setActivity(this);
+		
 	}
 	
 	@Override
@@ -84,9 +94,5 @@ public class GameActivity extends Activity {
 		// Resume rotation thread
 		game.getRotation().onResume();
 		super.onResume();
-	}
-	
-	public Game getGame(){
-		return game;
 	}
 }

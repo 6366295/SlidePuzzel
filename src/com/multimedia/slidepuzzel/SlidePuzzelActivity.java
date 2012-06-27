@@ -6,10 +6,8 @@ import com.multimedia.slidepuzzel.data.Settings;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
 
 public class SlidePuzzelActivity extends Activity {	
@@ -46,17 +44,13 @@ public class SlidePuzzelActivity extends Activity {
 			Uri photoUri = intent.getData();
 			
 			if(photoUri != null){
-				android.util.Log.d("Picker", photoUri.toString());
-				/*try{
-					Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), photoUri);
-				}catch (Exception e){
-					e.printStackTrace();
-				}*/
+				Intent i = new Intent(this, GameActivity.class);
+				i.putExtra("uri", photoUri);
+				startActivity(i);
 			}
 		}
 		
-		Intent i = new Intent(this, GameActivity.class);
-		startActivity(i);
+
 	}
 	
 	public void settingsActivity(View view) {
