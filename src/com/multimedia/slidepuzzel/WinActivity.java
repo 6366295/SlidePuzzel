@@ -55,7 +55,6 @@ public class WinActivity extends Activity {
 				String theText = et.getText().toString();
 				h.setName(theText);
 				app.dataManager.insertHighscore(h);
-				finish();
 				if(app.mode == Settings.MODE_IMAGE){
 					Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
 					photoPickerIntent.setType("image/*");
@@ -63,6 +62,7 @@ public class WinActivity extends Activity {
 				}else{
 					Intent intent = new Intent(WinActivity.this, GameActivity.class);
 					startActivity(intent);
+					finish();
 				}
 			}
 		});
@@ -87,6 +87,7 @@ public class WinActivity extends Activity {
 				Intent i = new Intent(this, GameActivity.class);
 				i.putExtra("uri", photoUri);
 				startActivity(i);
+				finish();
 			}
 		}
 	}
@@ -96,7 +97,7 @@ public class WinActivity extends Activity {
 		startActivity(intent);
 	}
 	
-	@Override
+/*	@Override
 	protected void onStop() {
 		super.onStop();
 		finish();
@@ -105,5 +106,5 @@ public class WinActivity extends Activity {
 	protected void onDestroy() {
 		super.onDestroy();
 		finish();
-	}
+	}*/
 }
