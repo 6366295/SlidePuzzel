@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 public class SlidePuzzelActivity extends Activity {	
 	private SharedApplication app;
@@ -24,6 +25,13 @@ public class SlidePuzzelActivity extends Activity {
 		app.diff = settings.getDifficulty();
 		app.size = settings.getSize();
 		app.mode = settings.getMode();
+		
+		Button exit = (Button) findViewById(R.id.exit);
+		exit.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View view) {				
+				finish();
+			}
+		});
 	}
 	
 	public void gameActivity(View view) {
@@ -67,4 +75,5 @@ public class SlidePuzzelActivity extends Activity {
 		Intent intent = new Intent(this, HowtoActivity.class);
 		startActivity(intent);
 	}
+	
 }

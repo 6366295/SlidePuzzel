@@ -41,5 +41,11 @@
         android:layout_height="wrap_content"
         android:text="@string/howtoplay"
         android:onClick="howtoActivity" />
+
+    <Button
+        android:id="@+id/exit"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/exit" />
 
 </LinearLayout>
