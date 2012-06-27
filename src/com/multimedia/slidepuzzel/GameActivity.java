@@ -58,8 +58,10 @@ public class GameActivity extends Activity {
 			//b.setVisibility(View.GONE);
 			b.setEnabled(false);
 		}
+		
 		if(app.mode == Settings.MODE_IMAGE){
 			drawControl = new DrawGame(this, game, (Uri) getIntent().getParcelableExtra("uri"));
+			freeze.setEnabled(false);
 		}else{
 			drawControl = new DrawGame(this, game);
 		}
