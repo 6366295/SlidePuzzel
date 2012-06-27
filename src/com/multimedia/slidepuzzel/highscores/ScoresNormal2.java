@@ -1,5 +1,6 @@
-package com.multimedia.slidepuzzel;
+package com.multimedia.slidepuzzel.highscores;
 
+import com.multimedia.slidepuzzel.R;
 import com.multimedia.slidepuzzel.application.SharedApplication;
 import com.multimedia.slidepuzzel.data.HighscoreEntry;
 
@@ -10,16 +11,16 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-public class ScoresHard2 extends Activity {
+public class ScoresNormal2 extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.scores4);
+		setContentView(R.layout.scores3);
 
-		TableLayout layout = (TableLayout) findViewById(R.id.tableLayout3);
+		TableLayout layout = (TableLayout) findViewById(R.id.tableLayout2);
 		
 		LayoutInflater inflater = getLayoutInflater();
 		
-		HighscoreEntry[] entries = ((SharedApplication) getApplication()).dataManager.getHighscore("HARD", 5, "size = 4");
+		HighscoreEntry[] entries = ((SharedApplication) getApplication()).dataManager.getHighscore("NORMAL", 5, "size = 4");
 		for(int i = 0; i < entries.length; i++){
 			if(entries[i] == null)break;
 			int time = entries[i].getTime();

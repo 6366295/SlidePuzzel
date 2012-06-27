@@ -1,5 +1,9 @@
 package com.multimedia.slidepuzzel;
 
+import com.multimedia.slidepuzzel.highscores.ScoresActivity2;
+import com.multimedia.slidepuzzel.highscores.ScoresActivity3;
+import com.multimedia.slidepuzzel.highscores.ScoresActivity4;
+
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
