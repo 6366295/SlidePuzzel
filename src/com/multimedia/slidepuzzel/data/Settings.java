@@ -2,6 +2,9 @@ package com.multimedia.slidepuzzel.data;
 
 /* Wrapper class for settings */
 public class Settings{
+	public static final int MODE_LIVE = 0;
+	public static final int MODE_IMAGE = 1;
+	
 	private int size;
 	private String difficulty;
 	private int mode;

@@ -130,12 +130,12 @@ public class SettingsActivity extends Activity {
 					RadioButton rb=(RadioButton)findViewById(arg1);
 					
 					if(rb.getText() == "Live Image"){
-						app.mode = 0;
+						app.mode = Settings.MODE_LIVE;
 						RadioButton live=(RadioButton)findViewById(R.id.live);
 						live.setChecked(true);
 					}
 					else{
-						app.mode = 1;
+						app.mode = Settings.MODE_IMAGE;
 						RadioButton image=(RadioButton)findViewById(R.id.image);
 						image.setChecked(true);
 					}

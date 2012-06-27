@@ -14,6 +14,10 @@ public class DataManager extends SQLiteOpenHelper{
 	
 	public DataManager(Context context) {
 		super(context, DATABASE_NAME, null, 1);
+		
+		getWritableDatabase().execSQL("DROP TABLE " + SETTINGS_TABLE);
+		getWritableDatabase().execSQL("DROP TABLE " + HIGHSCORE_TABLE);
+		onCreate(getWritableDatabase());
 	}
 	
 	@Override
@@ -54,7 +58,7 @@ public class DataManager extends SQLiteOpenHelper{
 	
 	public Settings getSettings(){
 		Settings s = new Settings();
-		Cursor c = getReadableDatabase().query(SETTINGS_TABLE, new String[] {"difficulty, size, mode"}, null,
+		Cursor c = getReadableDatabase().query(SETTINGS_TABLE, new String[] {"difficulty", "size", "mode"}, null,
 				null, null, null, null, "1");
 		if(c == null)return null;
 		c.moveToFirst();
