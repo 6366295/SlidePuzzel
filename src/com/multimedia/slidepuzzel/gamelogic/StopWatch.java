@@ -1,7 +1,5 @@
 package com.multimedia.slidepuzzel.gamelogic;
 
-import android.os.SystemClock;
-
 public class StopWatch{
 	private long start;
 	private long end;
@@ -13,17 +11,17 @@ public class StopWatch{
 	
 	public void start(){
 		end = 0;
-		start = SystemClock.currentThreadTimeMillis();
+		start = System.currentTimeMillis();
 	}
 	
 	public long stop(){
-		end = SystemClock.currentThreadTimeMillis();
+		end = System.currentTimeMillis();
 		return end - start;
 	}
 
 	public long getTimeElapsed(){
 		if(end == 0){
-			end = SystemClock.currentThreadTimeMillis();
+			end = System.currentTimeMillis();
 		}
 		
 		return end - start;
