@@ -104,7 +104,7 @@ public class DrawGame{
 		// If fixed image do nothing with the received data, only apply rotation if needed.
 		if(fixedImage){
 			if(game.getRotation().rotationChanged()){
-				bitmap = game.getRotation().apply(bitmap);
+				bitmap = game.getRotation().applyFixed(bitmap);
 			}
 			return;
 		}

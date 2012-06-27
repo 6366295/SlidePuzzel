@@ -41,6 +41,11 @@ public class GameRotation extends TimerTask{
 			return Bitmap.createBitmap(map, 0, 0, map.getWidth(), map.getHeight(), rotateMatrix[angle], true);
 		}
 	}
+	
+	public Bitmap applyFixed(Bitmap map){
+		changed = false;
+		return Bitmap.createBitmap(map, 0, 0, map.getWidth(), map.getHeight(), rotateMatrix[1], true);
+	}
 
 	@Override
 	public void run(){

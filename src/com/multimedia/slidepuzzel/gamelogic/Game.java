@@ -7,7 +7,7 @@ import com.multimedia.slidepuzzel.sound.SoundManager;
 import android.graphics.Rect;
 
 public class Game{
-	public static final long ROTATE_DELAY = 10000;
+	public static final long ROTATE_DELAY = 5000;
 	
 	public enum Difficulty{
 		EASY, NORMAL, HARD;
