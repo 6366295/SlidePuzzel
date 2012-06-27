@@ -20,6 +20,7 @@ public class SlidePuzzelActivity extends Activity {
 		Settings settings = app.dataManager.getSettings();
 		app.diff = settings.getDifficulty();
 		app.size = settings.getSize();
+		app.mode = settings.getMode();
 	}
 	
 	public void gameActivity(View view) {

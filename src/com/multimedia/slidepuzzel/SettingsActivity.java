@@ -24,6 +24,7 @@ public class SettingsActivity extends Activity {
 			settings = app.dataManager.getSettings();
 			app.diff = settings.getDifficulty();
 			app.size = settings.getSize();
+			app.mode = settings.getMode();
 			
 			Button back = (Button) findViewById(R.id.back3);
 			back.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +112,35 @@ public class SettingsActivity extends Activity {
 					}
 					
 					settings.setSize(app.size);
+					app.dataManager.updateSettings(settings);
+				}
+			});
+
+			RadioGroup rg3=(RadioGroup)findViewById(R.id.radioGroup2);
+			if(app.mode.equals("LIVE")){
+				rg2.check(R.id.live);
+			}
+			else if(app.mode.equals("IMAGE")){
+				rg2.check(R.id.image);
+			}
+			
+			rg3.setOnCheckedChangeListener(new android.widget.RadioGroup.OnCheckedChangeListener(){
+				public void onCheckedChanged(RadioGroup arg0, int arg1) {
+					SharedApplication app = (SharedApplication) getApplication();
+					RadioButton rb=(RadioButton)findViewById(arg1);
+					
+					if(rb.getText().equals("LIVE")){
+						app.mode = "LIVE";
+						RadioButton live=(RadioButton)findViewById(R.id.live);
+						live.setChecked(true);
+					}
+					else{
+						app.mode = "IMAGE";
+						RadioButton image=(RadioButton)findViewById(R.id.image);
+						image.setChecked(true);
+					}
+					
+					settings.setMode(app.mode);
 					app.dataManager.updateSettings(settings);
 				}
 			});
