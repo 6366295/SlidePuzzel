@@ -44,8 +44,13 @@ public class SettingsActivity extends Activity {
 					three.setChecked(true);
 					app.size = 3;
 					
+					RadioButton live = (RadioButton)findViewById(R.id.live);
+					live.setChecked(true);
+					app.mode = 0;
+					
 					settings.setDifficulty(app.diff);
 					settings.setSize(app.size);
+					settings.setMode(app.mode);
 					app.dataManager.updateSettings(settings);
 				}
 			});
@@ -105,7 +110,7 @@ public class SettingsActivity extends Activity {
 						RadioButton four=(RadioButton)findViewById(R.id.four);
 						four.setChecked(true);
 					}
-					else{
+					else if(rb.getText().equals("3 x 3")){
 						app.size = 3;
 						RadioButton three=(RadioButton)findViewById(R.id.three);
 						three.setChecked(true);
@@ -116,12 +121,12 @@ public class SettingsActivity extends Activity {
 				}
 			});
 
-			RadioGroup rg3=(RadioGroup)findViewById(R.id.radioGroup2);
+			RadioGroup rg3=(RadioGroup)findViewById(R.id.radioGroup3);
 			if(app.mode == 0){
-				rg2.check(R.id.live);
+				rg3.check(R.id.live);
 			}
 			else if(app.mode == 1){
-				rg2.check(R.id.image);
+				rg3.check(R.id.image);
 			}
 			
 			rg3.setOnCheckedChangeListener(new android.widget.RadioGroup.OnCheckedChangeListener(){

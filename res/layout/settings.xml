@@ -68,7 +68,6 @@
             android:id="@+id/three"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:checked="true"
             android:text="@string/three" />
 
         <RadioButton
@@ -118,7 +117,6 @@
             android:id="@+id/live"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
             android:text="@string/live" />
 
         <RadioButton
