@@ -15,9 +15,9 @@ public class DataManager extends SQLiteOpenHelper{
 	public DataManager(Context context) {
 		super(context, DATABASE_NAME, null, 1);
 		
-		getWritableDatabase().execSQL("DROP TABLE " + SETTINGS_TABLE);
+		/*getWritableDatabase().execSQL("DROP TABLE " + SETTINGS_TABLE);
 		getWritableDatabase().execSQL("DROP TABLE " + HIGHSCORE_TABLE);
-		onCreate(getWritableDatabase());
+		onCreate(getWritableDatabase());*/
 	}
 	
 	@Override
