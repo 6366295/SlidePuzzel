@@ -40,6 +40,7 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 	}
 
 	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height){
+		if(creationPhase < 2)drawControl.getViewSize(height, width);
 	}
 
 	public void surfaceCreated(SurfaceHolder holder){
