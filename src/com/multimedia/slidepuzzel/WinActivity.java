@@ -55,8 +55,14 @@ public class WinActivity extends Activity {
 				h.setName(theText);
 				app.dataManager.insertHighscore(h);
 				finish();
-				Intent intent = new Intent(WinActivity.this, GameActivity.class);
-				startActivity(intent);
+				if(app.mode == Settings.MODE_IMAGE){
+					Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+					photoPickerIntent.setType("image/*");
+					startActivityForResult(photoPickerIntent, 1);
+				}else{
+					Intent intent = new Intent(WinActivity.this, GameActivity.class);
+					startActivity(intent);
+				}
 			}
 		});
 		
