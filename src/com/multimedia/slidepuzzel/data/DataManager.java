@@ -44,7 +44,7 @@ public class DataManager extends SQLiteOpenHelper{
 		ContentValues val = new ContentValues();
 		val.put("difficulty", "EASY");
 		val.put("size", 3);
-		val.put("mode", 1);
+		val.put("mode", 0);
 		db.insert(SETTINGS_TABLE, null, val);
 	}
 	

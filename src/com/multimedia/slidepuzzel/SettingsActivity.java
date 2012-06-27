@@ -134,7 +134,7 @@ public class SettingsActivity extends Activity {
 					SharedApplication app = (SharedApplication) getApplication();
 					RadioButton rb=(RadioButton)findViewById(arg1);
 					
-					if(rb.getText() == "Live Image"){
+					if(rb.getText().equals("Live Image")){
 						app.mode = Settings.MODE_LIVE;
 						RadioButton live=(RadioButton)findViewById(R.id.live);
 						live.setChecked(true);
