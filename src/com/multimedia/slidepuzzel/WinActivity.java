@@ -6,6 +6,7 @@ import com.multimedia.slidepuzzel.data.Settings;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -73,6 +74,21 @@ public class WinActivity extends Activity {
 		h.setSettings(s);
 		h.setTime(totaltime);
 		
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent intent){
+		android.util.Log.d("Debug", "onActivityResult " + requestCode);
+		super.onActivityResult(requestCode, resultCode, intent);
+		if(resultCode == RESULT_OK){
+			Uri photoUri = intent.getData();
+			
+			if(photoUri != null){
+				Intent i = new Intent(this, GameActivity.class);
+				i.putExtra("uri", photoUri);
+				startActivity(i);
+			}
+		}
 	}
 	
 	public void newGame(View view) {

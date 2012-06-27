@@ -57,8 +57,6 @@ public class SlidePuzzelActivity extends Activity {
 				startActivity(i);
 			}
 		}
-		
-
 	}
 	
 	public void settingsActivity(View view) {
