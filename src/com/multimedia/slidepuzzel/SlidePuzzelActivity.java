@@ -6,16 +6,21 @@ import com.multimedia.slidepuzzel.data.Settings;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 
 public class SlidePuzzelActivity extends Activity {	
+	private SharedApplication app;
+	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		SharedApplication app = (SharedApplication) getApplication();
+		app = (SharedApplication) getApplication();
 		app.dataManager = new DataManager(getBaseContext());
 		Settings settings = app.dataManager.getSettings();
 		app.diff = settings.getDifficulty();
@@ -24,8 +29,34 @@ public class SlidePuzzelActivity extends Activity {
 	}
 	
 	public void gameActivity(View view) {
-		Intent intent = new Intent(this, GameActivity.class);
-		startActivity(intent);
+		if(app.mode == Settings.MODE_IMAGE){
+			Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+			photoPickerIntent.setType("image/*");
+			startActivityForResult(photoPickerIntent, 1);
+		}else{
+			Intent intent = new Intent(this, GameActivity.class);
+			startActivity(intent);
+		}
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent intent){
+		super.onActivityResult(requestCode, resultCode, intent);
+		if(resultCode == RESULT_OK){
+			Uri photoUri = intent.getData();
+			
+			if(photoUri != null){
+				android.util.Log.d("Picker", photoUri.toString());
+				/*try{
+					Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), photoUri);
+				}catch (Exception e){
+					e.printStackTrace();
+				}*/
+			}
+		}
+		
+		Intent i = new Intent(this, GameActivity.class);
+		startActivity(i);
 	}
 	
 	public void settingsActivity(View view) {
