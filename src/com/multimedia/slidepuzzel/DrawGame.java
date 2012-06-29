@@ -208,6 +208,7 @@ public class DrawGame{
 		// Draw the empty square black
 		c.drawRect(defaultRect[game.getField().getNullX()][game.getField().getNullY()], p);
 		
+		Log.d("FixedImage", "Game size: " + game.getSize());
 		Rect t;
 		int tIdx;
 		for(int x = 0; x < game.getSize(); x++){
@@ -218,6 +219,7 @@ public class DrawGame{
 				if(tIdx == 0){
 					continue;
 				}
+				Log.d("FixedImage", "Draw square " + x + ", " + y);
 				
 				t = game.getTile(tIdx);
 				
@@ -229,6 +231,8 @@ public class DrawGame{
 					c.drawRect(defaultRect[x][y], p);
 					// Draw in animate rectangle, paint over black (sliding animation)
 					c.drawBitmap(bitmap, t, animRect, null);
+				}else{
+					Log.d("FixedImage", "Wierd state");
 				}
 				
 				// Draw surrounding lines
