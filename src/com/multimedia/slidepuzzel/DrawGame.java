@@ -12,7 +12,6 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.hardware.Camera.Size;
 import android.net.Uri;
-import android.util.Log;
 import android.view.MotionEvent;
 
 import com.multimedia.slidepuzzel.gamelogic.Game;
@@ -120,7 +119,6 @@ public class DrawGame{
 	}
 	
 	public void getViewSize(int h, int w){
-		Log.d("FixedImage", "Received size " + w + "x" + h);
 		if(uri == null)return;
 		try{
 			InputStream image = activity.getContentResolver().openInputStream(uri);
@@ -150,7 +148,6 @@ public class DrawGame{
 		    bitmap = BitmapFactory.decodeStream(image, null, o2);
 		    
 		    image.close();
-		    Log.d("FixedImage", "Image loaded & decoded (" + bitmap + ")");
 		}catch(Exception e){
 			e.printStackTrace();
 			System.exit(1);
@@ -168,7 +165,6 @@ public class DrawGame{
 	public void draw(Canvas c){
 		// If bitmap is null the fixed image is not loaded yet
 		if(bitmap == null){
-			Log.d("FixedImage", "Bitmap unitialized");
 			return;
 		}
 		
@@ -208,7 +204,6 @@ public class DrawGame{
 		// Draw the empty square black
 		c.drawRect(defaultRect[game.getField().getNullX()][game.getField().getNullY()], p);
 		
-		Log.d("FixedImage", "Game size: " + game.getSize());
 		Rect t;
 		int tIdx;
 		for(int x = 0; x < game.getSize(); x++){
@@ -219,7 +214,6 @@ public class DrawGame{
 				if(tIdx == 0){
 					continue;
 				}
-				Log.d("FixedImage", "Draw square " + x + ", " + y);
 				
 				t = game.getTile(tIdx);
 				
@@ -231,8 +225,6 @@ public class DrawGame{
 					c.drawRect(defaultRect[x][y], p);
 					// Draw in animate rectangle, paint over black (sliding animation)
 					c.drawBitmap(bitmap, t, animRect, null);
-				}else{
-					Log.d("FixedImage", "Wierd state");
 				}
 				
 				// Draw surrounding lines
