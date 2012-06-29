@@ -19,7 +19,7 @@ public class Game{
 	private Field defField;			// Default field (solved)
 	private Difficulty difficulty;	// Difficulty for this game
 	private SoundManager sound;		// Manager that loads & plays the sound
-	private StopWatch gameTimer;	// stopwatch that keeps track of played time
+	private StopWatch gameTimer;	// Stopwatch that keeps track of played time
 	private boolean solved;			// Is the puzzle solved?
 	private GameRotation rotation;	// Object that handles the automatic rotation
 	

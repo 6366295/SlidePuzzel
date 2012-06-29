@@ -168,6 +168,7 @@ public class DrawGame{
 	public void draw(Canvas c){
 		// If bitmap is null the fixed image is not loaded yet
 		if(bitmap == null){
+			Log.d("FixedImage", "Bitmap unitialized");
 			return;
 		}
 		
