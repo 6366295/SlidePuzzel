@@ -1,0 +1,83 @@
+\documentclass[a4paper]{article}
+\begin{document}
+
+\section{Opbouw App}
+Wanneer de app gestart is, wordt er een menu gedisplayed.
+De opties in de main menu zijn: play, settings, highscores, how to play en exit.
+    \subsection{Settings}
+In de settings menu kan de moeilijkheidsgraad, game formaat en game modus worden aangepast.
+Voor de moeilijkheidsgraad zijn er drie niveaus geimplementeerd:
+\\
+\textbullet De easy moeilijkheidsgraad laat hints toe.
+\\
+\textbullet De normal moeilijkheidsgraad laat geen hints toe.
+\\
+\textbullet De hard moeilijkheidsgraad draait het beeld om de tien seconden 90 graden.
+\\\\
+Het formaat van de game kan aangepast worden naar een drie bij drie schuifpuzzel of een vier bij vier schuifpuzzel.
+\\\\
+De twee gamemodus die we hebben geimplementeerd is een live image mode en een gallery image mode.
+Bij de live image mode wordt de camera beeld van de mobiel ingeladen als de schuifpuzzel.
+Bij de gallery image mode kan er een image van het geheugen van de mobiel worden ingeladen.
+\\\\
+De settings worden opgeslagen via een SQLite database dat wordt aangemaakt.
+Hierdoor worden de settings van de app behouden, na het afsluiten van de app.
+Later wordt er dieper ingegaan op de database.
+    \subsection{Highscores}
+De highscores gedeelte van de app is verdeeld onder de eerder genoemde moeilijkheidsgraad.
+En daaronder zijn ze weer verdeeld onder drie bij drie of vier bij vier.
+Er is een duidelijke onderscheiding van highscores in moeilijkheidsgraad en game formaat.
+Hierdoor kan de gebruiker zien hoe snel hij of zij erover gedaan heeft in een specifieke moeilijkheidsgraad en game formaat.
+\\\\
+De highscores worden ingelezen door een query te sturen naar de game database.
+De naam en de bijbehorende tijd wordt dan weergegeven, met een maximum van 5 entries.
+De highscores gaan van de snelste tijd naar langzaamste.
+    \subsection{Play}
+De play knop brengt de gebruiker naar de game zelf.
+Hieronder worden de features van de game beschreven en uitgelegd.
+        \subsubsection{Game}
+De schuifpuzzel zelf gebruikt informatie van de settings om het speelveld te creeeren.
+Het beeld wordt verdeelt in tiles.
+Aantal tiles hangt af van of het een drie bij drie of vier bij vier game formaat is.
+Er is altijd een tile die leeg is.
+\\
+Er wordt altijd gecontrolleerd of een beweging wel mogelijk is, omdat de enige mogelijkheid naar de lege tile hoort te zijn.
+Ook wordt er gecontrolleerd of de puzzel opgelost is.
+        \subsubsection{Tile Shuffeler}
+De schuifpuzzel zou niet moeilijk zijn als de tiles niet geshuffeld waren.
+De implementatie voor de shuffeler werkt als volgd:
+\\
+Er wordt uitgegaan van het eind resultaat.
+Vanuit het eindresultaat wordt er random geschoven.
+Of het random geschuif een opgeloste puzzel opleverd wordt altijd gecontrolleerd.
+Er is gekozen voor deze manier omdat het random tiles op andere plaats leggen mogelijk een onoplosbare puzzel oplevert.
+Maar volgens een voorbeeld app met OpenCV kan die manier ook.
+Als er gecontrolleerd wordt of het geen onoplosbare puzzel opleverd.
+        \subsubsection{Hints}
+In easy mode is er een hint systeem ingebouwd. Dit wordt gedaan met een combinatie van brute force en A* algoritmes.
+Hier wordt later dieper op ingegaan
+        \subsubsection{Rotatie}
+In hard mode draait de live camera beeld of de gallery image iedere tien seconden 90 graden.
+Door de draaiing van het beeld, moet de gebruiker zich opnieuw in het plaatje orienteren.
+Dit maakt de schuifpuzzel aanzienlijk moeilijker.
+        \subsubsection{Freeze camera}
+In de live video mode van de schuifpuzzel is er een freeze button geimplementeerd.
+Hiermee zet je het beeld van de camera still.
+Hierdoor is er geen verschil meer tussen de live camera mode en gallery image mode.
+Maar voor de gebruiker is het mischien prettig om het camera beeld af en toe stil te zetten.
+        \subsubsection{Geluid}
+Er zijn een aantal geluidseffecten geimplementeerd in de game.
+Elke keer als de gebruiker een tile in beweging zet, wordt er een schuifgeluid afgespeeld.
+In de hard mode wordt er bij elke rotatie een geluidsfragment afgespeeld.
+En als de gebruiker de puzzel heeft opgelost, wordt er ook een geluidsfragment afgespeeld.
+        \subsubsection{Win scherm}
+Wanneer de gebruiker de puzzel heeft opgelost, wordt er een win scherm weergegeven.
+De tijd waarover de gebruiker gedaan heeft om de puzzel wordt weergeven.
+Op dit scherm kan dan gekozen worden of het spel opnieuw gespeeld wordt met de zelfde settings.
+of dat er teruggegaan naar de main menu.
+\\\\
+De gebruiker kan ook een naam opgeven.
+Deze komt samen met de tijd in de highscore tabel van de database.
+
+
+\end{document}
