@@ -53,7 +53,7 @@ public class DrawGame{
 		fixedImage = false;
 		
 		game.getField().swapTile(game.getField().getNullX(), game.getField().getNullY() - 1);
-		//game.shuffle();
+		game.shuffle();
 		
 		p = new Paint();
 		mContext = activity.getApplicationContext();
