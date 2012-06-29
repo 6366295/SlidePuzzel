@@ -12,6 +12,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.hardware.Camera.Size;
 import android.net.Uri;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import com.multimedia.slidepuzzel.gamelogic.Game;
@@ -119,6 +120,8 @@ public class DrawGame{
 	}
 	
 	public void getViewSize(int h, int w){
+		Log.d("FixedImage", "Received size " + w + "x" + h);
+		if(uri == null)return;
 		try{
 			InputStream image = activity.getContentResolver().openInputStream(uri);
 			
@@ -147,10 +150,11 @@ public class DrawGame{
 		    bitmap = BitmapFactory.decodeStream(image, null, o2);
 		    
 		    image.close();
+		    Log.d("FixedImage", "Image loaded & decoded (" + bitmap + ")");
 		}catch(Exception e){
 			e.printStackTrace();
+			System.exit(1);
 		}
-
 	}
 
 	public void freezeCamera(){
