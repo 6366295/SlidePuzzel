@@ -73,5 +73,4 @@ public class SlidePuzzelActivity extends Activity {
 		Intent intent = new Intent(this, HowtoActivity.class);
 		startActivity(intent);
 	}
-	
 }

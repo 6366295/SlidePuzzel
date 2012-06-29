@@ -119,6 +119,7 @@ public class DrawGame{
 	}
 	
 	public void getViewSize(int h, int w){
+		if(uri == null)return;
 		try{
 			InputStream image = activity.getContentResolver().openInputStream(uri);
 			
@@ -149,8 +150,8 @@ public class DrawGame{
 		    image.close();
 		}catch(Exception e){
 			e.printStackTrace();
+			System.exit(1);
 		}
-
 	}
 
 	public void freezeCamera(){

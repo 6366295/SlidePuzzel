@@ -43,7 +43,9 @@ public class WinActivity extends Activity {
 				EditText et = (EditText) findViewById(R.id.entername);
 				String theText = et.getText().toString();
 				h.setName(theText);
-				app.dataManager.insertHighscore(h);
+				if(theText.length() > 0){
+					app.dataManager.insertHighscore(h);
+				}
 				finish();
 			}
 		});
@@ -54,7 +56,9 @@ public class WinActivity extends Activity {
 				EditText et = (EditText) findViewById(R.id.entername);
 				String theText = et.getText().toString();
 				h.setName(theText);
-				app.dataManager.insertHighscore(h);
+				if(theText.length() > 0){
+					app.dataManager.insertHighscore(h);
+				}
 				if(app.mode == Settings.MODE_IMAGE){
 					Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
 					photoPickerIntent.setType("image/*");

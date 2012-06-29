@@ -7,17 +7,15 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DataManager extends SQLiteOpenHelper{
-
 	private static final String DATABASE_NAME = "slidepuzzel_data";
 	private static final String SETTINGS_TABLE = "settings";
 	private static final String HIGHSCORE_TABLE = "highscores";
 	
+	private SQLiteDatabase db;
+	
 	public DataManager(Context context) {
 		super(context, DATABASE_NAME, null, 1);
-		
-		/*getWritableDatabase().execSQL("DROP TABLE " + SETTINGS_TABLE);
-		getWritableDatabase().execSQL("DROP TABLE " + HIGHSCORE_TABLE);
-		onCreate(getWritableDatabase());*/
+		db = getWritableDatabase();
 	}
 	
 	@Override
@@ -53,12 +51,12 @@ public class DataManager extends SQLiteOpenHelper{
 		val.put("difficulty", s.getDifficulty());
 		val.put("size", s.getSize());
 		val.put("mode", s.getMode());
-		getWritableDatabase().update(SETTINGS_TABLE, val, null, null);
+		db.update(SETTINGS_TABLE, val, null, null);
 	}
 	
 	public Settings getSettings(){
 		Settings s = new Settings();
-		Cursor c = getReadableDatabase().query(SETTINGS_TABLE, new String[] {"difficulty", "size", "mode"}, null,
+		Cursor c = db.query(SETTINGS_TABLE, new String[] {"difficulty", "size", "mode"}, null,
 				null, null, null, null, "1");
 		if(c == null)return null;
 		c.moveToFirst();
@@ -77,14 +75,14 @@ public class DataManager extends SQLiteOpenHelper{
 		val.put("size", h.getSettings().getSize());
 		val.put("mode", h.getSettings().getMode());
 		
-		getWritableDatabase().insert(HIGHSCORE_TABLE, null, val);
+		db.insert(HIGHSCORE_TABLE, null, val);
 	}
 	
 	public HighscoreEntry[] getHighscore(String difficulty, int max, String qsize){
 		HighscoreEntry[] entries = new HighscoreEntry[max];
 		
 		// Select highscore 
-		Cursor c = getReadableDatabase().query(HIGHSCORE_TABLE, new String[] {"difficulty", "name", "time", "size", "mode"}, "difficulty = ? AND " + qsize,
+		Cursor c = db.query(HIGHSCORE_TABLE, new String[] {"difficulty", "name", "time", "size", "mode"}, "difficulty = ? AND " + qsize,
 				new String[] {difficulty}, null, null, "time ASC", "" + max);
 		
 		// Parse highscores
