@@ -25,9 +25,9 @@ De schuifpuzzel zelf gebruikt informatie van de settings om het speelveld te cre
 Het beeld wordt verdeeld in tiles. Het aantal tiles wordt bepaald door het gekozen spelformaat. Uit het originele beeld wordt de tile die zich rechtsonder bevindt zwart gemaakt. Vervolgens wordt het beeld gehusseld.
         \subsubsection{Tile Shuffler}
 Als de tiles in een vier bij vier veld random worden neergelegd is het mogelijk dat daar een niet oplosbare puzzel uit voortkomt. Daarom is besloten om zowel voor de drie bij drie als de vier bij vier dezelfde manier van husselen te gebruiken, die het onmogelijk maakt om een onoplosbare puzzel te cre\"eeren. De puzzel wordt vanuit zijn beginstaat, waar alle tiles op de goede locatie liggen, willekeurig verschoven, mits het mogelijk is om te schuiven. Nadat er gehusseld is wordt gecontroleerd of er niet toevallig het eindresultaat uit is voortgekomen, is dit wel het geval dan wordt overnieuw gehusseld. OpenCV \cite{opencvpuzzle} kent een slidepuzzel van vier bij vier tiles die gebruik maakt van een ander algoritme om de puzzel te husselen \cite{opencvsolve}. Hierbij kunnen de tiles willekeurig op het veld worden geplaatst waarna gekeken wordt of de puzzel op te lossen valt.
-        \subsubsection{Hints}
+        \subsubsection{0s}
 %moet nog worden aangepast, hangt van de implementatie af, daarnaast moet er nog een reference komen naar solce sectie
-In easy mode is er een hint systeem ingebouwd. Dit wordt gedaan met een combinatie van brute force en A* algoritmes.
+In easy mode is er een hint systeem ingebouwd. Bij het gebruik van deze knop in easy mode wordt de best mogelijke zet getoond op dat moment. Herhaling zal uiteindelijk de puzzel oplossen.
         \subsubsection{Rotatie}
 Als er is gekozen om te spelen in hard, dan wordt het originele beeld iedere tien seconden 90 graden gedraaid. Dit zorgt ervoor dat de gebruiker zich opnieuw moet ori\"enteren. Dit geeft een compleet nieuwe draai aan het schuifpuzzel concept en maakt de schuifpuzzel aanzienlijk moeilijker.
         \subsubsection{Freeze camera}
