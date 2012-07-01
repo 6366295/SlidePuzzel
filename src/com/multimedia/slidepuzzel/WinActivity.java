@@ -41,7 +41,6 @@ public class WinActivity extends Activity {
 			secstring = ":0";
 		else
 			secstring = ":";
-
 		if(hours > 0 && min < 10)
 			minstring = ":0";
 		else if(hours > 0)

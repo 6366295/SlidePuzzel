@@ -15,7 +15,7 @@ public class ScoresNormal2 extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.scores3);
-
+		
 		TableLayout layout = (TableLayout) findViewById(R.id.tableLayout2);
 		
 		LayoutInflater inflater = getLayoutInflater();
@@ -26,6 +26,18 @@ public class ScoresNormal2 extends Activity {
 			int time = entries[i].getTime();
 			int sec = time % 60;
 			int min = time / 60;
+			int hours = time / 3600;
+			String secstring, minstring;
+			if(sec < 10)
+				secstring = ":0";
+			else
+				secstring = ":";
+			if(hours > 0 && min < 10)
+				minstring = ":0";
+			else if(hours > 0)
+				minstring = ":";
+			else
+				minstring = "";
 			
 			TableRow row = (TableRow)inflater.inflate(R.layout.tablerow, layout, false);
 			
@@ -36,10 +48,7 @@ public class ScoresNormal2 extends Activity {
 			name.setText(entries[i].getName());
 			
 			TextView timeView = (TextView) row.findViewById(R.id.table_time);
-			if(sec < 10)
-				timeView.setText(min + ":0" + sec);
-			else
-				timeView.setText(min + ":" + sec);
+			timeView.setText(hours + minstring + min + secstring + sec );
 			
 			layout.addView(row);
 		}
