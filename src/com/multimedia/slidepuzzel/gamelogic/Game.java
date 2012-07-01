@@ -91,27 +91,37 @@ public class Game{
 	
 	public void shuffle(){
 		boolean loop = true;
-		boolean up, down, left, right;
+		boolean up, down, left, right, moved;
 		int rand;
 		Random generator = new Random();
 		
 		while(loop){
 			for(int i = 0; i < 100; i ++){
+				moved = false;
 				left = curField.validSwap(curField.getNullX() - 1, curField.getNullY());
 				right = curField.validSwap(curField.getNullX() + 1, curField.getNullY());
 				up = curField.validSwap(curField.getNullX(), curField.getNullY() - 1);
 				down = curField.validSwap(curField.getNullX(), curField.getNullY() + 1);
-				
-				rand = generator.nextInt();
-				rand = rand % 4;
-				if(rand == 0 && left)
-					curField.swapTile(curField.getNullX() - 1, curField.getNullY());
-				if(rand == 1 && right)
-					curField.swapTile(curField.getNullX() + 1, curField.getNullY());
-				if(rand == 2 && up)
-					curField.swapTile(curField.getNullX(), curField.getNullY() - 1);
-				if(rand == 3 && down)
-					curField.swapTile(curField.getNullX(), curField.getNullY() + 1);
+				while(!moved){
+					rand = generator.nextInt();
+					rand = rand % 4;
+					if(rand == 0 && left){
+						curField.swapTile(curField.getNullX() - 1, curField.getNullY());
+						moved = true;
+					}
+					if(rand == 1 && right){
+						curField.swapTile(curField.getNullX() + 1, curField.getNullY());
+						moved = true;
+					}
+					if(rand == 2 && up){
+						curField.swapTile(curField.getNullX(), curField.getNullY() - 1);
+						moved = true;
+					}
+					if(rand == 3 && down){
+						curField.swapTile(curField.getNullX(), curField.getNullY() + 1);
+						moved = true;
+					}
+				}
 
 			}
 			if(!checkPuzzleSolved())
