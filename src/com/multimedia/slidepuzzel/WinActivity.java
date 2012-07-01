@@ -19,8 +19,10 @@ public class WinActivity extends Activity {
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		int totaltime, sec, min;
+		int totaltime, sec, min, hours;
+		String secstring, minstring;
 		min = 0;
+		hours  = 0;
 		app = (SharedApplication) getApplication();
 		
 		super.onCreate(savedInstanceState);
@@ -30,12 +32,24 @@ public class WinActivity extends Activity {
 		totaltime = sender.getExtras().getInt("time");
 		sec = totaltime % 60;
 		min = totaltime / 60;
+		min = min % 60;
+		hours = totaltime / 3600;
 		
 		TextView wintext = (TextView) findViewById(R.id.wintext);
+
 		if(sec < 10)
-			wintext.setText("Time: " + min + ":0" + sec );
+			secstring = ":0";
 		else
-			wintext.setText("Time: " + min + ":" + sec );
+			secstring = ":";
+
+		if(hours > 0 && min < 10)
+			minstring = ":0";
+		else if(hours > 0)
+			minstring = ":";
+		else
+			minstring = "";
+		
+		wintext.setText("Time: " + hours + minstring + min + secstring + sec );
 		
 		Button back = (Button) findViewById(R.id.back5);
 		back.setOnClickListener(new View.OnClickListener() {
@@ -43,9 +57,7 @@ public class WinActivity extends Activity {
 				EditText et = (EditText) findViewById(R.id.entername);
 				String theText = et.getText().toString();
 				h.setName(theText);
-				if(theText.length() > 0){
-					app.dataManager.insertHighscore(h);
-				}
+				app.dataManager.insertHighscore(h);
 				finish();
 			}
 		});
@@ -56,9 +68,7 @@ public class WinActivity extends Activity {
 				EditText et = (EditText) findViewById(R.id.entername);
 				String theText = et.getText().toString();
 				h.setName(theText);
-				if(theText.length() > 0){
-					app.dataManager.insertHighscore(h);
-				}
+				app.dataManager.insertHighscore(h);
 				if(app.mode == Settings.MODE_IMAGE){
 					Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
 					photoPickerIntent.setType("image/*");

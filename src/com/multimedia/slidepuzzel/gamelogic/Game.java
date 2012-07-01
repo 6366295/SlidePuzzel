@@ -96,7 +96,7 @@ public class Game{
 		Random generator = new Random();
 		
 		while(loop){
-			for(int i = 0; i < 10000; i ++){
+			for(int i = 0; i < 100; i ++){
 				left = curField.validSwap(curField.getNullX() - 1, curField.getNullY());
 				right = curField.validSwap(curField.getNullX() + 1, curField.getNullY());
 				up = curField.validSwap(curField.getNullX(), curField.getNullY() - 1);
