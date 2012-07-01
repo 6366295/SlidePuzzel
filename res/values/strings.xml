@@ -12,18 +12,18 @@
     <string name="exit">Exit</string>
     
     <string name="howtoplaytext">
-		Change difficulty in the Settings menu\n
-		<li>Choose Easy if you like hints</li>\n
-		<li>Choose Normal if you don\'t like hints</li>\n
-		<li>Choose Hard if you like rotations</li>\n
-		\n
-		Change gridsize in the Settings menu\n
-		<li>Choose 3x3 if you like 3x3</li>\n
-		<li>Choose 4x4 if you like 4x4</li>\n
+		Settings menu:\n
+		<li>Easy mode allows hints</li>\n
+		<li>In hard mode the screen will rotate every 10 seconds</li>\n
+		<li>Choose 3x3 for an 8-puzzle</li>\n
+		<li>Choose 4x4 for a 15-puzzle</li>\n
+		<li>Live image mode will display a video puzzle</li>\n
+		<li>Gallery image mode will allow you to choose a picture to play as a puzzle</li>\n
 		\n
 		Choose play to play the game\n
-		<li>Press the tile you want to slide to the empty tile</li>\n
-		<li>Keep pressing tiles to the empty tile and eventualy you will win</li>
+		<li>To move a tile, simply press it. It will move automatically if it's a valid move!</li>\n
+		<li>The black square always ends in the bottom right corner</li>\n
+		<li>Keep on moving tiles to win</li>
 	</string>
     
     <string name="difficulty">Difficulty</string>
