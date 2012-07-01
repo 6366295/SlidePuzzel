@@ -2,11 +2,11 @@
 	\subsection{SQLite}
 		Om de settings en de highscores bij te houden gebruikt het programma een database.
 		De database die hiervoor gebruikt wordt is de SQLite database.
-		De SQLite database is een lichtgewicht ingebouwde database in android.
+		De SQLite database is een lichtgewicht ingebouwde database in Android.
 		De SQLite database komt in grote lijnen overeen met andere databases,
 		er worden query's in SQL (Structured Query Language) gestuurd naar de database.
-		Deze database zal dan deze query's afhandelen, zo nodig zal bij een SELECT query het resultaat terug gegeven worden.
-		Het uitvoeren van operaties op deze database is in android niet heel lastig, als de database aangemaakt is en er is een actieve connectie
+		Deze database zal dan deze query's afhandelen, zo nodig zal bij een SELECT query het resultaat teruggegeven worden.
+		Het uitvoeren van operaties op deze database is in Android niet heel lastig. Als de database aangemaakt is en er is een actieve connectie,
 		kunnen er via toegangsmethoden operaties uitgevoerd worden.
 		De operaties die het programma gebruikt en die gedefinieerd zijn in de gebruikte klasse zijn insert, update en select.
 		Er is dus voor deze operaties in principe geen kennis van SQL nodig.
@@ -16,41 +16,41 @@
 		
 	\subsection{Opbouw tabellen}
 	\subsubsection{Settings}
-		Voor de settings wordt gebruik gemaakt van een tabel met slecht een entry.
+		Voor de settings wordt gebruik gemaakt van een tabel met slechts \'e\'en entry.
 		Deze entry representeert de huidige settings.
 		De tabel bestaat dan ook uit drie kolommen, namelijk difficulty, size en mode.
 		De difficulty bestaat uit een string van minimaal vier tekens en kan de waardes EASY, NORMAL en HARD bevatten.
-		De size kolom bestaat uit een integer, deze kan de waardes drie en vier bevatten,
-		hierbij stelt de drie een drie bij drie veld voor en de vier een vier bij vier veld.
-		De mode kolom bevat de game mode, deze bestaat uit een integer met de waarde nul wat staat voor live beeld,
-		of \'e\'en wat staat voor een plaatje uit de gallery.
+		De size kolom bestaat uit een integer, deze kan de waardes 3 en 4 bevatten.
+		Hierbij stelt de 3 een drie bij drie veld voor en de 4 een vier bij vier veld.
+		De mode kolom bevat de game mode, deze bestaat uit een integer met de waarde 0 wat staat voor live beeld,
+		of 1 wat staat voor een plaatje uit de gallery.
 	\subsubsection{Highscores}
 		De highscores tabel bevat ongeveer alle velden van de settings tabel,
-		dit omdat de highscores moeten geselecteerd worden op spel type.
+		dit omdat de highscores geselecteerd moeten worden op spel type.
 		De kolommen die nog extra staan in de highscores tabel zijn name en time.
 		De name kolom bevat simpelweg de naam die de speler heeft ingevoerd bij het winnen van het spel.
-		De tijd kolom bevat de tijd in seconden die de speler heeft gedaan over het oplossen van de puzzel.
-		In tegenstelling tot de settings tabel kan de highscores tabel meer dan een entry bevatten.
+		De time kolom bevat de tijd in seconden die de speler heeft gedaan over het oplossen van de puzzel.
+		In tegenstelling tot de settings tabel kan de highscores tabel meer dan \'e\'en entry bevatten.
 		Omdat dezelfde gebruiker meerdere entry's in de highscore kan hebben en dus ook dezelfde naam kan gebruiken, 
-		moet er een andere manier dan naam zijn om de entry's uit elkaar te houden, hiervoor is de extra kolom id gebruikt.
-		De id kolom is een kolom die automatisch opgehoogd word bij het invoegen van een highscore entry,
+		moet er een andere manier dan naam zijn om de entry's uit elkaar te houden. Hiervoor is de extra kolom id gebruikt.
+		De id kolom is een kolom die automatisch opgehoogd wordt bij het invoegen van een highscore entry,
 		zo kunnen er nooit 2 compleet identieke rijen staan in de database.
 		
 	\subsection{Voor en nadelen}
 	\subsubsection{Settings}
-		Aangezien de settings tabel maar een entry bevat is het redelijk makkelijk om de settings in te laden,
-		er hoeft simpelweg maar een rij geselecteerd te worden.
+		Aangezien de settings tabel maar \'e\'en entry bevat is het redelijk makkelijk om de settings in te laden,
+		er hoeft simpelweg maar \'e\'en rij geselecteerd te worden.
 		Het nadeel van de op database gebaseerde settings is dat bij elke wijziging van de settings een update van de database uitgevoerd moet worden.
 		Dit nadeel zou je kunnen opheffen door de update alleen plaats te laten vinden bij het afsluiten van de app.
 		Dit zou het spel zelf niet schaden aangezien de actuele settings toch in het geheugen worden opgeslagen,
 		het nadeel van deze methode is alleen dat bij een crash (bijvoorbeeld lege batterij) het niet zeker is of de update is gedaan.
 	
 	\subsubsection{Highscores}
-		Het gebruik van de database voor de highscores is daarentegen wel goed verdedigbaar,
-		het invoegen van de highscores is heel simpel door de toegangsmethoden van de SQLite database.
-		Het is ook heel simpel selecteren van de juiste entry's doordat er in de query's een where conditie kan worden meegegeven, 
-		het lastige zoekwerk wordt dan simpelweg afgehandeld door de database zelf.
-		Het enige nadeel van het gebruik in het programma op het moment is dat er geen verwijder methode is in de app voor de highscore entry's,
-		dit zou kunnen leiden tot een enorme database waardoor het laten zien van de highscores heel langzaam zou gaan.
-		verder is er op mobiele apparaten geen onbeperkte opslagruimte, dus zou de database uiteindelijk niet meer kunnen groeien,
-		wat natuurlijk niet heel erg gebruiksvriendelijk is.
+		Het gebruik van de database voor de highscores is daarentegen wel goed verdedigbaar.
+		Het invoegen van de highscores is simpel door de toegangsmethoden van de SQLite database.
+		Het is ook simpel om de juiste entry's te selecteren doordat er in de query's een where conditie kan worden meegegeven.
+		Het lastige zoekwerk wordt dan afgehandeld door de database zelf.
+		Het enige nadeel op dit moment is dat er geen verwijder methode in de app is voor de highscore entry's.
+		Dit zou kunnen leiden tot een enorme database waardoor het laten zien van de highscores langzaam zou gaan.
+		Verder is er op mobiele apparaten geen onbeperkte opslagruimte, dus zou de database uiteindelijk niet meer kunnen groeien.
+		Dit is niet erg gebruiksvriendelijk.
