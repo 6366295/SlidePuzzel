@@ -38,7 +38,7 @@ public class Field{
 		nullY = (byte) y;
 	}
 	public int [][] getArray(){
-            int newtiles [][] = new int [tileIdx.length-1][tileIdx.length-1];
+            int newtiles [][] = new int [tileIdx.length][tileIdx.length];
             for(int y = 0;y<(int)tileIdx.length;y++){
             	for(int x = 0;x<(int)tileIdx.length;x++){
               	  newtiles[y][x]=(int)tileIdx[y][x];
