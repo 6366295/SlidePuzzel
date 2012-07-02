@@ -8,17 +8,13 @@ public class Utility {
     public static final DecimalFormat INT_FORMATTER = new DecimalFormat("###,###");
     public static final DecimalFormat DEC_FORMATTER = new DecimalFormat("###,##0.000");
 
-    public static byte[] getRandomArray(final int numOfTiles, final boolean keepZeroInCorner) {
+    public static byte[] getRandomArray(int [][]puzzleF,final int numOfTiles, final boolean keepZeroInCorner) {
         final byte[] tiles = new byte[numOfTiles];
         double reken = Math.sqrt(numOfTiles);
         int reken2 = (int)reken;
-        byte mtest[][]={{6,12,9,10},
-                        {2,5,8,4},
-                        {13,15,11,1},
-                        {3,14,7,0}
-                        };
+        
         for(int y = 0;y<4;y++){
-            System.arraycopy(mtest[y], 0, tiles, reken2*y, 4);
+            System.arraycopy(puzzleF[y], 0, tiles, reken2*y, 4);
         }
         tiles[numOfTiles-1]=0;
         /**
