@@ -1,4 +1,6 @@
-/**
+package com.multimedia.slidepuzzel.solver;
+
+/*
  * File: Entry.java
  * Author: Brian Borowski
  * Date created: January 8, 2011

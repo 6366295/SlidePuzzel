@@ -1,4 +1,6 @@
-/**
+package com.multimedia.slidepuzzel.solver;
+
+/*
  * File: IDAStarNode.java
  * Author: Brian Borowski
  * Date created: December 26, 2010

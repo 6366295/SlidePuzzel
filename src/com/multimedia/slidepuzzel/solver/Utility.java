@@ -1,4 +1,6 @@
-/**
+package com.multimedia.slidepuzzel.solver;
+
+/*
  * File: Utility.java
  * Author: Brian Borowski
  * Date created: March 2000

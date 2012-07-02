@@ -1,4 +1,6 @@
-/**
+package com.multimedia.slidepuzzel.solver;
+
+/*
  * File: BFSNode.java
  * Author: Brian Borowski
  * Date created: April 21, 2011

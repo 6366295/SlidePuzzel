@@ -1,4 +1,6 @@
-/**
+package com.multimedia.slidepuzzel.solver;
+
+/*
  * File: PuzzleConfiguration.java
  * Author: Brian Borowski
  * Date created: December 27, 2010

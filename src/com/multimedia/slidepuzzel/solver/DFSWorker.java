@@ -1,4 +1,6 @@
-/**
+package com.multimedia.slidepuzzel.solver;
+
+/*
  * File: DFSWorker.java
  * Author: Brian Borowski
  * Date created: March 11, 2011

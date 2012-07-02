@@ -1,4 +1,6 @@
-/**
+package com.multimedia.slidepuzzel.solver;
+
+/*
  * File: Algorithm.java
  * Author: Brian Borowski
  * Date created: December 26, 2010
