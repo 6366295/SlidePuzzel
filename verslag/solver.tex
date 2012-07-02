@@ -12,3 +12,6 @@ Als de eindstatus is gevonden dan is er een pad bekend. Elke beweging op dit pad
 
 \subsection{Alternatief}
 Het algoritme wat nu gebruikt wordt om de puzzel op de lossen is nogal traag. Een verbetering zou zijn om het A* (A-ster) algoritme te gebruiken. Dit algoritme vindt de beste oplossing. In de gebruikte code kon het A* algoritme niet gebruikt worden bij een vier bij vier schuifpuzzel. Een oplossing hiervoor zou zijn om met en algoritme van de vier bij vier puzzel een drie bij drie puzzel te maken door de eerste rij en de eerste kolom te vullen. Deze puzzel kan dan worden opgelost met behulp van het A* algoritme.
+
+\subsection{Problemen}
+Zoals eerder aangegeven, is het Iterative Deepening A* search algoritme vrij traag. Dit resulteert erin dat een vier bij vier puzzel veel tijd nodig heeft om te worden opgelost. Dit kost zoveel tijd dat er is besloten om voor het vier bij vier veld geen hints toe te laten.
