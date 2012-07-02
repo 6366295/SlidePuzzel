@@ -149,7 +149,7 @@ public class Utility {
                 int x = tile % tileSize;
                 int y = tile / tileSize;
                 android.util.Log.d("Hint", "Solution found " + x + ", " + y);
-                drawControl.startSwapAnim(x, y);
+                drawControl.startSwapAnim(y,x);
                 directions[i] = builder.toString();
             }
         }
