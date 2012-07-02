@@ -130,11 +130,12 @@ public class Utility {
                 final byte tile = tiles[tiles.length -1];
                 final char dir = Algorithm.shortestPath.charAt(i);
                 String direction;
+                byte x = 0; byte y = 0;
                 for(int l=0;l<tiles.length;l++){
                                                        
-                                if(tiles[l]==0){
-                                     int x = l % tileSize;
-                                     int y = l / tileSize;
+                                if(tiles[l]==(byte)0){
+                                     x = (byte)(l % tileSize);
+                                     y = (byte)(l / tileSize);
                                 }
                              
                 }
