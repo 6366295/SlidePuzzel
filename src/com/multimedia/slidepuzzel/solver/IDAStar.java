@@ -27,14 +27,10 @@ public class IDAStar extends Algorithm {
     }
 
     private void solveMultiThreaded(final long currentState, final int numOfThreads) {
-        if (PuzzleConfiguration.isVerbose()) {
-            System.err.print("Creating starting positions for " + numOfThreads + " threads...");
-        }
+
         findStartingPositions(currentState, numOfThreads);
         initialMovesEstimate = movesRequired = Node.h(currentState);
-        if (PuzzleConfiguration.isVerbose()) {
-            System.err.println("done.");
-        }
+
         if (!solved) {
             final int numElements = queue.size();
             workers = new DFSWorker[numElements];
@@ -43,16 +39,7 @@ public class IDAStar extends Algorithm {
             }
 
             do {
-                if (PuzzleConfiguration.isVerbose()) {
-                    if (movesRequired != 1) {
-                        System.out.print(
-                            "\nSearching paths of length " + movesRequired +
-                            " moves...");
-                    } else {
-                        System.out.print(
-                                "\nSearching paths of length 1 move...");
-                    }
-                }
+
 
                 final ExecutorService executor = Executors.newFixedThreadPool(numOfThreads);
                 final Iterator<BFSNode> it = queue.iterator();
@@ -88,9 +75,7 @@ public class IDAStar extends Algorithm {
         // Add to array so GUI can poll it for the stats in real time.
         workers[0] = dfsWorker;
         do {
-            if (PuzzleConfiguration.isVerbose()) {
-                System.out.print("\nSearching paths of depth " + movesRequired + "...");
-            }
+
             dfsWorker.setConfig(currentState, "X", movesRequired, 0);
             dfsWorker.run();
             if (!solved) {
@@ -102,9 +87,7 @@ public class IDAStar extends Algorithm {
     private void completeBFS(final BFSNode node) {
         solved = true;
         shortestPath = node.getShortestPath();
-        if (PuzzleConfiguration.isVerbose()) {
-            System.out.println("done.");
-        }
+
     }
 
     /**
