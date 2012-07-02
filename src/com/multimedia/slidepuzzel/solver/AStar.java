@@ -57,17 +57,17 @@ public final class AStar extends Algorithm {
                               closedNode = closedMap.get(successor.boardConfig);
 
                     if (closedNode == null || successor.cost < closedNode.cost) {
-                        openHeap.insert(successor);
+                        
                         openMap.put(successor.boardConfig, successor);
                         ++numberExpanded;
                     } else if (openNode != null && successor.cost < openNode.cost) {
-                        openHeap.decreaseKey(openNode, successor.cost);
+                        
                         openMap.put(successor.boardConfig, successor);
                     }
                 }
             }
 
-            currentConfig = openHeap.removeMin();
+            
         }
     }
 
