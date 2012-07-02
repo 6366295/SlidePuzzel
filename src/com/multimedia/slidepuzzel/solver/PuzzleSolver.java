@@ -1,3 +1,5 @@
+package com.multimedia.slidepuzzel.solver;
+
 public final class PuzzleSolver {
 
     public PuzzleSolver() {
