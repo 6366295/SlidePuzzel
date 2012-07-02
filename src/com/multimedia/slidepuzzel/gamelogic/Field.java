@@ -42,7 +42,7 @@ public class Field{
             int newtiles [][] = new int [tileIdx.length][tileIdx.length];
             for(int y = 0;y<(int)tileIdx.length;y++){
             	for(int x = 0;x<(int)tileIdx.length;x++){
-              	  newtiles[y][x]=(int)tileIdx[x][y];
+              	  newtiles[x][y]=(int)tileIdx[x][y];
             	}
             }
             return newtiles;
