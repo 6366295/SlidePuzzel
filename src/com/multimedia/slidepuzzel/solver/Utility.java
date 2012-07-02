@@ -4,6 +4,8 @@ import java.text.DecimalFormat;
 
 import java.util.StringTokenizer;
 
+import com.multimedia.slidepuzzel.DrawGame;
+
 public class Utility {
     public static final DecimalFormat INT_FORMATTER = new DecimalFormat("###,###");
     public static final DecimalFormat DEC_FORMATTER = new DecimalFormat("###,##0.000");
@@ -14,7 +16,7 @@ public class Utility {
         
         for(int y = 0; y<ntiles; y++){
             for(int x = 0; x<ntiles; x++){
-            	tiles[x+ntiles*y] = (byte) puzzleF[y][x];
+            	tiles[x+ntiles*y] = (byte) puzzleF[x][y];
             }
         }
         return tiles;
@@ -101,18 +103,18 @@ public class Utility {
     	return (int)((boardConfig >> (index << 2)) & 0xF);
     }
 
-    public static void displayStats(final byte[] initState) {
+    public static void displayStats(final byte[] initState, DrawGame drawControl) {
         final int numOfTiles = initState.length;
        
         final int numOfMoves = Algorithm.shortestPath.length();
         
-        final String[] directions = getDirections(initState);
+        final String[] directions = getDirections(initState, drawControl);
         for (int i = 0; i < 1; ++i) {
             // new object dat de tile markeert(directions[i]);
         }
     }
 
-    public static String[] getDirections(final byte[] initState) {
+    public static String[] getDirections(final byte[] initState, DrawGame drawControl) {
         final int pathLength = Algorithm.shortestPath.length();
         final String[] directions = new String[pathLength];
         if (pathLength != 0) {
@@ -146,8 +148,8 @@ public class Utility {
                         y++;
                     }
                 }
-            
-            // swapTile(x,y);    
+                android.util.Log.d("Hint", "Solution found " + x + ", " + y);
+                drawControl.startSwapAnim(x, y);
                 directions[i] = builder.toString();
             }
         }

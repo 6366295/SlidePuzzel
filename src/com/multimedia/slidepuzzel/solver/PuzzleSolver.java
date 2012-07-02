@@ -1,8 +1,10 @@
 package com.multimedia.slidepuzzel.solver;
 
+import com.multimedia.slidepuzzel.DrawGame;
+
 public final class PuzzleSolver {
 
-    public PuzzleSolver(int[][] puzzleF) {
+    public PuzzleSolver(int[][] puzzleF, DrawGame drawControl) {
         int algorithm = PuzzleConfiguration.ALGORITHM_IDASTAR;
         int heuristic = PuzzleConfiguration.HEURISTIC_LC;
         byte[] tiles = null;
@@ -15,7 +17,7 @@ public final class PuzzleSolver {
         PuzzleConfiguration.initialize(puzzleType, algorithm, heuristic, numOfThreads);
         PuzzleConfiguration.getAlgorithm().solve(
             Utility.arrayToLong(tiles), numOfThreads);
-        Utility.displayStats(tiles);
+        Utility.displayStats(tiles, drawControl);
     }
 
 } 
