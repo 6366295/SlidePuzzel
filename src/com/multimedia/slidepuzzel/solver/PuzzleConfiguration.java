@@ -6,20 +6,12 @@ package com.multimedia.slidepuzzel.solver;
  * Date created: December 27, 2010
  * Date last modified: May 13, 2011
  */
-import java.io.BufferedInputStream;
-import java.io.DataInputStream;
-import java.io.EOFException;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 
 public final class PuzzleConfiguration {
     public static final int PUZZLE_8  = 0,
                             PUZZLE_15 = 1,
                             ALGORITHM_ASTAR   = 0,
                             ALGORITHM_IDASTAR = 1,
-                            HEURISTIC_PD = 0x1,
                             HEURISTIC_MD = 0x2,
                             HEURISTIC_LC = 0x4;
 
@@ -47,7 +39,7 @@ public final class PuzzleConfiguration {
         PuzzleConfiguration.numOfTiles = puzzleType == PUZZLE_15 ? 16: 9;
         PuzzleConfiguration.algorithmType = algorithmType;
         PuzzleConfiguration.algorithm =
-            algorithmType == ALGORITHM_ASTAR ? new AStar() : new IDAStar();
+        algorithmType == ALGORITHM_ASTAR ? null : new IDAStar();
         PuzzleConfiguration.heuristicType = heuristicType;
         PuzzleConfiguration.numOfThreads = numOfThreads;
         PuzzleConfiguration.dimension = (int)Math.sqrt(numOfTiles);
@@ -117,9 +109,6 @@ public final class PuzzleConfiguration {
                 return "Unknown algorithm type";
         }
         switch (PuzzleConfiguration.heuristicType) {
-            case HEURISTIC_PD:
-                builder.append(" / Pattern Database");
-                break;
             case HEURISTIC_MD:
                 builder.append(" / Manhattan Distance");
                 break;

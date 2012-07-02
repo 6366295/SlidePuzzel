@@ -6,13 +6,7 @@ package com.multimedia.slidepuzzel.solver;
  * Date created: December 26, 2010
  * Date last modified: April 13, 2012
  */
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
 import java.util.Queue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class IDAStar extends Algorithm {
     private Queue<BFSNode> queue;

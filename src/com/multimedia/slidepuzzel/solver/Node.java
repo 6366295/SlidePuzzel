@@ -36,38 +36,6 @@ public abstract class Node {
     }
 
     public static int h(final long boardConfig) {
-        if (heuristic == PuzzleConfiguration.HEURISTIC_PD) {
-            if (numOfTiles == 16) {
-                // Create three different indexes that contain only the positions of
-                // tiles applicable to the corresponding pattern database.
-                int index0 = 0, index1 = 0, index2 = 0;
-                for (int pos = numOfTilesMinusOne; pos >= 0; --pos) {
-                    final int tile = (int)((boardConfig >> (pos << 2)) & 0xF);
-                    if (tile != 0) {
-                        final int subsetNumber = tileSubsets[tile];
-                        switch (subsetNumber) {
-                            case 2:
-                                index2 |= pos << (tilePositions[tile] << 2);
-                                break;
-                            case 1:
-                                index1 |= pos << (tilePositions[tile] << 2);
-                                break;
-                            default:
-                                index0 |= pos << (tilePositions[tile] << 2);
-                                break;
-                        }
-                    }
-                }
-
-                return PuzzleConfiguration.costTable_15_puzzle_0[index0] +
-                       PuzzleConfiguration.costTable_15_puzzle_1[index1] +
-                       PuzzleConfiguration.costTable_15_puzzle_2[index2];
-
-            } else {
-                return PuzzleConfiguration.patternDatabase_8_puzzle.get(boardConfig);
-            }
-        }
-
         // Implements the Manhattan Distance heuristic
         int distance = 0;
         final long currentPositions =
