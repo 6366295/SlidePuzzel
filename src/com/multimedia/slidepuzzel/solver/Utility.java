@@ -19,6 +19,13 @@ public class Utility {
             	tiles[x+ntiles*y] = (byte) puzzleF[x][y];
             }
         }
+        
+        StringBuilder b = new StringBuilder();
+        for(int i = 0; i < tiles.length; i++){
+        	b.append(tiles[i]);
+        	b.append(" ");
+        }
+        android.util.Log.d("Tiles", b.toString());
         return tiles;
     }
 
