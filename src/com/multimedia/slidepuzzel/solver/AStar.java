@@ -15,8 +15,7 @@ public final class AStar extends Algorithm {
         initialMovesEstimate = NOT_APPLICABLE;
 
         AStarNode currentConfig = new AStarNode(currentState);
-        openMap = new HashMap<Long, AStarNode>();
-        closedMap = new HashMap<Long, AStarNode>();
+ 
   
         int previous = 0;
 
