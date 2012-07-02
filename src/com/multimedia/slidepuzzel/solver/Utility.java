@@ -12,8 +12,8 @@ public class Utility {
         final byte[] tiles = new byte[numOfTiles];
         int ntiles = (int) Math.sqrt(numOfTiles);
         
-        for(int y = 0; y<4; y++){
-            for(int x = 0; x<4; x++){
+        for(int y = 0; y<ntiles; y++){
+            for(int x = 0; x<ntiles; x++){
             	tiles[x+ntiles*y] = (byte) puzzleF[y][x];
             }
         }
