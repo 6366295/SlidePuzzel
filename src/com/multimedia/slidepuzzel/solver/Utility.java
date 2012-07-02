@@ -1,7 +1,7 @@
 package com.multimedia.slidepuzzel.solver;
 
 import java.text.DecimalFormat;
-import java.util.Random;
+
 import java.util.StringTokenizer;
 
 public class Utility {
@@ -18,10 +18,7 @@ public class Utility {
                         {3,14,7,0}
                         };
         for(int y = 0;y<4;y++){
-            for(int x = 0;x<4;x++){
-                tiles[x+reken2*y]=mtest[y][x];
-            
-            }
+            System.arraycopy(mtest[y], 0, tiles, reken2*y, 4);
         }
         tiles[numOfTiles-1]=0;
         /**
