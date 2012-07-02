@@ -17,7 +17,7 @@ public final class PuzzleSolver {
         PuzzleConfiguration.initialize(puzzleType, algorithm, heuristic, numOfThreads);
         PuzzleConfiguration.getAlgorithm().solve(
             Utility.arrayToLong(tiles), numOfThreads);
-        Utility.displayStats(tiles, drawControl);
+        Utility.displayStats(tiles, drawControl, puzzleSize);
     }
 
 } 

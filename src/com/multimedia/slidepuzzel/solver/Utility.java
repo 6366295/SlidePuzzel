@@ -103,18 +103,18 @@ public class Utility {
     	return (int)((boardConfig >> (index << 2)) & 0xF);
     }
 
-    public static void displayStats(final byte[] initState, DrawGame drawControl) {
+    public static void displayStats(final byte[] initState, DrawGame drawControl, int puzzleSize) {
         final int numOfTiles = initState.length;
        
         final int numOfMoves = Algorithm.shortestPath.length();
         
-        final String[] directions = getDirections(initState, drawControl);
+        final String[] directions = getDirections(initState, drawControl, (int) Math.sqrt(puzzleSize));
         for (int i = 0; i < 1; ++i) {
             // new object dat de tile markeert(directions[i]);
         }
     }
 
-    public static String[] getDirections(final byte[] initState, DrawGame drawControl) {
+    public static String[] getDirections(final byte[] initState, DrawGame drawControl, int tileSize) {
         final int pathLength = Algorithm.shortestPath.length();
         final String[] directions = new String[pathLength];
         if (pathLength != 0) {
@@ -139,15 +139,8 @@ public class Utility {
                 }
                 
                     builder.append(tile);
-                int x = tile % tiles.length;
-                int r = tile;
-                int y = 0;
-                for(int k = 0;k<tiles.length;k++){
-                    if(r>tiles.length){
-                        r = r - tiles.length;
-                        y++;
-                    }
-                }
+                int x = tile % tileSize;
+                int y = tile / tileSize;
                 android.util.Log.d("Hint", "Solution found " + x + ", " + y);
                 drawControl.startSwapAnim(x, y);
                 directions[i] = builder.toString();
