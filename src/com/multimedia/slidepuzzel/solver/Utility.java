@@ -52,7 +52,15 @@ public class Utility {
                 
             }
             int x = tile % tiles.length;
-            int y = tile - x;
+            int r = tile;
+            int y = 0;
+            for(int k = 0;k<tiles.length;k++){
+                if(r>tiles.length){
+                r = r - tiles.length;
+                y++;
+                }
+            }
+            
             // swapTile(x,y);
             builder.append(state[i]);
         }
