@@ -8,7 +8,7 @@ public final class PuzzleSolver {
         int algorithm = PuzzleConfiguration.ALGORITHM_IDASTAR;
         int heuristic = PuzzleConfiguration.HEURISTIC_LC;
         byte[] tiles = null;
-        int puzzleSize = 16;
+        int puzzleSize = puzzleF.length * puzzleF.length;
         final int numOfThreads = 1;
         tiles = Utility.getRandomArray(puzzleF,puzzleSize,true);
         final int puzzleType = tiles.length == 16 ? PuzzleConfiguration.PUZZLE_15 :
