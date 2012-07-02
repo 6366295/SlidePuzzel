@@ -17,7 +17,7 @@ public final class AStar extends Algorithm {
         AStarNode currentConfig = new AStarNode(currentState);
         openMap = new HashMap<Long, AStarNode>();
         closedMap = new HashMap<Long, AStarNode>();
-        final FibonacciHeap openHeap = new FibonacciHeap();
+  
         int previous = 0;
 
         while (running) {
