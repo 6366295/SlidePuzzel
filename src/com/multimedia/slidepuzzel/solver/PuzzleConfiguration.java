@@ -181,11 +181,11 @@ public final class PuzzleConfiguration {
         } catch (final EOFException eofe) {
 
         } catch (final FileNotFoundException fnfe) {
-            System.err.println("Error: Cannot find file " + filename + ".");
-            System.exit(1);
+           
+    
         } catch (final IOException ioe) {
-            System.err.println("Error: Cannot read from file " + filename + ".");
-            System.exit(1);
+ 
+  
         } finally {
             try {
                 if (dis != null) {
@@ -211,11 +211,11 @@ public final class PuzzleConfiguration {
         } catch (final EOFException eofe) {
 
         } catch (final FileNotFoundException fnfe) {
-            System.err.println("Error: Cannot find file " + filename + ".");
-            System.exit(1);
+        
+        
         } catch (final IOException ioe) {
-            System.err.println("Error: Cannot read from file " + filename + ".");
-            System.exit(1);
+
+      
         } finally {
             try {
                 if (dis != null) {
