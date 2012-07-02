@@ -266,6 +266,9 @@ public class DrawGame{
 			return false;
 		}
 		
+		swapX = x;
+		swapY = y;
+		
 		anim = tileSize / 20;
 		
 		animRect = new Rect(game.getTile(game.getDefaultField().getTileIdx(x, y)));
