@@ -10,19 +10,13 @@ public class Utility {
 
     public static byte[] getRandomArray(int [][]puzzleF,final int numOfTiles, final boolean keepZeroInCorner) {
         final byte[] tiles = new byte[numOfTiles];
-        double reken = Math.sqrt(numOfTiles);
-        int reken2 = (int)reken;
+        int ntiles = (int) Math.sqrt(numOfTiles);
         
-        for(int y = 0;y<4;y++){
-            System.arraycopy(puzzleF[y], 0, tiles, reken2*y, 4);
-        }
-        tiles[numOfTiles-1]=0;
-        /**
-        for(int y = 0;y<4;y++){
-            for(int x = 0;x<4;x++){
-                System.out.println("Tegel " + tiles[x+reken2*y]);
+        for(int y = 0; y<4; y++){
+            for(int x = 0; x<4; x++){
+            	tiles[x+ntiles*y] = (byte) puzzleF[y][x];
             }
-        } */
+        }
         return tiles;
     }
 
