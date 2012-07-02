@@ -1,0 +1,14 @@
+\section{Solver}\label{sec:hint}
+\subsection{Algoritme}
+Het algoritme wat wordt gebruikt om de puzzel op te lossen is het Iterative Deepening A* search algoritme. Het algoritme werkt als volgt. Stel dat elke staat van de puzzel een knoop is, dan zal de staat waaruit op hint wordt gedrukt de beginknoop zijn. In dit algoritme wordt vanuit de begin knoop de boom doorlopen zover als de dieptegrens is ingesteld. Vanaf de huidige knoop wordt de volgende knoop bezocht als deze voldoet aan een bepaalde Manhattan distance waarde. Dit blijft zich herhalen tot de eindknoop (de oplossing) of de dieptegrens is bereikt. Als de dieptegrens is bereikt en de eindknoop is niet gevonden dan wordt er opnieuw gezocht met een hoger geaccepteerde Manhattan distance waarde. Meer knopen zullen dan bezocht worden. Deze stappen herhalend wordt de hele boom doorlopen. Mits de oplossing niet gevonden is en de hele boom doorlopen is, wordt de dieptegrens  2 stappen groter. Zo gauw als de oplossing gevonden is, stopt het algoritme. Voor het oplossen van de puzzel wordt een kopie van het speelveld gebruikt als begin knoop. Er wordt dan gezocht door middel van deze kopie, zodat de gebruiker zijn puzzel niet kwijt raakt.
+
+\subsection{Manhattan distance en Linear Conflict}
+De Manhattan distance wordt berekend door van een tegel te bekijken hoeveel zetten hij nog nodig heeft om naar de oplossingspositie te komen als er geen andere tegels op het bord staan. Dit wordt voor elke tegel berekend en bij elkaar opgeteld. Het resulterende getal is de manhattan distance. 
+Een toevoeging hierop is Linear conflict. Bij Linear conflict wordt gekeken of twee tegels,die al op de goede lijn staan maar niet op de juiste plaats, op dezelfde lijn staan. De lijn kan een rij of een kolom zijn. Stel dat de eerste rij gevuld is met tegel 3 met rechts daarvan 2. Linear conflict zou dan tenminste 2 zetten tellen bij de Manhattan distance voor deze twee conflicterende tegels.
+De heuristiek die gebruikt wordt voor het algoritme wordt is deze manhattan distance. Deze distance helpt het algoritme met het sneller vinden van de beste oplossing.
+
+\subsection{Pad bepalen}
+Als de eindstatus is gevonden dan is er een pad bekend. Elke beweging op dit pad wordt opgeslagen in het “path array”. Hierin staan alle stappen die genomen moeten worden om bij de oplossing te komen. Het eerste element wordt gegeven als de beste zet op dat moment.
+
+\subsection{Alternatief}
+Het algoritme wat nu gebruikt wordt om de puzzel op de lossen is nogal traag. Een verbetering zou zijn om het A* (A-ster) algoritme te gebruiken, dit algoritme vindt de beste oplossing. In de gebruikte code kon het A* algoritme niet gebruikt worden bij een 4 bij 4 schuifpuzzel. Een oplossing hiervoor zou zijn om met en algoritme van de 4 bij 4 puzzel een 3 bij 3 puzzel te maken door de eerste rij en de eerste kolom te vullen. Deze puzzel kan dan worden opgelost met behulp van het A* algoritme.
