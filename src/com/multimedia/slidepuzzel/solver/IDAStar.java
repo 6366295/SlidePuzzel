@@ -18,55 +18,13 @@ public class IDAStar extends Algorithm {
     private Queue<BFSNode> queue;
     private DFSWorker[] workers;
 
-    void solvePuzzle(final long currentState, final int numOfThreads) {
-        if (numOfThreads > 1) {
-            solveMultiThreaded(currentState, numOfThreads);
-        } else {
+      void solvePuzzle(final long currentState, final int numOfThreads) {
+      
             solveSingleThreaded(currentState);
-        }
+        
     }
 
-    private void solveMultiThreaded(final long currentState, final int numOfThreads) {
-
-        findStartingPositions(currentState, numOfThreads);
-        initialMovesEstimate = movesRequired = Node.h(currentState);
-
-        if (!solved) {
-            final int numElements = queue.size();
-            workers = new DFSWorker[numElements];
-            for (int i = numElements - 1; i >= 0; --i) {
-                workers[i] = new DFSWorker();
-            }
-
-            do {
-
-
-                final ExecutorService executor = Executors.newFixedThreadPool(numOfThreads);
-                final Iterator<BFSNode> it = queue.iterator();
-                int index = 0;
-                while (it.hasNext()) {
-                    final BFSNode node = it.next();
-                    final String currentPath = node.getPath();
-                    final DFSWorker worker = workers[index++];
-                    worker.setConfig(
-                        node.boardConfig, currentPath, movesRequired,
-                        currentPath.length() - 1);
-                    executor.execute(worker);
-                }
-
-                executor.shutdown();
-                try {
-                    executor.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
-                } catch (final InterruptedException ie) {
-                    stop();
-                }
-
-                if (!solved) {
-                    movesRequired += 2;
-                }
-            } while (running);
-        }
-    }
+   
 
     private void solveSingleThreaded(final long currentState) {
         initialMovesEstimate = movesRequired = Node.h(currentState);
