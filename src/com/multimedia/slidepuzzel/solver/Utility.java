@@ -120,7 +120,7 @@ public class Utility {
         if (pathLength != 0) {
             final byte[] tiles = getMovedTiles(Algorithm.shortestPath, initState);
             for (int i = 0; i < 1; ++i) {
-                final byte tile = tiles[i];
+                final byte tile = tiles[tiles.length -1];
                 final char dir = Algorithm.shortestPath.charAt(i);
                 String direction;
                 if (dir == 'L') {
