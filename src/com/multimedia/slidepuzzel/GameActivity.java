@@ -66,6 +66,10 @@ public class GameActivity extends Activity {
 			b.setEnabled(false);
 		}
 		
+		if(app.size == 4){
+			hint.setEnabled(false);
+		}
+		
 		if(app.mode == Settings.MODE_IMAGE){
 			drawControl = new DrawGame(this, game, (Uri) getIntent().getParcelableExtra("uri"));
 			freeze.setEnabled(false);
