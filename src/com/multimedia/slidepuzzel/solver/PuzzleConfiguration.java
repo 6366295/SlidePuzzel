@@ -23,9 +23,7 @@ public final class PuzzleConfiguration {
                             HEURISTIC_MD = 0x2,
                             HEURISTIC_LC = 0x4;
 
-    public static final byte[] costTable_15_puzzle_0 = new byte[4096],
-                               costTable_15_puzzle_1 = new byte[16777216],
-                               costTable_15_puzzle_2 = new byte[16777216];
+    
     public static final PrimitiveHashMap patternDatabase_8_puzzle =
         new PrimitiveHashMap(262144, 1.0f);
 
@@ -38,12 +36,7 @@ public final class PuzzleConfiguration {
     private static Algorithm algorithm;
     private static boolean isVerbose = false;
 
-    static {
-        loadStreamCostTable("databases/15-puzzle-663-0.db", costTable_15_puzzle_0);
-        loadStreamCostTable("databases/15-puzzle-663-1.db", costTable_15_puzzle_1);
-        loadStreamCostTable("databases/15-puzzle-663-2.db", costTable_15_puzzle_2);
-        loadStreamPatternDatabase("databases/8-puzzle.db", patternDatabase_8_puzzle);
-    }
+   
 
     private PuzzleConfiguration() { }
 
