@@ -24,22 +24,11 @@ public final class AStar extends Algorithm {
             ++numberVisited;
             movesRequired = currentConfig.g();
             if (movesRequired > previous) {
-                if (PuzzleConfiguration.isVerbose()) {
-                    if (movesRequired != 1) {
-                        System.out.print(
-                            "\nSearching paths of length " + movesRequired +
-                            " moves...");
-                    } else {
-                        System.out.print(
-                                "\nSearching paths of length 1 move...");
-                    }
-                }
+
                 previous = movesRequired;
             }
             if (currentConfig.isGoalState()) {
-                if (PuzzleConfiguration.isVerbose()) {
-                    System.out.println("done.");
-                }
+
                 shortestPath = currentConfig.getPath();
                 solved = true;
                 return;
