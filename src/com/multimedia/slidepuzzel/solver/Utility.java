@@ -131,11 +131,12 @@ public class Utility {
                 final char dir = Algorithm.shortestPath.charAt(i);
                 String direction;
                 for(int l=0;l<tiles.length;l++){
-                             for(int j=0;j<tiles.length;j++){                             
-                                if(tiles[j][l]==0){
-                                    int x = j; int y = l;
+                                                       
+                                if(tiles[l]==0){
+                                     int x = l % tileSize;
+                                     int y = l / tileSize;
                                 }
-                             }
+                             
                 }
                 if (dir == 'L') {
                      drawControl.startSwapAnim(y,x+1);
