@@ -188,33 +188,5 @@ public final class PuzzleConfiguration {
         }
     }
 
-    private static void loadStreamCostTable(final String filename,
-                                            final byte[] costTable) {
-        InputStream is = PuzzleConfiguration.class.getResourceAsStream(filename);
-        DataInputStream dis = null;
-        try {
-            if (is == null) {
-                is = new FileInputStream(filename);
-            }
-            dis = new DataInputStream(new BufferedInputStream(is));
-            int i = 0;
-            while (true) {
-                costTable[i++] = dis.readByte();
-            }
-        } catch (final EOFException eofe) {
-
-        } catch (final FileNotFoundException fnfe) {
-        
-        
-        } catch (final IOException ioe) {
-
-      
-        } finally {
-            try {
-                if (dis != null) {
-                    dis.close();
-                }
-            } catch (final IOException ioe) { }
-        }
-    }
+    
 }
