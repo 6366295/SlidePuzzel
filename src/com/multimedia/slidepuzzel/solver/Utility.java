@@ -1,11 +1,5 @@
 package com.multimedia.slidepuzzel.solver;
 
-/*
- * File: Utility.java
- * Author: Brian Borowski
- * Date created: March 2000
- * Date last modified: January 12, 2012
- */
 import java.text.DecimalFormat;
 import java.util.Random;
 import java.util.StringTokenizer;
@@ -16,37 +10,26 @@ public class Utility {
 
     public static byte[] getRandomArray(final int numOfTiles, final boolean keepZeroInCorner) {
         final byte[] tiles = new byte[numOfTiles];
-        for (int i = numOfTiles - 2; i >= 0; --i) {
-            tiles[i] = (byte)(i + 1);
-        }
-        tiles[numOfTiles - 1] = 0;
-
-        int maxTilesToSwap;
-        if (keepZeroInCorner) {
-            maxTilesToSwap = numOfTiles - 1;
-        } else {
-            maxTilesToSwap = numOfTiles;
-        }
-        final Random random = new Random();
-        for (int i = 49; i >= 0; --i) {
-            final int rand1 = random.nextInt(maxTilesToSwap);
-            int rand2 = random.nextInt(maxTilesToSwap);
-            if (rand1 == rand2) {
-                if (rand1 < (maxTilesToSwap << 1)) {
-                    rand2 = random.nextInt(maxTilesToSwap - rand1) + rand1;
-                } else {
-                    rand2 = random.nextInt(rand1);
-                }
-            }
-            swap(rand1, rand2, tiles);
-        }
-        if (!isValidPermutation(tiles)) {
-            if (tiles[0] != 0 && tiles[1] != 0) {
-                swap(0, 1, tiles);
-            } else {
-                swap(2, 3, tiles);
+        double reken = Math.sqrt(numOfTiles);
+        int reken2 = (int)reken;
+        byte mtest[][]={{6,12,9,10},
+                        {2,5,8,4},
+                        {13,15,11,1},
+                        {3,14,7,0}
+                        };
+        for(int y = 0;y<4;y++){
+            for(int x = 0;x<4;x++){
+                tiles[x+reken2*y]=mtest[y][x];
+            
             }
         }
+        tiles[numOfTiles-1]=0;
+        /**
+        for(int y = 0;y<4;y++){
+            for(int x = 0;x<4;x++){
+                System.out.println("Tegel " + tiles[x+reken2*y]);
+            }
+        } */
         return tiles;
     }
 
@@ -109,7 +92,7 @@ public class Utility {
 
     public static long getPositionsAsLong(final long boardConfig,
                                           final int numOfTilesMinusOne) {
-    	// Creates a long that maps tiles(i.e. array index) to position in puzzle.
+        // Creates a long that maps tiles(i.e. array index) to position in puzzle.
     	long positions = 0;
         for (int pos = numOfTilesMinusOne; pos >= 0; --pos) {
             final int tile = (int)((boardConfig >> (pos << 2)) & 0xF);
@@ -132,37 +115,12 @@ public class Utility {
 
     public static void displayStats(final byte[] initState) {
         final int numOfTiles = initState.length;
-        System.out.println();
-        System.out.println("Puzzle type:          " + (numOfTiles - 1) +
-            "-puzzle");
-        System.out.print("Initial permutation:  ");
-        System.out.println(byteArrayToString(initState));
-        System.out.print("Goal state:           ");
-        for (int i = 0; i < numOfTiles; ++i) {
-            if (i != 0) {
-                System.out.print(",");
-            }
-            System.out.print((byte)((PuzzleConfiguration.getGoalState() >> (i << 2)) & 0xF));
-        }
-        System.out.println();
-        System.out.println(
-            "Elapsed time:         " +
-            DEC_FORMATTER.format(Algorithm.getRunningTimeInSeconds()) + " s");
-        System.out.println(
-            "Paths visited:        " + INT_FORMATTER.format(Algorithm.numberVisited));
-        System.out.println(
-            "States explored:      " + INT_FORMATTER.format(Algorithm.numberExpanded));
+       
         final int numOfMoves = Algorithm.shortestPath.length();
-        if (numOfMoves == 1) {
-            System.out.println(
-                "Shortest path:        " + numOfMoves + " move");
-        } else {
-            System.out.println(
-                "Shortest path:        " + numOfMoves + " moves");
-        }
+        
         final String[] directions = getDirections(initState);
-        for (int i = 0; i < directions.length; ++i) {
-            System.out.println(directions[i]);
+        for (int i = 0; i < 1; ++i) {
+            // new object dat de tile markeert(directions[i]);
         }
     }
 
@@ -171,7 +129,7 @@ public class Utility {
         final String[] directions = new String[pathLength];
         if (pathLength != 0) {
             final byte[] tiles = getMovedTiles(Algorithm.shortestPath, initState);
-            for (int i = 0; i < pathLength; ++i) {
+            for (int i = 0; i < 1; ++i) {
                 final byte tile = tiles[i];
                 final char dir = Algorithm.shortestPath.charAt(i);
                 String direction;
@@ -189,11 +147,9 @@ public class Utility {
                 if (iPlusOne < 10) {
                     builder.append(" ");
                 }
-                if (tile < 10) {
-                    builder.append(iPlusOne + ".  " + tile + " - " + direction);
-                } else {
-                    builder.append(iPlusOne + ". " + tile + " - " + direction);
-                }
+                
+                    builder.append(tile);
+                    
                 directions[i] = builder.toString();
             }
         }
@@ -206,7 +162,7 @@ public class Utility {
         final StringTokenizer st = new StringTokenizer(arrayString, " ,");
         final int numOfTokens = st.countTokens();
 
-        // Create an array of String representations of the tile numbers.
+       
         final String[] numStrings = new String[numOfTokens];
         int i = 0;
         while (st.hasMoreTokens()) {
@@ -216,7 +172,7 @@ public class Utility {
             }
         }
 
-        // Validate the number of tiles entered.
+        
         if (i == 0) {
             throw new IllegalArgumentException("Input contains no tiles.");
         } else if (i < numOfTiles) {
@@ -227,7 +183,7 @@ public class Utility {
                 numOfTiles + " tiles.");
         }
 
-        // Make sure each string is a number.
+       
         final byte[] tiles = new byte[numOfTiles];
         final int[] tilePositions = new int[numOfTiles];
         for (i = 0; i < tiles.length; ++i) {
@@ -249,7 +205,7 @@ public class Utility {
             }
         }
 
-        // Make sure no tile number is missing from the input.
+       
         for (i = 0; i < numOfTiles; ++i) {
             if (tilePositions[i] == -1) {
                 throw new IllegalArgumentException("Tile " + i + " is missing from input.");
@@ -281,12 +237,7 @@ public class Utility {
     }
 
     public static int getDefaultNumOfThreads() {
-        // If there's only one processor, there is no sense in creating extra
-        // threads. If there are multiple processors, creating more threads than
-        // processors tends to keep the utilization higher during each iteration
-        // of IDA*, since we are less likely to run into the case where some of
-        // the threads for a given iteration have completed and processors are
-        // sitting idle.
+
         final Runtime runtime = Runtime.getRuntime();
         final int numOfProcessors = runtime.availableProcessors();
         return numOfProcessors == 1 ? 1 : numOfProcessors * 2;
@@ -359,3 +310,4 @@ public class Utility {
         A[j] = temp;
     }
 }
+
