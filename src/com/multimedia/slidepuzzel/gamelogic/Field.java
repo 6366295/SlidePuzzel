@@ -37,6 +37,15 @@ public class Field{
 		nullX = (byte) x;
 		nullY = (byte) y;
 	}
+	public int [][] getarray(byte [][] tileIdx){
+            int newtiles [][] = new int [tileIdx.length-1][tileIdx.length-1];
+            for(int y = 0;y<(int)tileIdx.length;y++){
+            	for(int x = 0;x<(int)tileIdx.length;x++){
+              	  newtiles[y][x]=(int)tileIdx[y][x];
+            	}
+            }
+            return newtiles;
+    	}
 	
 	/*
 	 * This method checks if the tile at x,y can
