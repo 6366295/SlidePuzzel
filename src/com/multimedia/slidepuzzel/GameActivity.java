@@ -16,6 +16,7 @@ public class GameActivity extends Activity {
 	private Game game;
 	private Button freeze;
 	private DrawGame drawControl;
+	private Button hint;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,14 @@ public class GameActivity extends Activity {
 				}
 			}
 		});
-		
+		hint = (Button) findViewById(R.id.hint);
+		hint.setOnClickListener(new View.OnClickListener() {
+		public void onClick(View view) {
+			
+			new PuzzleSolver();
+			
+			}
+		});
 		SharedApplication app = (SharedApplication) getApplication();
 		if(app.diff.equals("EASY")){
 			game = new Game(Game.Difficulty.EASY, app.size, new SoundManager(getBaseContext()));
