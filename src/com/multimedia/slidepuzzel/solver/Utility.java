@@ -49,8 +49,11 @@ public class Utility {
         final StringBuilder builder = new StringBuilder();
         for (int i = 0; i < numOfTiles; ++i) {
             if (i != 0) {
-                builder.append(",");
+                
             }
+            int x = tile % tiles.length;
+            int y = tile - x;
+            // swapTile(x,y);
             builder.append(state[i]);
         }
         return builder.toString();
