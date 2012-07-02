@@ -32,6 +32,7 @@ public class Field{
 	 * It will swap even if it is not a valid move;
 	 */
 	public void swapTile(int x, int y){
+		android.util.Log.d("DontCrash", "Swap to " + x + ", " + y + " from " + nullX + ", " + nullY);
 		tileIdx[nullX][nullY] = tileIdx[x][y];
 		tileIdx[x][y] = 0;
 		nullX = (byte) x;
