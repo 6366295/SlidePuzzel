@@ -51,17 +51,7 @@ public class Utility {
             if (i != 0) {
                 
             }
-            int x = tile % tiles.length;
-            int r = tile;
-            int y = 0;
-            for(int k = 0;k<tiles.length;k++){
-                if(r>tiles.length){
-                r = r - tiles.length;
-                y++;
-                }
-            }
-            
-            // swapTile(x,y);
+           
             builder.append(state[i]);
         }
         return builder.toString();
@@ -147,7 +137,17 @@ public class Utility {
                 }
                 
                     builder.append(tile);
-                    
+                int x = tile % tiles.length;
+                int r = tile;
+                int y = 0;
+                for(int k = 0;k<tiles.length;k++){
+                    if(r>tiles.length){
+                        r = r - tiles.length;
+                        y++;
+                    }
+                }
+            
+            // swapTile(x,y);    
                 directions[i] = builder.toString();
             }
         }
