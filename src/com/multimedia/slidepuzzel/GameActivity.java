@@ -46,7 +46,7 @@ public class GameActivity extends Activity {
 		hint = (Button) findViewById(R.id.hint);
 		hint.setOnClickListener(new View.OnClickListener() {
 		public void onClick(View view) {
-				new PuzzleSolver();
+				new PuzzleSolver(game.getField().getArray());
 			}
 		});
 		SharedApplication app = (SharedApplication) getApplication();
