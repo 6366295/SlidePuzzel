@@ -130,14 +130,21 @@ public class Utility {
                 final byte tile = tiles[tiles.length -1];
                 final char dir = Algorithm.shortestPath.charAt(i);
                 String direction;
+                for(int l=0;l<tiles.length;l++){
+                             for(int j=0;j<puzzle2.length;j++){                             
+                                if(puzzle2[j][l]==0){
+                                    int x = j; int y = l;
+                                }
+                             }
+                }
                 if (dir == 'L') {
-                    direction = "right";
+                     drawControl.startSwapAnim(y,x+1);
                 } else if (dir == 'R') {
-                    direction = "left";
+                     drawControl.startSwapAnim(y,x-1);
                 } else if (dir == 'U') {
-                    direction = "down";
+                     drawControl.startSwapAnim(y-1,x);
                 } else {
-                    direction = "up";
+                     drawControl.startSwapAnim(y+1,x);
                 }
                 final StringBuilder builder = new StringBuilder();
                 final int iPlusOne = i + 1;
@@ -146,10 +153,11 @@ public class Utility {
                 }
                 
                     builder.append(tile);
+                /**
                 int x = tile % tileSize;
                 int y = tile / tileSize;
                 android.util.Log.d("Hint", "Solution found " + x + ", " + y);
-                drawControl.startSwapAnim(y,x);
+                drawControl.startSwapAnim(y,x);  */
                 directions[i] = builder.toString();
             }
         }
