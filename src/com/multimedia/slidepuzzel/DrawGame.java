@@ -252,24 +252,33 @@ public class DrawGame{
 			swapY /= tileSize;
 			
 			if(game.getField().validSwap(swapX, swapY)){
-				// Animation timer
-				anim = tileSize / 20;
-				
-				animRect = new Rect(game.getTile(game.getDefaultField().getTileIdx(swapX, swapY)));
-				
-				// Shift of rectangle each draw
-				animX = game.getField().getNullX() - swapX;
-				animY = game.getField().getNullY() - swapY;
-				animX *= 20;
-				animY *= 20;
-				
-				game.getSound().playSound(game.getSound().swap);
+				startSwapAnim(swapX, swapY);
 			}else{
 				// Reset swap x & y
 				swapX = -1;
 				swapY = -1;
 			}
 		}
+	}
+	
+	public boolean startSwapAnim(int x, int y){
+		if(!game.getField().validSwap(x,  y)){
+			return false;
+		}
+		
+		anim = tileSize / 20;
+		
+		animRect = new Rect(game.getTile(game.getDefaultField().getTileIdx(x, y)));
+		
+		// Shift of rectangle each draw
+		animX = game.getField().getNullX() - x;
+		animY = game.getField().getNullY() - y;
+		animX *= 20;
+		animY *= 20;
+		
+		game.getSound().playSound(game.getSound().swap);
+		
+		return true;
 	}
 	
 	/*
