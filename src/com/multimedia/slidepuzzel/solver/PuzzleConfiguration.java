@@ -157,36 +157,7 @@ public final class PuzzleConfiguration {
         	Utility.getPositionsAsLong(goalState, numOfTilesMinusOne);
     }
 
-    private static void loadStreamPatternDatabase(final String filename,
-                                                  final PrimitiveHashMap patternDatabase) {
-        InputStream is = PuzzleConfiguration.class.getResourceAsStream(filename);
-        DataInputStream dis = null;
-        try {
-            if (is == null) {
-                is = new FileInputStream(filename);
-            }
-            dis = new DataInputStream(new BufferedInputStream(is));
-            while (true) {
-                final long pattern = dis.readLong();
-                final byte cost = dis.readByte();
-                patternDatabase.put(pattern, cost);
-            }
-        } catch (final EOFException eofe) {
-
-        } catch (final FileNotFoundException fnfe) {
-           
-    
-        } catch (final IOException ioe) {
- 
-  
-        } finally {
-            try {
-                if (dis != null) {
-                    dis.close();
-                }
-            } catch (final IOException ioe) { }
-        }
-    }
+   
 
     
 }
