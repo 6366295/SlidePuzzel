@@ -90,6 +90,8 @@ public class PuzzleSolver{
 			}
 		}
 		queue.clear();
+		android.util.Log.d("Solution", "Found " + foundNode.getParent().getState().getNullX() + ", "
+				+ foundNode.getParent().getState().getNullY());
 		drawControl.startSwapAnim(foundNode.getParent().getState().getNullX(),
 				foundNode.getParent().getState().getNullY());
 		

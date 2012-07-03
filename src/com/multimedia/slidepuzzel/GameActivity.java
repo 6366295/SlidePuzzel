@@ -9,7 +9,6 @@ import android.widget.Button;
 import com.multimedia.slidepuzzel.application.SharedApplication;
 import com.multimedia.slidepuzzel.data.Settings;
 import com.multimedia.slidepuzzel.gamelogic.Game;
-import com.multimedia.slidepuzzel.solver.PuzzleSolver;
 import com.multimedia.slidepuzzel.sound.SoundManager;
 
 public class GameActivity extends Activity {
@@ -46,7 +45,11 @@ public class GameActivity extends Activity {
 		hint = (Button) findViewById(R.id.hint);
 		hint.setOnClickListener(new View.OnClickListener() {
 		public void onClick(View view) {
-				new PuzzleSolver(game.getField().getArray(), drawControl);
+				if(drawControl.animFinished()){
+					android.util.Log.d("Solution", "Started finder");
+					new com.multimedia.slidepuzzel.solver2.PuzzleSolver(game, drawControl);
+				}
+				//new PuzzleSolver(game.getField().getArray(), drawControl);
 			}
 		});
 		SharedApplication app = (SharedApplication) getApplication();

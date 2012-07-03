@@ -266,6 +266,8 @@ public class DrawGame{
 			return false;
 		}
 		
+		android.util.Log.d("Solution", "Start anim");
+		
 		swapX = x;
 		swapY = y;
 		
@@ -282,6 +284,10 @@ public class DrawGame{
 		game.getSound().playSound(game.getSound().swap);
 		
 		return true;
+	}
+	
+	public boolean animFinished(){
+		return anim == -1;
 	}
 	
 	/*

@@ -1,6 +1,8 @@
 package com.multimedia.slidepuzzel.gamelogic;
 
-public class Field{
+import com.multimedia.slidepuzzel.solver2.PuzzleField;
+
+public class Field implements PuzzleField{
 	/*
 	 * Default 3x3: 
 	 * 8 7 6
@@ -27,26 +29,52 @@ public class Field{
 		}
 	}
 	
+	// Private constructor for making copy's
+	private Field(Field clone){
+		nullX = (byte) clone.getNullX();
+		nullY = (byte) clone.getNullY();
+		
+		tileIdx = new byte[clone.getSize()][clone.getSize()];
+		
+		for(int x = 0; x < tileIdx.length; x++){
+			for(int y = 0; y < tileIdx.length; y++){
+				tileIdx[x][y] = (byte) clone.getTileIdx(x, y);
+			}
+		}
+	}
+	
+	public Field clone(){
+		return new Field(this);
+	}
+	
+	public int getSize(){
+		return tileIdx.length;
+	}
+	
 	/*
 	 * Swap tile at index idx with the empty.
 	 * It will swap even if it is not a valid move;
 	 */
 	public void swapTile(int x, int y){
-		android.util.Log.d("DontCrash", "Swap to " + x + ", " + y + " from " + nullX + ", " + nullY);
 		tileIdx[nullX][nullY] = tileIdx[x][y];
 		tileIdx[x][y] = 0;
 		nullX = (byte) x;
 		nullY = (byte) y;
 	}
+	
+	public void move(int x, int y){
+		swapTile(x, y);
+	}
+	
 	public int [][] getArray(){
-            int newtiles [][] = new int [tileIdx.length][tileIdx.length];
-            for(int y = 0;y<(int)tileIdx.length;y++){
-            	for(int x = 0;x<(int)tileIdx.length;x++){
-              	  newtiles[x][y]=(int)tileIdx[x][y];
-            	}
-            }
-            return newtiles;
-    	}
+		int newtiles [][] = new int [tileIdx.length][tileIdx.length];
+		for(int y = 0;y<(int)tileIdx.length;y++){
+			for(int x = 0;x<(int)tileIdx.length;x++){
+				newtiles[x][y] = (int) tileIdx[x][y];
+			}
+		}
+		return newtiles;
+	}
 	
 	/*
 	 * This method checks if the tile at x,y can
@@ -72,6 +100,10 @@ public class Field{
 		return true;
 	}
 	
+	public boolean validMove(int x, int y){
+		return validSwap(x, y);
+	}
+	
 	public int getTileIdx(int x, int y){
 		return tileIdx[x][y];
 	}
@@ -84,7 +116,7 @@ public class Field{
 		return nullY;
 	}
 	
-	public boolean equals(Field d){
+	public boolean equals(PuzzleField d){
 		if(d.getNullX() != nullX || d.getNullY() != nullY){
 			return false;
 		}
@@ -97,5 +129,20 @@ public class Field{
 			}
 		}
 		return true;
+	}
+	
+	public int getManhattanDistance(PuzzleField p){
+		int dist = 0;
+		for(int x = 0; x < tileIdx.length; x++){
+			for(int y = 0; y < tileIdx.length; y++){
+				int xOrig = tileIdx[x][y] % tileIdx.length;
+				int yOrig = tileIdx[x][y] / tileIdx.length;
+				int xNew = p.getTileIdx(x, y) % tileIdx.length;
+				int yNew = p.getTileIdx(x, y) / tileIdx.length;
+				dist += Math.abs(xOrig - xNew);
+				dist += Math.abs(yOrig - yNew);
+			}
+		}
+		return dist;
 	}
 }
