@@ -135,7 +135,7 @@ public class Utility {
                                                        
                                 if(tiles[l]==(byte)0){
                                      x = (byte)(l % tileSize);
-                                     y = (byte)((l -1)/ tileSize);
+                                     y = (byte)(l/ tileSize);
                                 }
                              
                 }
